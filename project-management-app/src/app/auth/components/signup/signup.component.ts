@@ -67,10 +67,10 @@ export class SignupComponent implements OnInit, OnDestroy {
       password: this.singupForm.get('password')?.value,
     };
 
-    const response: Subscription = this.api.signUp(data).subscribe(
-      (res) => localStorage.setItem('signup', JSON.stringify(res)),
-      (error: HttpErrorResponse) => { this.errorMessage = error.message; },
-    );
+    const response: Subscription = this.api.signUp(data).subscribe({
+      next: (res) => localStorage.setItem('signup', JSON.stringify(res)),
+      error: (error: HttpErrorResponse) => { this.errorMessage = error.message; },
+    });
 
     this.subscription.push(response);
   }
