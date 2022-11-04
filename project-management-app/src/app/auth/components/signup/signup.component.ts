@@ -3,7 +3,10 @@ import {
   FormControl, Validators, FormBuilder, FormGroup,
 } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 import { MessageError } from '../../models/enum';
+import { SignUpData } from '../../models/auth.models';
+import { ApiService } from '../../services/api/api.service';
 import { CustomValidatorService } from '../../services/custom-validator/custom-validator.service';
 
 @Component({
@@ -19,9 +22,15 @@ export class SignupComponent implements OnInit, OnDestroy {
 
   singupForm!: FormGroup;
 
-  statusForm!: Subscription;
+  subscription: Subscription[] = [];
 
-  constructor(private fb: FormBuilder, private validators: CustomValidatorService) { }
+  errorMessage!: string;
+
+  constructor(
+    private fb: FormBuilder,
+    private validators: CustomValidatorService,
+    private api: ApiService,
+  ) { }
 
   ngOnInit(): void {
     this.singupForm = this.fb.group({
@@ -29,13 +38,15 @@ export class SignupComponent implements OnInit, OnDestroy {
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, this.validators.customValidatorForPassword()]),
     });
-    this.statusForm = this.singupForm.statusChanges.subscribe((status) => {
+
+    const statusForm: Subscription = this.singupForm.statusChanges.subscribe((status) => {
       this.isValidForm = status === 'VALID';
     });
+    this.subscription.push(statusForm);
   }
 
   protected getErrorMessage(nameField: string): MessageError {
-    const field = this.singupForm.get(nameField);
+    const field = this.singupForm.get(nameField) as FormControl;
 
     if (field?.hasError('required')) {
       return MessageError.required;
@@ -52,10 +63,21 @@ export class SignupComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
+    const data: SignUpData = {
+      name: this.singupForm.get('name')?.value,
+      login: this.singupForm.get('email')?.value,
+      password: this.singupForm.get('password')?.value,
+    };
 
+    const response: Subscription = this.api.signUp(data).subscribe(
+      (res) => localStorage.setItem('signup', JSON.stringify(res)),
+      (error: HttpErrorResponse) => { this.errorMessage = error.message; },
+    );
+
+    this.subscription.push(response);
   }
 
   ngOnDestroy(): void {
-    this.statusForm.unsubscribe();
+    this.subscription.forEach((sub) => sub.unsubscribe());
   }
 }
