@@ -1,0 +1,59 @@
+<div class="container">
+  <h1 class="signup__title"></h1>
+  <form
+    class="signup__input-fields"
+    [formGroup]="singupForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <mat-form-field class="field" appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" />
+      <mat-error *ngIf="singupForm.get('name')?.errors">
+        {{ getErrorMessage("name") }}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="field" appearance="fill">
+      <mat-label>Enter your email</mat-label>
+      <input
+        formControlName="email"
+        matInput
+        placeholder="pat@example.com"
+        required
+      />
+      <mat-error *ngIf="singupForm.get('email')?.errors">
+        {{ getErrorMessage("email") }}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="field" appearance="fill">
+      <mat-label>Enter your password</mat-label>
+      <input
+        formControlName="password"
+        matInput
+        [type]="hide ? 'password' : 'text'"
+      />
+      <mat-error *ngIf="singupForm.get('password')?.errors">
+        {{ getErrorMessage("password") }}
+      </mat-error>
+      <button
+        class="btn__password"
+        mat-icon-button
+        matSuffix
+        (click)="hide = !hide"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide"
+      >
+        <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+      </button>
+    </mat-form-field>
+    <button
+      class="btn__form"
+      mat-raised-button
+      [disabled]="!isValidForm"
+      [ngClass]="{ 'btn__form-valid': isValidForm }"
+      type="submit"
+    >
+      Sign Up
+    </button>
+  </form>
+  <p class="sighup__message"></p>
+</div>
