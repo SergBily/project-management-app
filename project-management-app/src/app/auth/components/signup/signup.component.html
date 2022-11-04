@@ -6,26 +6,26 @@
     (ngSubmit)="onSubmit()"
   >
     <mat-form-field class="field" appearance="fill">
-      <mat-label>Name</mat-label>
+      <mat-label>name</mat-label>
       <input matInput formControlName="name" />
       <mat-error *ngIf="singupForm.get('name')?.errors">
         {{ getErrorMessage("name") }}
       </mat-error>
     </mat-form-field>
     <mat-form-field class="field" appearance="fill">
-      <mat-label>Enter your email</mat-label>
+      <mat-label>login</mat-label>
       <input
-        formControlName="email"
+        formControlName="login"
         matInput
         placeholder="pat@example.com"
         required
       />
-      <mat-error *ngIf="singupForm.get('email')?.errors">
-        {{ getErrorMessage("email") }}
+      <mat-error *ngIf="singupForm.get('login')?.errors">
+        {{ getErrorMessage("login") }}
       </mat-error>
     </mat-form-field>
     <mat-form-field class="field" appearance="fill">
-      <mat-label>Enter your password</mat-label>
+      <mat-label>password</mat-label>
       <input
         formControlName="password"
         matInput

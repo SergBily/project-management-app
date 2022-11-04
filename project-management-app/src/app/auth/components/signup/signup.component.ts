@@ -35,7 +35,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.singupForm = this.fb.group({
       name: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.required, Validators.email]),
+      login: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required, this.validators.customValidatorForPassword()]),
     });
 
@@ -50,8 +50,6 @@ export class SignupComponent implements OnInit, OnDestroy {
 
     if (field?.hasError('required')) {
       return MessageError.required;
-    } if (field?.hasError('email')) {
-      return MessageError.email;
     } if (field?.hasError('hasLettersAndNumbers')) {
       return MessageError.hasLettersAndNumbers;
     } if (field?.hasError('hasMinCharacters')) {
@@ -65,7 +63,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   onSubmit(): void {
     const data: SignUpData = {
       name: this.singupForm.get('name')?.value,
-      login: this.singupForm.get('email')?.value,
+      login: this.singupForm.get('login')?.value,
       password: this.singupForm.get('password')?.value,
     };
 
