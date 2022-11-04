@@ -23,8 +23,5 @@ import { SignupComponent } from './components/signup/signup.component';
     MatInputModule,
     MatButtonModule,
   ],
-  exports: [
-    AuthComponent,
-  ],
 })
 export class AuthModule { }

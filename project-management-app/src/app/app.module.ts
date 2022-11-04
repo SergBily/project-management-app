@@ -7,7 +7,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
-import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +16,6 @@ import { AuthModule } from './auth/auth.module';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    AuthModule,
     StoreModule.forRoot({}, {}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     EffectsModule.forRoot([]),
