@@ -48,6 +48,7 @@ export class LoginComponent implements OnInit {
           this.successMessage = MessageError.successResponse;
           this.authState.setAuthState(true);
           this.authTemplate.reset();
+          this.router.navigate(['/main/boards']);
         },
       });
   }

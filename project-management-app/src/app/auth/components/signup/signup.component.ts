@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {
   FormControl, Validators, FormGroup,
 } from '@angular/forms';
-import { take } from 'rxjs';
+import { take, retry } from 'rxjs';
 import { SignUpData } from '../../models/auth.models';
 import { ApiService } from '../../services/api/api.service';
 import { MessageError } from '../../models/enum';
@@ -34,7 +34,10 @@ export class SignupComponent implements OnInit {
 
   onSubmit(): void {
     this.api.signUp(this.data)
-      .pipe(take(1))
+      .pipe(
+        retry(2),
+        take(1),
+      )
       .subscribe({
         next: (res) => localStorage.setItem('userId', res.id),
         error: () => {
