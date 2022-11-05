@@ -39,7 +39,7 @@ export class SignupComponent implements OnInit {
         next: (res) => localStorage.setItem('userId', res.id),
         error: () => {
           this.successMessage = '';
-          this.errorMessage = MessageError.badResponse;
+          this.errorMessage = MessageError.badResponseSignup;
         },
         complete: () => {
           this.errorMessage = '';

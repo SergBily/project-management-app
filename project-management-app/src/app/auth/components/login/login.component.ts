@@ -7,6 +7,7 @@ import { take } from 'rxjs';
 import { SignUpData } from '../../models/auth.models';
 import { MessageError } from '../../models/enum';
 import { ApiService } from '../../services/api/api.service';
+import { AuthStateService } from '../../services/auth-state/auth-state.service';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +26,11 @@ export class LoginComponent implements OnInit {
 
   authTemplate!: FormGroup;
 
-  constructor(private api: ApiService, private router: Router) { }
+  constructor(
+    private api: ApiService,
+    private router: Router,
+    public authState: AuthStateService,
+  ) { }
 
   ngOnInit(): void {}
 
@@ -41,6 +46,7 @@ export class LoginComponent implements OnInit {
         complete: () => {
           this.errorMessage = '';
           this.successMessage = MessageError.successResponse;
+          this.authState.setAuthState(true);
           this.authTemplate.reset();
         },
       });
@@ -61,5 +67,10 @@ export class LoginComponent implements OnInit {
       login: this.authTemplate.get('login')?.value,
       password: this.authTemplate.get('password')?.value,
     };
+  }
+
+  protected onLogout(): void {
+    this.authState.setAuthState(false);
+    localStorage.removeItem('token');
   }
 }

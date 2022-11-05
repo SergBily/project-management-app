@@ -8,4 +8,5 @@ export enum MessageError {
   inclusion of at least one special character, e.g., ! @ # ? % ^ & *]`,
   badResponse = 'You entered the wrong login or password ',
   successResponse = 'SUCCESS',
+  badResponseSignup = 'Server not responding, please try again later',
 }
