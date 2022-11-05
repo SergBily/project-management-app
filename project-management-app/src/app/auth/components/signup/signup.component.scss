@@ -29,6 +29,10 @@
     .sighup__message {
       @include wh(100%, 20px);
       margin-top: 15px;
+      font-size: 18px;
+      font-weight: 400;
+      color: red;
+      text-align: center;
     }
 
     .btn__form-valid {
@@ -39,6 +43,10 @@
     .btn__form-valid:hover {
       background-color: #bba5ba;
       color: #352c5f;
+    }
+
+    .success {
+      color: green;
     }
 }
 

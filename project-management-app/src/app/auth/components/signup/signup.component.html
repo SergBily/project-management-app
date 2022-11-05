@@ -1,5 +1,5 @@
 <div class="container">
-  <form class="signup__input-fields" (ngSubmit)="onSubmit()">
+  <form class="signup__input-fields">
     <mat-form-field class="field" appearance="fill">
       <mat-label>name</mat-label>
       <input matInput [formControl]="nameControl" />
@@ -7,18 +7,19 @@
         That field is required
       </mat-error>
     </mat-form-field>
-    <app-auth-template
-      (formGroup)="checkLoginAndPasswordFields($event)"
-    ></app-auth-template>
+    <app-auth-template (formGroup)="checkForm($event)"></app-auth-template>
     <button
-      type="submit"
+      type="button"
       class="btn__form"
       mat-raised-button
       [disabled]="!isValidForm"
       [ngClass]="{ 'btn__form-valid': isValidForm }"
+      (click)="onSubmit()"
     >
       Sign Up
     </button>
   </form>
-  <p class="sighup__message">{{ errorMessage }}</p>
+  <p class="sighup__message" [ngClass]="{ success: successMessage }">
+    {{ errorMessage || successMessage }}
+  </p>
 </div>

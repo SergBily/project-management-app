@@ -6,4 +6,6 @@ export enum MessageError {
   hasLettersAndNumbers = 'Your password isn\'t strong enough need a mixture of letters and numbers',
   hasSpecialCharacter = `Your password isn't strong enough need
   inclusion of at least one special character, e.g., ! @ # ? % ^ & *]`,
+  badResponse = 'You entered the wrong login or password ',
+  successResponse = 'SUCCESS',
 }

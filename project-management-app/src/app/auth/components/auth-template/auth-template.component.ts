@@ -32,13 +32,16 @@ export class AuthTemplateComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.singupForm = this.fb.group({
       login: new FormControl('', [Validators.required]),
-      password: new FormControl('', [Validators.required]),
+      password: new FormControl(
+        '',
+        [
+          Validators.required,
+          this.validators.customValidatorForPassword()],
+      ),
     });
 
-    this.statusForm = this.singupForm.statusChanges.subscribe((status) => {
-      if (status === 'VALID') {
-        this.formGroup.emit(this.singupForm);
-      }
+    this.statusForm = this.singupForm.statusChanges.subscribe(() => {
+      this.formGroup.emit(this.singupForm);
     });
   }
 

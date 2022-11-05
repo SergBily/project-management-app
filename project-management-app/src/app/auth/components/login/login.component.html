@@ -1,15 +1,19 @@
 <div class="container">
   <form class="signin__input-fields">
-    <app-auth-template (formGroup)="onSubmit($event)"></app-auth-template>
+    <app-auth-template (formGroup)="checkForm($event)"></app-auth-template>
     <button
+      type="button"
       class="btn__form"
       mat-raised-button
       [disabled]="!isValidForm"
       [ngClass]="{ 'btn__form-valid': isValidForm }"
-      type="submit"
+      (click)="onSubmit()"
     >
       Sign In
     </button>
   </form>
-  <p class="sighin__message">{{ errorMessage }}</p>
+
+  <p class="sighin__message" [ngClass]="{ success: successMessage }">
+    {{ errorMessage || successMessage }}
+  </p>
 </div>

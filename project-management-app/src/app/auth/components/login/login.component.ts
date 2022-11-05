@@ -1,10 +1,11 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {
   FormGroup,
 } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
+import { take } from 'rxjs';
 import { SignUpData } from '../../models/auth.models';
+import { MessageError } from '../../models/enum';
 import { ApiService } from '../../services/api/api.service';
 
 @Component({
@@ -12,32 +13,53 @@ import { ApiService } from '../../services/api/api.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
+
 export class LoginComponent implements OnInit {
   errorMessage!: string;
 
-  isValidForm = false;
+  successMessage!: string;
 
-  subscription!: Subscription;
+  isValidForm = false;
 
   data!: SignUpData;
 
-  constructor(private api: ApiService) { }
+  authTemplate!: FormGroup;
+
+  constructor(private api: ApiService, private router: Router) { }
 
   ngOnInit(): void {}
 
-  onSubmit(validTemplate: FormGroup): void {
-    this.data = {
-      login: validTemplate.get('login')?.value,
-      password: validTemplate.get('password')?.value,
-    };
-
-    this.subscription = this.api.signIn(this.data).subscribe({
-      next: (res) => localStorage.setItem('token', res.token),
-      error: (error: HttpErrorResponse) => { this.errorMessage = error.message; },
-    });
+  onSubmit(): void {
+    this.api.signIn(this.data)
+      .pipe(take(1))
+      .subscribe({
+        next: (res) => localStorage.setItem('token', res.token),
+        error: () => {
+          this.successMessage = '';
+          this.errorMessage = MessageError.badResponse;
+        },
+        complete: () => {
+          this.errorMessage = '';
+          this.successMessage = MessageError.successResponse;
+          this.authTemplate.reset();
+        },
+      });
   }
 
-  getData(validTemplate: FormGroup): void {
-    this.isValidForm = validTemplate.status === 'VALID';
+  checkForm(template: FormGroup): void {
+    if (template.status === 'VALID') {
+      this.isValidForm = true;
+      this.authTemplate = template;
+      this.getData();
+    } else {
+      this.isValidForm = false;
+    }
+  }
+
+  private getData(): void {
+    this.data = {
+      login: this.authTemplate.get('login')?.value,
+      password: this.authTemplate.get('password')?.value,
+    };
   }
 }

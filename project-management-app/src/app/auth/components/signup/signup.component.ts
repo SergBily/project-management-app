@@ -1,13 +1,11 @@
-import {
-  Component, OnDestroy, OnInit,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormControl, Validators, FormGroup,
 } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
+import { take } from 'rxjs';
 import { SignUpData } from '../../models/auth.models';
 import { ApiService } from '../../services/api/api.service';
+import { MessageError } from '../../models/enum';
 
 @Component({
   selector: 'app-signup',
@@ -15,18 +13,18 @@ import { ApiService } from '../../services/api/api.service';
   styleUrls: ['./signup.component.scss'],
 })
 
-export class SignupComponent implements OnInit, OnDestroy {
+export class SignupComponent implements OnInit {
   isValidForm = false;
 
   nameControl!: FormControl;
 
-  subscription!: Subscription;
-
   errorMessage!: string;
 
-  statusForm!: Subscription;
+  successMessage!: string;
 
   data!: SignUpData;
+
+  authTemplate!: FormGroup;
 
   constructor(private api: ApiService) { }
 
@@ -35,25 +33,38 @@ export class SignupComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
-    this.subscription = this.api.signUp(this.data).subscribe({
-      next: (res) => localStorage.setItem('signup', JSON.stringify(res)),
-      error: (error: HttpErrorResponse) => { this.errorMessage = error.message; },
-    });
+    this.api.signUp(this.data)
+      .pipe(take(1))
+      .subscribe({
+        next: (res) => localStorage.setItem('userId', res.id),
+        error: () => {
+          this.successMessage = '';
+          this.errorMessage = MessageError.badResponse;
+        },
+        complete: () => {
+          this.errorMessage = '';
+          this.successMessage = MessageError.successResponse;
+          this.authTemplate.reset();
+          this.nameControl.reset();
+        },
+      });
   }
 
-  checkLoginAndPasswordFields(validTemplate: FormGroup): void {
-    this.data = {
-      name: this.nameControl?.value,
-      login: validTemplate.get('login')?.value,
-      password: validTemplate.get('password')?.value,
-    };
-
-    if (!this.nameControl.errors) {
-      this.isValidForm = !this.isValidForm;
+  checkForm(template: FormGroup): void {
+    if (!this.nameControl.errors && template.status === 'VALID') {
+      this.isValidForm = true;
+      this.authTemplate = template;
+      this.getData();
+    } else {
+      this.isValidForm = false;
     }
   }
 
-  ngOnDestroy(): void {
-    this.subscription?.unsubscribe();
+  private getData(): void {
+    this.data = {
+      name: this.nameControl?.value,
+      login: this.authTemplate.get('login')?.value,
+      password: this.authTemplate.get('password')?.value,
+    };
   }
 }
