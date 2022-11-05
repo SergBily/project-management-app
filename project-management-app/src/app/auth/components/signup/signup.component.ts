@@ -1,13 +1,13 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
-  FormControl, Validators, FormBuilder, FormGroup,
+  Component, OnDestroy, OnInit,
+} from '@angular/core';
+import {
+  FormControl, Validators, FormGroup,
 } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
-import { MessageError } from '../../models/enum';
 import { SignUpData } from '../../models/auth.models';
 import { ApiService } from '../../services/api/api.service';
-import { CustomValidatorService } from '../../services/custom-validator/custom-validator.service';
 
 @Component({
   selector: 'app-signup',
@@ -16,66 +16,44 @@ import { CustomValidatorService } from '../../services/custom-validator/custom-v
 })
 
 export class SignupComponent implements OnInit, OnDestroy {
-  hide = true;
-
   isValidForm = false;
 
-  singupForm!: FormGroup;
+  nameControl!: FormControl;
 
-  subscription: Subscription[] = [];
+  subscription!: Subscription;
 
   errorMessage!: string;
 
-  constructor(
-    private fb: FormBuilder,
-    private validators: CustomValidatorService,
-    private api: ApiService,
-  ) { }
+  statusForm!: Subscription;
+
+  data!: SignUpData;
+
+  constructor(private api: ApiService) { }
 
   ngOnInit(): void {
-    this.singupForm = this.fb.group({
-      name: new FormControl('', [Validators.required]),
-      login: new FormControl('', [Validators.required]),
-      password: new FormControl('', [Validators.required, this.validators.customValidatorForPassword()]),
-    });
-
-    const statusForm: Subscription = this.singupForm.statusChanges.subscribe((status) => {
-      this.isValidForm = status === 'VALID';
-    });
-    this.subscription.push(statusForm);
-  }
-
-  protected getErrorMessage(nameField: string): MessageError {
-    const field = this.singupForm.get(nameField) as FormControl;
-
-    if (field?.hasError('required')) {
-      return MessageError.required;
-    } if (field?.hasError('hasLettersAndNumbers')) {
-      return MessageError.hasLettersAndNumbers;
-    } if (field?.hasError('hasMinCharacters')) {
-      return MessageError.hasMinCharacters;
-    } if (field?.hasError('hasSpecialCharacter')) {
-      return MessageError.hasSpecialCharacter;
-    }
-    return MessageError.hasUpperAndLowercase;
+    this.nameControl = new FormControl('', [Validators.required]);
   }
 
   onSubmit(): void {
-    const data: SignUpData = {
-      name: this.singupForm.get('name')?.value,
-      login: this.singupForm.get('login')?.value,
-      password: this.singupForm.get('password')?.value,
-    };
-
-    const response: Subscription = this.api.signUp(data).subscribe({
+    this.subscription = this.api.signUp(this.data).subscribe({
       next: (res) => localStorage.setItem('signup', JSON.stringify(res)),
       error: (error: HttpErrorResponse) => { this.errorMessage = error.message; },
     });
+  }
 
-    this.subscription.push(response);
+  checkLoginAndPasswordFields(validTemplate: FormGroup): void {
+    this.data = {
+      name: this.nameControl?.value,
+      login: validTemplate.get('login')?.value,
+      password: validTemplate.get('password')?.value,
+    };
+
+    if (!this.nameControl.errors) {
+      this.isValidForm = !this.isValidForm;
+    }
   }
 
   ngOnDestroy(): void {
-    this.subscription.forEach((sub) => sub.unsubscribe());
+    this.subscription?.unsubscribe();
   }
 }
