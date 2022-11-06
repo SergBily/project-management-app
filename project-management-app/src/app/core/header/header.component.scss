@@ -1,0 +1,172 @@
+$colorMain: #026aa7;
+$colorBlond:rgba(245, 246, 247, 0.36);
+$colorBlack: #172b4d;
+
+@mixin light {
+  background-color: $colorBlond;
+  transition: 0.4s;
+  // opacity: 0.5;
+}
+
+@mixin design {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 4px;
+}
+
+.wrapper-header {
+  padding: 6px 4px;
+  width: 100%;
+  height: 44px;
+  background-color: $colorMain;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-left {
+  display: flex;
+}
+
+.wrapper-cube {
+  height: 32px;
+  width: 32px;
+  @include design;
+
+  &:hover {
+    @include light;
+  }
+}
+
+.wrapp-points {
+  width: 24px;
+  height: 24px;
+}
+
+.cube {
+  @include design;
+  color: white;
+}
+
+.menuTrello {
+  width: 75px;
+  height: 32px;
+  @include design;
+
+  &:hover {
+    @include light;
+  }
+}
+
+.trello {
+  font-size: 20px;
+  color: white;
+  font-weight: 900;
+  z-index: 2;
+}
+
+.workspace {
+  width: 190px;
+  text-align: center;
+  color: white;
+  @include design;
+  &:hover {
+    @include light;
+  }
+}
+
+.expand {
+  margin-left: 7px;
+}
+
+.recent {
+  width: 107px;
+  text-align: center;
+  color: white;
+  @include design;
+  &:hover {
+    @include light;
+  }
+}
+
+.more {
+  width: 107px;
+  text-align: center;
+  color: white;
+  @include design;
+  &:hover {
+    @include light;
+  }
+}
+
+.favorites {
+  width: 130px;
+  text-align: center;
+  color: white;
+  @include design;
+  &:hover {
+    @include light;
+  }
+}
+
+.templates {
+  width: 106px;
+  text-align: center;
+  color: white;
+  @include design;
+  &:hover {
+    @include light;
+  }
+}
+
+.plus {
+  width: 32px;
+  text-align: center;
+  color: white;
+  @include design;
+  background-color: $colorBlack;
+  &:hover {
+    @include light;
+  }
+}
+
+.create {
+  width: 75px;
+  text-align: center;
+  color: white;
+  @include design;
+  &:hover {
+    @include light;
+  }
+}
+
+.header-right {
+  display: flex;
+}
+
+.black{
+background-color: $colorBlack;
+}
+
+.search {
+  width: 32px;
+  height: 32px;
+  
+  @include design;
+  &:hover {
+    @include light;
+  }
+}
+
+.avatar{
+  width: 32px;
+  height: 32px;
+}
+
+.img-avatar{
+  width: 100%;
+}
