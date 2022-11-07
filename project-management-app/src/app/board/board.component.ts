@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { boards } from 'src/app/mock';
-import { Board } from 'src/app/models';
+import { Board } from '../main/models/board';
+import { BoardsApiService } from '../main/services/boards/boards.service';
 
 @Component({
   selector: 'app-board',
@@ -19,6 +19,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   constructor(
     public route: ActivatedRoute,
     public router: Router,
+    private boardsApi: BoardsApiService,
   ) { }
 
   ngOnInit(): void {
@@ -28,10 +29,11 @@ export class BoardComponent implements OnInit, OnDestroy {
       }),
     );
 
-    this.board = boards.find((item) => item.id === this.boardId);
-    if (!this.board) {
-      this.router.navigate(['page-not-found']);
-    }
+    this.subscriptions.add(
+      this.boardsApi.getBoard(this.boardId).subscribe((board) => {
+        this.board = board;
+      }),
+    );
   }
 
   ngOnDestroy(): void {

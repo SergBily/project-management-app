@@ -19,10 +19,12 @@ export class UrlHeadersInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const userToken: string | null = localStorage.getItem('token');
 
-    this.headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      accept: 'application/json',
-    });
+    this.headers = new HttpHeaders();
+
+    if (request.method !== 'delete') {
+      this.headers.set('Content-Type', 'application/json');
+      this.headers.set('accept', 'application/json');
+    }
 
     if (this.authState.getCurrentState()) {
       this.headers = this.headers.set('Authorization', `Bearer ${userToken}`);

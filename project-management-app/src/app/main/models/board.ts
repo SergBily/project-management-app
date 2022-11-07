@@ -4,8 +4,7 @@ export interface Board {
   description: string,
 }
 
-export interface AddBoard {
-  id: string,
-  title: string,
-  description: string,
+export interface PostBoardRequest {
+  title: string | null,
+  description: string | null,
 }

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
+import { PostBoardRequest } from '../../models/board';
+import { BoardsApiService } from '../../services/boards/boards.service';
 
 @Component({
   selector: 'app-add-board',
@@ -12,18 +14,9 @@ export class AddBoardComponent {
     description: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(250)]],
   });
 
-  public title = this.addBoardForm.controls.title;
+  constructor(private fb: FormBuilder, private boardsApi: BoardsApiService) { }
 
-  public description = this.addBoardForm.controls.description;
-
-  constructor(private fb: FormBuilder) { }
-
-  addBoard(board: any) {
-    console.log(board);
-  }
-
-  isValid(field: FormControl) {
-    const { invalid, dirty, touched } = field;
-    return invalid && (dirty || touched);
+  addBoard(board: PostBoardRequest) {
+    this.boardsApi.addBoard(board).subscribe();
   }
 }

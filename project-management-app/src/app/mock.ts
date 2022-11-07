@@ -1,4 +1,5 @@
-import { Board, Column } from './models';
+import { Column } from './models';
+import { Board } from './main/models/board';
 
 export const boards: Board[] = [
   {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { boards } from 'src/app/mock';
-import { Board } from 'src/app/models';
+import { Observable } from 'rxjs';
+import { Board } from '../../models/board';
+import { BoardsApiService } from '../../services/boards/boards.service';
 
 @Component({
   selector: 'app-boards-list',
@@ -8,9 +9,9 @@ import { Board } from 'src/app/models';
   styleUrls: ['./boards-list.component.scss'],
 })
 export class BoardsListComponent implements OnInit {
-  boards: Board[] = boards;
+  boards$: Observable<Board[]> = this.boardsApi.getBoards();
 
-  constructor() { }
+  constructor(private boardsApi: BoardsApiService) { }
 
   ngOnInit(): void {
   }
