@@ -4,7 +4,6 @@ import { MainComponent } from './main.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent },
-  { path: 'board', loadChildren: () => import('./pages/board/board.module').then((m) => m.BoardModule) },
 ];
 
 @NgModule({

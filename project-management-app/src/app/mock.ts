@@ -1,4 +1,4 @@
-import { Board } from './models';
+import { Board, Column } from './models';
 
 export const boards: Board[] = [
   {
@@ -15,5 +15,23 @@ export const boards: Board[] = [
     id: '3',
     title: 'Board 3',
     description: 'description...',
+  },
+];
+
+export const columns: Column[] = [
+  {
+    id: '1',
+    title: 'Colum 1',
+    order: 1,
+  },
+  {
+    id: '2',
+    title: 'Colum 2',
+    order: 2,
+  },
+  {
+    id: '3',
+    title: 'Colum 3',
+    order: 3,
   },
 ];

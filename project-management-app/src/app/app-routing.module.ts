@@ -5,6 +5,7 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
 const routes: Routes = [
   { path: '', redirectTo: '/main', pathMatch: 'full' },
   { path: 'main', loadChildren: () => import('./main/main.module').then((m) => m.MainModule) },
+  { path: 'boards', loadChildren: () => import('./board/board.module').then((m) => m.BoardModule) },
   { path: '**', component: PageNotFoundComponent },
 ];
 
