@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Board } from 'src/app/models';
+import { Board } from '../../models/board';
 
 @Component({
   selector: 'app-board-item',

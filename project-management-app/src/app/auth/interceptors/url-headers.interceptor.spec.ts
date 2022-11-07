@@ -5,8 +5,8 @@ import { UrlHeadersInterceptor } from './url-headers.interceptor';
 describe('UrlHeadersInterceptor', () => {
   beforeEach(() => TestBed.configureTestingModule({
     providers: [
-      UrlHeadersInterceptor
-      ]
+      UrlHeadersInterceptor,
+    ],
   }));
 
   it('should be created', () => {
