@@ -2,23 +2,22 @@
 
 .container {
   @include wh(400px,auto);
+  @include center-window();
   padding: 100px 30px 20px 30px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: url('../../../../assets/images/logo.png') 10% -8% no-repeat;
-  background-size: 150px 150px;
-  box-shadow: rgb(0 0 0 / 30%) 0px 10px 30px;
-  border-radius: 10px;
+  background: url('../../../../assets/images/logo.png') 15% 4% no-repeat;
+  background-size: 120px 70px;
+  box-shadow: $modalWindowShadow;
+  border-radius: $modalWindowBorderRad;
+  -webkit-border-radius: $modalWindowBorderRad;
+  -moz-border-radius: $modalWindowBorderRad;
+  -ms-border-radius: $modalWindowBorderRad;
+  -o-border-radius: $modalWindowBorderRad;
 
     .btn__form {
       @include wh(50%, 40px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      @include flex();
+      @include btn($background-color: $disableBtn);
       margin: 0 auto;
-      background-color: #d9c1cf;
     }
 
     .sighin__message {
@@ -26,22 +25,20 @@
       margin-top: 15px;
       font-size: 18px;
       font-weight: 400;
-      color: red;
+      color: $errorMessage;
       text-align: center;
     }
 
     .btn__form-valid {
-      background-color: #574b75;
-      color: white;
+      @include btn();
     }
 
     .btn__form-valid:hover {
-      background-color: #bba5ba;
-      color: #352c5f;
+      @include btn-hover();
     }
 
     .success {
-      color: green;
+      color: $successMessage;
     }
 
     .btn__logout {
