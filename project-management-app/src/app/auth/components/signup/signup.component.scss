@@ -1,0 +1,56 @@
+@import '../../../../style/default.scss';
+
+.container {
+  @include wh(400px, auto);
+  padding: 100px 30px 20px 30px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: url('../../../../assets/images/logo.png') 10% -8% no-repeat;
+  background-size: 150px 150px;
+  box-shadow: rgb(0 0 0 / 30%) 0px 10px 30px;
+  border-radius: 10px;
+
+    .field {
+      width: 100%;
+      margin-bottom: 15px;
+    }
+
+    .btn__form {
+      @include wh(50%, 40px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+      background-color: #d9c1cf;
+    }
+
+    .sighup__message {
+      @include wh(100%, 20px);
+      margin-top: 15px;
+      font-size: 18px;
+      font-weight: 400;
+      color: red;
+      text-align: center;
+    }
+
+    .btn__form-valid {
+      background-color: #574b75;
+      color: white;
+    }
+
+    .btn__form-valid:hover {
+      background-color: #bba5ba;
+      color: #352c5f;
+    }
+
+    .success {
+      color: green;
+    }
+}
+
+.btn__password {
+  border: 0;
+  background-color: transparent;
+}
