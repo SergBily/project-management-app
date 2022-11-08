@@ -51,11 +51,3 @@
   border: 0;
   background-color: transparent;
 }
-
-.btnc {
-  @include btn($background-color: #6c5a74)
-}
-
-.btnc:hover {
-@include btn-hover()
-}

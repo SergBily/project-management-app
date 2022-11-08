@@ -1,0 +1,62 @@
+@import '../../../../style/default.scss';
+
+.container {
+  @include wh(400px,auto);
+  @include center-window();
+  padding: 100px 30px 20px 30px;
+  background: url('../../../../assets/images/logo.png') 15% 4% no-repeat;
+  background-size: 120px 70px;
+  box-shadow: $modalWindowShadow;
+  border-radius: $modalWindowBorderRad;
+  -webkit-border-radius: $modalWindowBorderRad;
+  -moz-border-radius: $modalWindowBorderRad;
+  -ms-border-radius: $modalWindowBorderRad;
+  -o-border-radius: $modalWindowBorderRad;
+  .field {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  .btn__form {
+    @include wh(50%, 40px);
+    @include btn($background-color: $disableBtn);
+    @include flex();
+    margin: 0 auto;
+  }
+
+  .sighup__message {
+    @include wh(100%, 20px);
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: 400;
+    color: $errorMessage;
+    text-align: center;
+  }
+
+  .btn__form-valid {
+    @include btn();
+  }
+
+  .btn__form-valid:hover {
+    @include btn-hover();
+  }
+
+  .success {
+    color: $successMessage;
+  }
+
+    .container__btn {
+      @include flex();
+      margin-top: 1rem;
+
+      .btn__delete {
+        @include btn($background-color: rgba(255, 0, 0, 0.6));
+      }
+    }
+
+
+    .btn__delete:hover {
+      box-shadow: $modalWindowShadow;
+      color: #6c5a74;
+    }
+}

@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, retry, take } from 'rxjs';
 
-import { SignInResponse, SignUpData, SignUpResponse } from '../../models/auth.models';
+import {
+  User, SignInResponse, SignUpData,
+} from '../../models/auth.models';
 
 @Injectable({
   providedIn: 'root',
@@ -10,11 +12,19 @@ import { SignInResponse, SignUpData, SignUpResponse } from '../../models/auth.mo
 export class ApiService {
   constructor(private http: HttpClient) { }
 
-  public signUp(data: SignUpData): Observable<SignUpResponse> {
-    return this.http.post<SignUpResponse>('/signup', data);
+  public signUp(data: SignUpData): Observable<User> {
+    return this.http.post<User>('/signup', data);
   }
 
   public signIn(data: SignUpData): Observable<SignInResponse> {
     return this.http.post<SignInResponse>('/signin', data);
+  }
+
+  public getUser(id: string): Observable<User> {
+    return this.http.get<User>(`/users/${id}`)
+      .pipe(
+        retry(2),
+        take(1),
+      );
   }
 }
