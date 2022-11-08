@@ -1,6 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { take } from 'rxjs';
 import { Board } from '../main/models/board';
 import { BoardsApiService } from '../main/services/boards/boards.service';
 
@@ -9,12 +9,10 @@ import { BoardsApiService } from '../main/services/boards/boards.service';
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.scss'],
 })
-export class BoardComponent implements OnInit, OnDestroy {
+export class BoardComponent implements OnInit {
   boardId = '';
 
   board: Board | undefined;
-
-  subscriptions: Subscription = new Subscription();
 
   constructor(
     public route: ActivatedRoute,
@@ -23,20 +21,12 @@ export class BoardComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.subscriptions.add(
-      this.route.params.subscribe((params) => {
-        this.boardId = params['id'];
-      }),
-    );
+    this.route.params.pipe(take(1)).subscribe((params) => {
+      this.boardId = params['id'];
+    });
 
-    this.subscriptions.add(
-      this.boardsApi.getBoard(this.boardId).subscribe((board) => {
-        this.board = board;
-      }),
-    );
-  }
-
-  ngOnDestroy(): void {
-    this.subscriptions.unsubscribe();
+    this.boardsApi.getBoard(this.boardId).subscribe((board) => {
+      this.board = board;
+    });
   }
 }

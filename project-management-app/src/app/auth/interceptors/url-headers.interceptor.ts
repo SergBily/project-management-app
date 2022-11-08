@@ -21,9 +21,10 @@ export class UrlHeadersInterceptor implements HttpInterceptor {
 
     this.headers = new HttpHeaders();
 
-    if (request.method !== 'delete') {
-      this.headers.set('Content-Type', 'application/json');
-      this.headers.set('accept', 'application/json');
+    if (request.method !== 'DELETE') {
+      this.headers = this.headers
+        .set('Content-Type', 'application/json')
+        .set('accept', 'application/json');
     }
 
     if (this.authState.getCurrentState()) {

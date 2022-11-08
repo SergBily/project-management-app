@@ -1,5 +1,5 @@
-<div class="board">
-  <h3 class="board__title" (click)="showBoard()">{{board.title}}</h3>
+<div class="board" routerLink="/boards/{{board.id}}">
+  <h3 class="board__title">{{board.title}}</h3>
   <p class="board__description">{{board.description}}</p>
-  <button class="board__remove" (click)="deleteBoard()">remove</button>
+  <button class="board__remove" (click)="deleteBoard($event)">remove</button>
 </div>

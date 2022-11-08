@@ -16,10 +16,7 @@ export class BoardsApiService {
     return this.http.post<Board>('/boards', data).pipe(
       retry(2),
       take(1),
-      catchError((error) => {
-        console.log('[ERROR]', error);
-        return EMPTY;
-      }),
+      catchError(() => EMPTY),
     );
   }
 
@@ -27,10 +24,7 @@ export class BoardsApiService {
     return this.http.get<Board[]>('/boards').pipe(
       retry(2),
       take(1),
-      catchError((error) => {
-        console.log('[ERROR]', error);
-        return EMPTY;
-      }),
+      catchError(() => EMPTY),
     );
   }
 
@@ -38,8 +32,7 @@ export class BoardsApiService {
     return this.http.get<Board>(`/boards/${id}`).pipe(
       retry(2),
       take(1),
-      catchError((error) => {
-        console.log('[ERROR]', error);
+      catchError(() => {
         this.router.navigate(['page-not-found']);
         return EMPTY;
       }),
@@ -50,10 +43,7 @@ export class BoardsApiService {
     return this.http.delete(`/boards/${id}`).pipe(
       retry(2),
       take(1),
-      catchError((error) => {
-        console.log('[ERROR]', error);
-        return EMPTY;
-      }),
+      catchError(() => EMPTY),
     );
   }
 }
