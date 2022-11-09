@@ -12,25 +12,24 @@ import { AuthStateService } from '../services/auth-state/auth-state.service';
 
 @Injectable()
 export class UrlHeadersInterceptor implements HttpInterceptor {
-  headers!: HttpHeaders;
-
   constructor(private authState: AuthStateService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const userToken: string | null = localStorage.getItem('token');
+    let headers = new HttpHeaders();
 
-    this.headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      accept: 'application/json',
-    });
+    if (request.method !== 'DELETE') {
+      headers = headers.set('Content-Type', 'application/json');
+      headers = headers.set('accept', 'application/json');
+    }
 
     if (this.authState.getCurrentState()) {
-      this.headers = this.headers.set('Authorization', `Bearer ${userToken}`);
+      headers = headers.set('Authorization', `Bearer ${userToken}`);
     }
 
     const newRequest = request.clone({
       url: environment.baseUrl + request.url,
-      headers: this.headers,
+      headers,
     });
     return next.handle(newRequest);
   }

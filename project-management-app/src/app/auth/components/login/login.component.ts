@@ -3,7 +3,6 @@ import {
   FormGroup,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { take } from 'rxjs';
 import { SignUpData } from '../../models/auth.models';
 import { MessageError } from '../../models/enum';
 import { ApiService } from '../../services/api/api.service';
@@ -40,7 +39,6 @@ export class LoginComponent implements OnInit {
 
   onSubmit(): void {
     this.api.signIn(this.data)
-      .pipe(take(1))
       .subscribe({
         next: (res) => localStorage.setItem('token', res.token),
         error: () => {
@@ -52,7 +50,7 @@ export class LoginComponent implements OnInit {
           this.successMessage = MessageError.successResponse;
           this.authState.setAuthState(true);
           this.authTemplate.reset();
-          this.router.navigate(['/main/boards']);
+          // this.router.navigate(['/main/boards']);
         },
       });
   }

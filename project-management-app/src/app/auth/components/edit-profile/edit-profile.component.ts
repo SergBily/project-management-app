@@ -2,13 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import {
   FormControl, Validators, FormGroup,
 } from '@angular/forms';
-import { retry, take } from 'rxjs';
 import { SignUpData } from '../../models/auth.models';
 import { MessageError } from '../../models/enum';
 import { ApiService } from '../../services/api/api.service';
 import { CheckFormService } from '../../services/check-form/check-form.service';
 import { DataFormService } from '../../services/data-form/data-form.service';
-import { DateUserService } from '../../services/user-date/date-user';
+import { DateUserService } from '../../services/date-user/date-user';
 
 @Component({
   selector: 'app-edit-profile',
@@ -30,6 +29,8 @@ export class EditProfileComponent implements OnInit {
 
   loginUser!: string;
 
+  currentUserId!: string;
+
   constructor(
     private api: ApiService,
     private check: CheckFormService,
@@ -38,21 +39,17 @@ export class EditProfileComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const id = this.userId.getloginedUserId();
+    this.currentUserId = this.userId.getloginedUserId();
     this.nameControl = new FormControl('', [Validators.required]);
 
-    this.api.getUser(id).subscribe((user) => {
+    this.api.getUser(this.currentUserId).subscribe((user) => {
       this.loginUser = user.login;
       this.nameControl.setValue(user.name);
     });
   }
 
   protected onUpdate(): void {
-    this.api.signUp(this.data)
-      .pipe(
-        retry(2),
-        take(1),
-      )
+    this.api.updateUser(this.currentUserId, this.data)
       .subscribe({
         next: (res) => localStorage.setItem('userId', res.id),
         error: () => {
@@ -61,15 +58,23 @@ export class EditProfileComponent implements OnInit {
         },
         complete: () => {
           this.errorMessage = '';
-          this.successMessage = MessageError.successResponse;
-          this.authTemplate.reset();
-          this.nameControl.reset();
+          this.successMessage = MessageError.updateSuccess;
         },
       });
   }
 
   protected onDelete() {
-
+    this.api.deleteUser(this.currentUserId)
+      .subscribe({
+        error: () => {
+          this.successMessage = '';
+          this.errorMessage = MessageError.deleteUserError;
+        },
+        complete: () => {
+          this.errorMessage = '';
+          this.successMessage = MessageError.successResponse;
+        },
+      });
   }
 
   protected checkForm(template: FormGroup): void {
