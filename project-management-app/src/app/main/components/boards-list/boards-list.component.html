@@ -1,0 +1,5 @@
+<ul class="boards">
+  <li *ngFor="let board of boards$ | async">
+    <app-board-item [board]="board"></app-board-item>
+  </li>
+</ul>

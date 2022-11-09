@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'https://glacial-earth-79071.herokuapp.com/',
+  baseUrl: 'https://glacial-earth-79071.herokuapp.com',
 };
 
 /*
