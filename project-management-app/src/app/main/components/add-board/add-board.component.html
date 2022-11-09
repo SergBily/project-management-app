@@ -1,0 +1,16 @@
+<form class="add-board-form" [formGroup]="addBoardForm" (ngSubmit)="addBoard(addBoardForm.getRawValue())">
+  <h2 class="add-board-form__title">Add new board: </h2>
+  <div class="add-board-form__input">
+    <label for="title">Title</label>
+    <input id="title" formControlName="title">
+  </div>
+  <div class="add-board-form__input">
+    <label for="description">Description</label>
+    <input id="description" formControlName="description">
+  </div>
+  <button
+    class="add-board-form__button"
+    type="submit"
+    [disabled]="!addBoardForm.valid"
+    >Add</button>
+</form>

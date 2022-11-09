@@ -8,11 +8,13 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { UrlHeadersInterceptor } from './auth/interceptors/url-headers.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
