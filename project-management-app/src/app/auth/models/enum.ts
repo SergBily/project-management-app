@@ -9,4 +9,6 @@ export enum MessageError {
   badResponse = 'You entered the wrong login or password ',
   successResponse = 'SUCCESS',
   badResponseSignup = 'Server not responding, please try again later',
+  deleteUserError = 'User was not founded!',
+  updateSuccess = 'Profile updated successfully',
 }

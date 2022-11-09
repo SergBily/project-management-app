@@ -1,5 +1,5 @@
 import {
-  Component, EventEmitter, OnDestroy, OnInit, Output,
+  Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges,
 } from '@angular/core';
 import {
   FormControl, Validators, FormBuilder, FormGroup,
@@ -13,8 +13,10 @@ import { CustomValidatorService } from '../../services/custom-validator/custom-v
   templateUrl: './auth-template.component.html',
   styleUrls: ['./auth-template.component.scss'],
 })
-export class AuthTemplateComponent implements OnInit, OnDestroy {
+export class AuthTemplateComponent implements OnInit, OnChanges, OnDestroy {
   @Output() formGroup = new EventEmitter<FormGroup>();
+
+  @Input() valueLogin!: string;
 
   singupForm!: FormGroup;
 
@@ -28,6 +30,13 @@ export class AuthTemplateComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private validators: CustomValidatorService,
   ) { }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    const value = changes?.['valueLogin'].currentValue;
+    if (value) {
+      this.setLogin(value);
+    }
+  }
 
   ngOnInit(): void {
     this.singupForm = this.fb.group({
@@ -43,6 +52,10 @@ export class AuthTemplateComponent implements OnInit, OnDestroy {
     this.statusForm = this.singupForm.statusChanges.subscribe(() => {
       this.formGroup.emit(this.singupForm);
     });
+  }
+
+  private setLogin(value: string): void {
+    this.singupForm.get('login')?.setValue(value);
   }
 
   protected getErrorMessage(nameField: string): MessageError {

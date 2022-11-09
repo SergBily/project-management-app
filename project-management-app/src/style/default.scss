@@ -1,4 +1,60 @@
+$btnBackColor: #574b75;
+$circleBtnBackColor: #6c5a74;
+$btnBackColorHover: #cbb7d4;
+$btnColor: #ffffff;
+$btnColorHover: #6c5a74;
+$disableBtn: #d9c1cf;
+$successMessage: #008000;
+$HeaderHeight: 70px;
+$FooterHeight: 50px;
+$errorMessage: #ff0000;
+$modalWindowShadow:rgb(203 183 212 / 60%) 0px 10px 30px;
+$modalWindowBorderRad: 10px;
+
 @mixin wh($width: auto, $height: auto) {
   width: $width;
   height: $height;
+}
+
+@mixin flex($display: flex, $justify-content: center, $align-items: center) {
+  display: $display;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
+
+@mixin btn ($background-color: $btnBackColor, $color: $btnColor, $font-size: 16px,
+$letter-spacing: 0.5px, $transition: all 0.4s ease-in-out) {
+  background-color: $background-color;
+  color: $color;
+  font-size: $font-size;
+  letter-spacing: $letter-spacing;
+  transition: $transition;
+  -webkit-transition: $transition;
+  -moz-transition: $transition;
+  -ms-transition: $transition;
+  -o-transition: $transition;
+}
+
+@mixin btn-hover ($background-color: $btnBackColorHover, $color: $btnColorHover, $transition: all 0.4s ease-in-out,
+$box-shadow: #6c5a74 2px 5px 15px, $font-weight: 700) {
+  background-color: $background-color;
+  color: $color;
+  transition: $transition;
+  -webkit-transition: $transition;
+  -moz-transition: $transition;
+  -ms-transition: $transition;
+  -o-transition: $transition;
+  box-shadow: $box-shadow;
+  font-weight: $font-weight;
+}
+
+@mixin center-window ($position: absolute, $top: 50%, $left: 50%, $transform: translate(-50%, -50%)) {
+  position: $position;
+  top: $top;
+  left: $left;
+  transform: $transform;
+  -webkit-transform: $transform;
+  -moz-transform: $transform;
+  -ms-transform: $transform;
+  -o-transform: $transform;
 }

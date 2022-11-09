@@ -4,12 +4,18 @@ export interface SignUpData {
   name?: string,
 }
 
-export interface SignUpResponse {
+export interface SignInResponse {
+  token: string
+}
+
+export interface User {
   id: string,
   name: string,
   login: string
 }
 
-export interface SignInResponse {
-  token: string
+export interface LoggedUser {
+  userId: string,
+  login: string,
+  iat: number
 }
