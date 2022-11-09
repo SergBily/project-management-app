@@ -1,5 +1,5 @@
 $colorMain: #026aa7;
-$colorBlond:rgba(245, 246, 247, 0.36);
+$colorBlond: rgba(245, 246, 247, 0.36);
 $colorBlack: #172b4d;
 
 @mixin light {
@@ -15,6 +15,12 @@ $colorBlack: #172b4d;
   border-radius: 5px;
   cursor: pointer;
   margin-right: 4px;
+}
+
+@mixin flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .wrapper-header {
@@ -148,25 +154,80 @@ $colorBlack: #172b4d;
   display: flex;
 }
 
-.black{
-background-color: $colorBlack;
+.black {
+  background-color: $colorBlack;
 }
 
-.search {
-  width: 32px;
-  height: 32px;
-  
+.btn-wrap {
+  text-align: center;
+  color: white;
   @include design;
+  padding: 0 10px;
+  margin: 0;
+  height: 32px;
   &:hover {
     @include light;
   }
 }
 
-.avatar{
+.avatar {
   width: 32px;
   height: 32px;
 }
 
-.img-avatar{
+.img-avatar {
   width: 100%;
+}
+
+.wrapper-button {
+  display: flex;
+  height: 32px;
+  // @include flexCenter;
+}
+
+.btn-en {
+  width: 50px;
+  background-color: rgb(198, 213, 168);
+  border-radius: 5px;
+  @include flexCenter;
+  color: white;
+  font-weight: 100;
+  margin: 0 1px;
+  &:hover {
+    @include light();
+  }
+}
+
+.btn-ru {
+  width: 50px;
+  background-color: rgb(198, 213, 168);
+  border-radius: 5px;
+  @include flexCenter;
+  color: white;
+  font-weight: 100;
+  margin: 0 1px;
+  &:hover {
+    @include light();
+  }
+}
+
+.search-wrap {
+  @include flexCenter;
+  color: white;
+}
+
+.search {
+  background-color: $colorMain;
+  color: white;
+  border: none;
+  font-size: 16px;
+  outline: none;
+  border-bottom: 1px solid;
+  width: 90px;
+  font-weight: 100;
+  &::-webkit-input-placeholder {
+    color: white;
+    font-weight: 100;
+    font-size: 14px;
+  }
 }

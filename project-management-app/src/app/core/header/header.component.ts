@@ -11,5 +11,32 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  event = event?.target as HTMLElement
+  // srtrg:number = 1
+  registrationYes = false
+  registrationNo = true
 
+  enter(){
+    if(true){
+      this.registrationYes = true
+      this.registrationNo = false
+    }
+  }
+
+  exit(){
+    this.registrationYes = false
+    this.registrationNo = true
+  }
+  
+  enSwitchLanguage(){
+    
+    console.log('44ee')
+    // console.log(event.target)
+    // console.log(event.target)
+    // console.log(this.event)
+    // if(event.target.id === 'en'){
+    //   event.target.classList.add('black')
+    //   console.log('ee')
+    // }
+  }
 }
