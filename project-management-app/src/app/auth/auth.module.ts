@@ -9,6 +9,7 @@ import { AuthComponent } from './auth.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { AuthTemplateComponent } from './components/auth-template/auth-template.component';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { AuthTemplateComponent } from './components/auth-template/auth-template.
     LoginComponent,
     SignupComponent,
     AuthTemplateComponent,
+    EditProfileComponent,
   ],
   imports: [
     CommonModule,

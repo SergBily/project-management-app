@@ -3,11 +3,12 @@ import {
   FormGroup,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { take } from 'rxjs';
 import { SignUpData } from '../../models/auth.models';
 import { MessageError } from '../../models/enum';
 import { ApiService } from '../../services/api/api.service';
 import { AuthStateService } from '../../services/auth-state/auth-state.service';
+import { CheckFormService } from '../../services/check-form/check-form.service';
+import { DataFormService } from '../../services/data-form/data-form.service';
 
 @Component({
   selector: 'app-login',
@@ -30,13 +31,14 @@ export class LoginComponent implements OnInit {
     private api: ApiService,
     private router: Router,
     public authState: AuthStateService,
+    private check: CheckFormService,
+    private dataForm: DataFormService,
   ) { }
 
   ngOnInit(): void {}
 
   onSubmit(): void {
     this.api.signIn(this.data)
-      .pipe(take(1))
       .subscribe({
         next: (res) => localStorage.setItem('token', res.token),
         error: () => {
@@ -48,26 +50,21 @@ export class LoginComponent implements OnInit {
           this.successMessage = MessageError.successResponse;
           this.authState.setAuthState(true);
           this.authTemplate.reset();
-          this.router.navigate(['/main/boards']);
+          // this.router.navigate(['/main/boards']);
         },
       });
   }
 
-  checkForm(template: FormGroup): void {
-    if (template.status === 'VALID') {
-      this.isValidForm = true;
-      this.authTemplate = template;
-      this.getData();
-    } else {
-      this.isValidForm = false;
-    }
-  }
+  protected checkForm(template: FormGroup): void {
+    const isValid = this.check.checkForm(template);
 
-  private getData(): void {
-    this.data = {
-      login: this.authTemplate.get('login')?.value,
-      password: this.authTemplate.get('password')?.value,
-    };
+    if (isValid) {
+      this.data = this.dataForm.getData(template);
+      this.isValidForm = isValid;
+      this.authTemplate = template;
+    } else {
+      this.isValidForm = isValid;
+    }
   }
 
   protected onLogout(): void {
