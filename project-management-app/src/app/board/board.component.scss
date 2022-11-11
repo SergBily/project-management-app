@@ -1,0 +1,21 @@
+@import '../../style/default.scss';
+
+.board__wrapper {
+
+  .board__container {
+    @include flex();
+    flex-direction: column;
+
+    .board__header {
+      @include wh (100%, auto);
+      padding: 10px;
+    }
+
+      .board {
+        @include wh (100%, auto);
+        @include flex($justify-content: flex-start);
+      }
+  }
+}
+
+
