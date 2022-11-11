@@ -1,0 +1,31 @@
+<div class="column__wrapper" [ngClass]="{ 'column-add': isCreateColumn }">
+  <ng-container *ngIf="!isCreateColumn; else addColumn">
+    <button class="column__btn-create" (click)="isCreateColumn = true">
+      <mat-icon>add</mat-icon>
+      <span class="column__btn-text">Add another column</span>
+    </button>
+  </ng-container>
+</div>
+<ng-template #addColumn>
+  <form>
+    <div class="column__container" @openColumnAdd>
+      <input
+        class="column__input"
+        type="text"
+        autocomplete="off"
+        placeholder="Enter column title..."
+        autofocus
+      />
+      <div class="column__control">
+        <button class="column__btn-add" mat-raised-button>Add Column</button>
+        <button
+          type="button"
+          class="column__btn-close"
+          (click)="isCreateColumn = false"
+        >
+          <mat-icon [inline]="true">close</mat-icon>
+        </button>
+      </div>
+    </div>
+  </form>
+</ng-template>
