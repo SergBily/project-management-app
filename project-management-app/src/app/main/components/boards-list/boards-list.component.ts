@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { AddBoardDialogComponent } from 'src/app/shared/components/add-board-dialog/add-board-dialog.component';
 import { Board } from '../../models/board';
 import { BoardsApiService } from '../../services/boards/boards.service';
 
@@ -8,11 +10,21 @@ import { BoardsApiService } from '../../services/boards/boards.service';
   templateUrl: './boards-list.component.html',
   styleUrls: ['./boards-list.component.scss'],
 })
-export class BoardsListComponent implements OnInit {
+export class BoardsListComponent {
   boards$: Observable<Board[]> = this.boardsApi.getBoards();
 
-  constructor(private boardsApi: BoardsApiService) { }
+  constructor(
+    private boardsApi: BoardsApiService,
+    public dialog: MatDialog,
+  ) { }
 
-  ngOnInit(): void {
+  openDialog() {
+    const dialogRef = this.dialog.open(AddBoardDialogComponent, {
+      maxWidth: '500px',
+    });
+
+    dialogRef.afterClosed().subscribe((dialogResult) => {
+      if (dialogResult) this.boardsApi.addBoard(dialogResult).subscribe();
+    });
   }
 }

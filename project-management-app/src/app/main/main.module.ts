@@ -8,7 +8,6 @@ import { MainRoutingModule } from './main-routing.module';
 import { MainComponent } from './main.component';
 import { BoardsListComponent } from './components/boards-list/boards-list.component';
 import { BoardItemComponent } from './components/board-item/board-item.component';
-import { AddBoardComponent } from './components/add-board/add-board.component';
 
 const MATERIAL = [MatCardModule, MatButtonModule, MatIconModule];
 
@@ -17,7 +16,6 @@ const MATERIAL = [MatCardModule, MatButtonModule, MatIconModule];
     MainComponent,
     BoardsListComponent,
     BoardItemComponent,
-    AddBoardComponent,
   ],
   imports: [
     CommonModule,
