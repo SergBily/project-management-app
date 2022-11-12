@@ -8,6 +8,7 @@ import { BoardComponent } from './board.component';
 import { ColumnComponent } from './components/column/column.component';
 import { ColumnsListComponent } from './components/columns-list/columns-list.component';
 import { CreateColumnComponent } from './components/create-column/create-column.component';
+import { TextBtnDirective } from './directives/text-btn/text-btn.directive';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { CreateColumnComponent } from './components/create-column/create-column.
     ColumnComponent,
     ColumnsListComponent,
     CreateColumnComponent,
+    TextBtnDirective,
   ],
   imports: [
     CommonModule,

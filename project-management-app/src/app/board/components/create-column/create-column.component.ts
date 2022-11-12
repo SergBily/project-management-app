@@ -1,7 +1,7 @@
 import {
   animate, state, style, transition, trigger,
 } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-create-column',
@@ -17,6 +17,8 @@ import { Component, OnInit } from '@angular/core';
   ],
 })
 export class CreateColumnComponent implements OnInit {
+  @Input() typeOfBtnCreate!: string;
+
   isCreateColumn = false;
 
   constructor() { }

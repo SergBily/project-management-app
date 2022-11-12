@@ -2,22 +2,33 @@
   <ng-container *ngIf="!isCreateColumn; else addColumn">
     <button class="column__btn-create" (click)="isCreateColumn = true">
       <mat-icon>add</mat-icon>
-      <span class="column__btn-text">Add another column</span>
+      <span
+        class="column__btn-text"
+        [appTextBtn]="typeOfBtnCreate"
+        elem="span"
+      ></span>
     </button>
   </ng-container>
 </div>
 <ng-template #addColumn>
   <form>
     <div class="column__container" @openColumnAdd>
-      <input
-        class="column__input"
-        type="text"
-        autocomplete="off"
-        placeholder="Enter column title..."
-        autofocus
-      />
+      <ng-container *ngIf="typeOfBtnCreate === 'column'; else task">
+        <input
+          class="column__input"
+          type="text"
+          autocomplete="off"
+          placeholder="Enter column title..."
+          autofocus
+        />
+      </ng-container>
       <div class="column__control">
-        <button class="column__btn-add" mat-raised-button>Add Column</button>
+        <button
+          class="column__btn-add"
+          mat-raised-button
+          [appTextBtn]="typeOfBtnCreate"
+          elem="button"
+        ></button>
         <button
           type="button"
           class="column__btn-close"
@@ -28,4 +39,15 @@
       </div>
     </div>
   </form>
+</ng-template>
+<ng-template #task>
+  <textarea
+    class="task__textarea"
+    name=""
+    id=""
+    cols="30"
+    rows="10"
+    autofocus
+    placeholder="Enter a title for this task..."
+  ></textarea>
 </ng-template>
