@@ -1,9 +1,11 @@
 @import '../../../../style/default.scss';
 
 .column__wrapper {
-  @include wh(270px, 40px);
-  margin: 0 5px;
+  @include wh(260px, 40px);
+  display: inline-block;
+  // margin: $columnWrapperMargin;
   padding: 4px;
+  vertical-align: top;
   background-color: #0000003d;
   border-radius: $columnBorderRad;
   -webkit-border-radius: $columnBorderRad;

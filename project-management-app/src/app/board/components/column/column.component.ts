@@ -6,6 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./column.component.scss'],
 })
 export class ColumnComponent implements OnInit {
+  title!: string;
+
+  isChangeTitle = false;
+
   constructor() { }
 
   ngOnInit(): void {

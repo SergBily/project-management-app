@@ -1,0 +1,46 @@
+@import '../../../../style/default.scss';
+
+.column__wrapper {
+  @include wh($widthColumn, 100%);
+  display: inline-block;
+  margin: $columnWrapperMargin;
+  vertical-align: top;
+}
+
+.column__container {
+  width: 100%;
+  max-height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  border-radius: $columnBorderRad;
+  -webkit-border-radius: $columnBorderRad;
+  -moz-border-radius: $columnBorderRad;
+  -ms-border-radius: $columnBorderRad;
+  -o-border-radius: $columnBorderRad;
+  background-color: $columnAddBack;
+
+    .column__title {
+      @include wh(100%, auto);
+      margin: 5px 0;
+      border: 1px solid red;
+    }
+
+    .column__tasks {
+      border: 1px solid red;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .column__task-create {
+      margin-top: 5px;
+      border: 1px solid red;
+    }
+}
+
+.t {
+  @include wh(100%, 40px);
+  border: 1px solid green;
+}

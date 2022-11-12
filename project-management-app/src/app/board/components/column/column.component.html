@@ -1,1 +1,19 @@
-
+<div class="column__wrapper">
+  <div class="column__container">
+    <div class="column__title">
+      <h2 class="column__title-header" *ngIf="!isChangeTitle; else changeTitle">
+        To do
+      </h2>
+    </div>
+    <div class="column__tasks">
+      <div class="t">task 1</div>
+      <div class="t">task 2</div>
+    </div>
+    <div class="column__task-create">
+      <app-create-column></app-create-column>
+    </div>
+  </div>
+</div>
+<ng-template #changeTitle>
+  <textarea name="" id="" cols="30" rows="10"></textarea>
+</ng-template>
