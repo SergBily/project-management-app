@@ -14,6 +14,7 @@ import { CreateColumnComponent } from './components/create-column/create-column.
 import { TextBtnDirective } from './directives/text-btn/text-btn.directive';
 import { ColumnEffects } from './redux/effects/column/column-effects.service';
 import { reducer } from './redux/reducers/board.reducer';
+import { CreateTaskComponent } from './components/create-task/create-task.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { reducer } from './redux/reducers/board.reducer';
     ColumnsListComponent,
     CreateColumnComponent,
     TextBtnDirective,
+    CreateTaskComponent,
   ],
   imports: [
     CommonModule,
