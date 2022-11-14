@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, retry, take } from 'rxjs';
-import { DataColumn } from '../../model/data-column.model';
+import {
+  DataColumn, ParamApiTask, DataTask, TaskUpdate,
+} from '../../model/board.model';
 import { Column } from '../../redux/state.model';
 
 @Injectable({
@@ -20,6 +22,58 @@ export class ApiBoardService {
 
   createColumn(data: DataColumn): Observable<Column> {
     return this.http.post<Column>(`/boards/${data.id}/columns`, { title: data.title })
+      .pipe(
+        retry(2),
+        take(1),
+      );
+  }
+
+  createTask(param: Omit<ParamApiTask, 'taskId'>): Observable<DataTask> {
+    return this.http.post<DataTask>(
+      `/boards/${param.boardId}/columns/${param.columnId}/tasks`,
+      param.data,
+    )
+      .pipe(
+        retry(2),
+        take(1),
+      );
+  }
+
+  getTasks(param: Pick<ParamApiTask, 'boardId' | 'columnId'>): Observable<Task[]> {
+    return this.http.get<Task[]>(
+      `/boards/${param.boardId}/columns/${param.columnId}/tasks`,
+    )
+      .pipe(
+        retry(2),
+        take(1),
+      );
+  }
+
+  getTask(param: Omit<ParamApiTask, 'data'>): Observable<Task[]> {
+    return this.http.get<Task[]>(
+      `/boards/${param.boardId}/columns/${param.columnId}/tasks/${param.taskId}`,
+    )
+      .pipe(
+        retry(2),
+        take(1),
+      );
+  }
+
+  deleteTask(param: Omit<ParamApiTask, 'data'>): Observable<undefined> {
+    return this.http.delete<undefined>(
+      `/boards/${param.boardId}/columns/${param.columnId}/tasks/${param.taskId}`,
+    )
+      .pipe(
+        retry(2),
+        take(1),
+      );
+  }
+
+  updateTask(param: ParamApiTask): Observable<TaskUpdate> {
+    return this.http.put<TaskUpdate>(
+      `/boards/${param.boardId}/columns/${param.columnId}/tasks/${param.taskId}`,
+      param.data as TaskUpdate,
+    )
       .pipe(
         retry(2),
         take(1),
