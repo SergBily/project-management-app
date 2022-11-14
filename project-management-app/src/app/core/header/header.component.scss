@@ -1,33 +1,11 @@
-$colorMain: #026aa7;
-$colorBlond: rgba(245, 246, 247, 0.36);
-$colorBlack: #172b4d;
-
-@mixin light {
-  background-color: $colorBlond;
-  transition: 0.4s;
-  // opacity: 0.5;
-}
-
-@mixin design {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-right: 4px;
-}
-
-@mixin flexCenter {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+@import "../../../style/default.scss";
+@import "../style/default.scss";
 
 .wrapper-header {
   padding: 6px 4px;
   width: 100%;
-  height: 44px;
-  background-color: $colorMain;
+  height: 65px;
+  background-color: $btnBackColorHover;
   font-size: 14px;
   display: flex;
   align-items: center;
@@ -38,124 +16,8 @@ $colorBlack: #172b4d;
   display: flex;
 }
 
-.wrapper-cube {
-  height: 32px;
-  width: 32px;
-  @include design;
-
-  &:hover {
-    @include light;
-  }
-}
-
-.wrapp-points {
-  width: 24px;
-  height: 24px;
-}
-
-.cube {
-  @include design;
-  color: white;
-}
-
-.menuTrello {
-  width: 75px;
-  height: 32px;
-  @include design;
-
-  &:hover {
-    @include light;
-  }
-}
-
-.trello {
-  font-size: 20px;
-  color: white;
-  font-weight: 900;
-  z-index: 2;
-}
-
-.workspace {
-  width: 190px;
-  text-align: center;
-  color: white;
-  @include design;
-  &:hover {
-    @include light;
-  }
-}
-
-.expand {
-  margin-left: 7px;
-}
-
-.recent {
-  width: 107px;
-  text-align: center;
-  color: white;
-  @include design;
-  &:hover {
-    @include light;
-  }
-}
-
-.more {
-  width: 107px;
-  text-align: center;
-  color: white;
-  @include design;
-  &:hover {
-    @include light;
-  }
-}
-
-.favorites {
-  width: 130px;
-  text-align: center;
-  color: white;
-  @include design;
-  &:hover {
-    @include light;
-  }
-}
-
-.templates {
-  width: 106px;
-  text-align: center;
-  color: white;
-  @include design;
-  &:hover {
-    @include light;
-  }
-}
-
-.plus {
-  width: 32px;
-  text-align: center;
-  color: white;
-  @include design;
-  background-color: $colorBlack;
-  &:hover {
-    @include light;
-  }
-}
-
-.create {
-  width: 75px;
-  text-align: center;
-  color: white;
-  @include design;
-  &:hover {
-    @include light;
-  }
-}
-
 .header-right {
   display: flex;
-}
-
-.black {
-  background-color: $colorBlack;
 }
 
 .btn-wrap {
@@ -165,49 +27,26 @@ $colorBlack: #172b4d;
   padding: 0 10px;
   margin: 0;
   height: 32px;
-  &:hover {
-    @include light;
-  }
-}
-
-.avatar {
-  width: 32px;
-  height: 32px;
-}
-
-.img-avatar {
-  width: 100%;
 }
 
 .wrapper-button {
   display: flex;
-  height: 32px;
-  // @include flexCenter;
 }
 
+.btn-ru,
 .btn-en {
   width: 50px;
-  background-color: rgb(198, 213, 168);
-  border-radius: 5px;
   @include flexCenter;
-  color: white;
-  font-weight: 100;
   margin: 0 1px;
-  &:hover {
-    @include light();
-  }
-}
-
-.btn-ru {
-  width: 50px;
-  background-color: rgb(198, 213, 168);
+  height: 40px;
+  @include btn;
   border-radius: 5px;
-  @include flexCenter;
-  color: white;
-  font-weight: 100;
-  margin: 0 1px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
   &:hover {
-    @include light();
+    @include btn-hover();
   }
 }
 
@@ -217,7 +56,7 @@ $colorBlack: #172b4d;
 }
 
 .search {
-  background-color: $colorMain;
+  background-color: $btnBackColorHover;
   color: white;
   border: none;
   font-size: 16px;
@@ -230,4 +69,28 @@ $colorBlack: #172b4d;
     font-weight: 100;
     font-size: 14px;
   }
+}
+
+.logo {
+  @include flexCenter();
+  margin-left: 10px;
+}
+
+.additionally {
+  @include btn;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  margin: 0 5px;
+  width: 110px;
+  height: 40px;
+  &:hover {
+    @include btn-hover;
+  }
+}
+
+.registration {
+  display: flex;
 }

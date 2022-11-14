@@ -1,0 +1,34 @@
+@import '../../../style/default.scss';
+@import '../style/default.scss';
+
+.footer-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+    background-color: $btnBackColorHover;
+    height: 50px;
+    padding: 0 10px;
+    color: $textColor;
+}
+
+.link{
+    color: $textColor;
+    text-decoration: none;
+}
+
+.link:hover{
+    transform: scale(1.1);
+    transition: .3s;
+}
+
+
+.img{
+    @include flexCenter;
+    height: 40px;
+}
+
+.img:hover{
+    transform: scale(1.1);
+    transition: .3s;
+    cursor: pointer;
+}

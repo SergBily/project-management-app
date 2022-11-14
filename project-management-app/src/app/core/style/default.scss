@@ -1,0 +1,20 @@
+$titleSize: 40px;
+$textSize: 16px;
+$textName: 18px;
+$bigTextSize: 20px;
+$textColor: #7b1fa2;
+
+@mixin design {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 4px;
+  }
+  
+  @mixin flexCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }

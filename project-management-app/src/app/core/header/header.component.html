@@ -1,35 +1,74 @@
 <div class="wrapper-header">
   <div class="header-left">
-    <div class="menuTrello">
-      <span class="trello">Trello</span>
+    <div class="logo">
+      <img src="../../../assets/images/logo.png" alt="" width="110" height="65">
     </div>
   </div>
 
   <div class="wrapper-button">
-    <div class="btn-en" id="en" (click)="enSwitchLanguage()">EN</div>
-    <div class="btn-ru" id="ru">RU</div>
+    <div class="btn-en">EN</div>
+    <div class="btn-ru">RU</div>
   </div>
 
   <div class="header-right">
-    <div class="search-wrap" *ngIf="registrationYes">
+
+    <div class="registration" *ngIf="show(); else registrationNot">
+      <div class="search-wrap" >
+        <input type="text" placeholder="Search" class="search" />
+        <div class="cancel" style="cursor: pointer">
+          <mat-icon>cancel</mat-icon>
+        </div>
+      </div>
+      <div class="btn-wrap additionally">
+        Team
+        <mat-icon>expand_more</mat-icon>
+      </div>
+      <div class="btn-wrap additionally"  routerLink="/auth/signin" >Login</div>
+      <div class="btn-wrap black additionally"  routerLink="/auth/signup">Sing-up
+      </div>
+
+      <div class="btn-wrap additionally" >All boards</div>
+      <div class="btn-wrap additionally" >
+        Create new <br />
+        board
+      </div>
+      <div class="btn-wrap additionally"  routerLink="/auth/profile">Edit profile</div>
+      <div class="btn-wrap black additionally" >Logout</div>
+    </div>
+
+    <ng-template #registrationNot>
+      <div class="registration">
+        <div class="btn-wrap additionally">
+          Team
+          <mat-icon>expand_more</mat-icon>
+        </div>
+        <div class="btn-wrap additionally"  routerLink="/auth/signin" >Login</div>
+        <div class="btn-wrap black additionally"   routerLink="/auth/signup">
+          Sing-up
+        </div>
+      </div>
+    </ng-template>
+
+
+    <!-- <div class="search-wrap" *ngIf="registrationYes">
       <input type="text" placeholder="Search" class="search" />
       <div class="cancel" style="cursor: pointer">
         <mat-icon>cancel</mat-icon>
       </div>
     </div>
-    <div class="btn-wrap">
+    <div class="btn-wrap additionally">
       Team
       <mat-icon>expand_more</mat-icon>
     </div>
-    <div class="btn-wrap" *ngIf="registrationNo">Login</div>
-    <div class="btn-wrap black" *ngIf="registrationNo" (click)="enter()" >Sing-up</div>
+    <div class="btn-wrap additionally" *ngIf="registrationNo" routerLink="/auth/signin" (click)="show()">Login</div>
+    <div class="btn-wrap black additionally" *ngIf="registrationNo" (click)="show()" routerLink="/auth/signup">Sing-up</div>
 
-    <div class="btn-wrap" *ngIf="registrationYes">All boards</div>
-    <div class="btn-wrap" *ngIf="registrationYes">
+    <div class="btn-wrap additionally" *ngIf="registrationYes">All boards</div>
+    <div class="btn-wrap additionally" *ngIf="registrationYes">
       Create new <br />
       board
     </div>
-    <div class="btn-wrap" *ngIf="registrationYes">Edit profile</div>
-    <div class="btn-wrap black" *ngIf="registrationYes" (click)="exit()" >Logout</div>
+    <div class="btn-wrap additionally" *ngIf="registrationYes" routerLink="/auth/profile">Edit profile</div>
+    <div class="btn-wrap black additionally" *ngIf="registrationYes" (click)="exit()" >Logout</div> -->
   </div>
 </div>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthStateService } from 'src/app/auth/services/auth-state/auth-state.service';
+import { HeaderService } from '../services/header.service';
 
 @Component({
   selector: 'app-header',
@@ -7,36 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(public AuthStateService: AuthStateService, public HeaderService: HeaderService) {
+    
+  }
 
   ngOnInit(): void {
-  }
-  event = event?.target as HTMLElement
-  // srtrg:number = 1
-  registrationYes = false
-  registrationNo = true
-
-  enter(){
-    if(true){
-      this.registrationYes = true
-      this.registrationNo = false
-    }
-  }
-
-  exit(){
-    this.registrationYes = false
-    this.registrationNo = true
+    
   }
   
-  enSwitchLanguage(){
-    
-    console.log('44ee')
-    // console.log(event.target)
-    // console.log(event.target)
-    // console.log(this.event)
-    // if(event.target.id === 'en'){
-    //   event.target.classList.add('black')
-    //   console.log('ee')
-    // }
+  show() {
+    return this.AuthStateService.getCurrentState()
   }
+ 
 }
+
+
+

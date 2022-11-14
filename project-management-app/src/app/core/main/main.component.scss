@@ -1,0 +1,36 @@
+@import '../../../style/default.scss';
+@import '../style/default.scss';
+
+.wrapper-main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fafafa;
+    padding: 100px 100px;
+    color: $textColor;
+}
+
+.wrapper-cards{
+    display: flex;
+    justify-content: center;
+    max-width: 1200px;
+    flex-wrap: wrap;
+}
+
+.title{
+    // margin-top: 40px;
+    font-size: $titleSize;
+    line-height: 50px;
+}
+
+.projec-name{
+    font-size: $titleSize;
+    font-weight: 800;
+    line-height: 50px;
+}
+
+.text{
+    font-size: $bigTextSize;
+    line-height: 30px;
+    margin-bottom: 90px;
+}
