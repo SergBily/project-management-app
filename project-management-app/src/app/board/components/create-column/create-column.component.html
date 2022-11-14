@@ -13,21 +13,24 @@
 <ng-template #addColumn>
   <form>
     <div class="column__container" @openColumnAdd>
-      <ng-container *ngIf="typeOfBtnCreate === 'column'; else task">
-        <input
-          class="column__input"
-          type="text"
-          autocomplete="off"
-          placeholder="Enter column title..."
-          autofocus
-        />
-      </ng-container>
+      <input
+        [(ngModel)]="titleForm"
+        name="title"
+        class="column__input"
+        type="text"
+        autocomplete="off"
+        placeholder="Enter column title..."
+        autofocus
+      />
+
       <div class="column__control">
         <button
+          type="button"
           class="column__btn-add"
           mat-raised-button
           [appTextBtn]="typeOfBtnCreate"
           elem="button"
+          (click)="onCreateColumn()"
         ></button>
         <button
           type="button"
@@ -39,15 +42,4 @@
       </div>
     </div>
   </form>
-</ng-template>
-<ng-template #task>
-  <textarea
-    class="task__textarea"
-    name=""
-    id=""
-    cols="30"
-    rows="10"
-    autofocus
-    placeholder="Enter a title for this task..."
-  ></textarea>
 </ng-template>

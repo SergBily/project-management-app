@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-column',
@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./column.component.scss'],
 })
 export class ColumnComponent implements OnInit {
-  title!: string;
+  @Input() title!: string;
 
   isChangeTitle = false;
 
