@@ -1,4 +1,11 @@
 @import '../style/default.scss';
+
+.container {
+  max-width: 1170px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
 .header {
   width: 100%;
   height: $HeaderHeight;
