@@ -4,7 +4,7 @@ import { Observable, retry, take } from 'rxjs';
 import {
   DataColumn, ParamApiTask, DataTask, TaskUpdate,
 } from '../../model/board.model';
-import { Column } from '../../redux/state.model';
+import { Column, StateTask } from '../../redux/state.model';
 
 @Injectable({
   providedIn: 'root',
@@ -39,8 +39,8 @@ export class ApiBoardService {
       );
   }
 
-  getTasks(param: Pick<ParamApiTask, 'boardId' | 'columnId'>): Observable<Task[]> {
-    return this.http.get<Task[]>(
+  getTasks(param: Pick<ParamApiTask, 'boardId' | 'columnId'>): Observable<StateTask[]> {
+    return this.http.get<StateTask[]>(
       `/boards/${param.boardId}/columns/${param.columnId}/tasks`,
     )
       .pipe(

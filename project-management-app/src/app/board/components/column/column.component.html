@@ -2,15 +2,17 @@
   <div class="column__container">
     <div class="column__title">
       <h2 class="column__title-header" *ngIf="!isChangeTitle; else changeTitle">
-        {{title}}
+        {{ column.title }}
       </h2>
     </div>
-    <div class="column__tasks">
-      <div class="t">task 1</div>
-      <div class="t">task 2</div>
+    <div class="column__tasks" *ngFor="let task of tasks$ | async">
+      <div class="t">
+        <p>{{task.title}}</p>
+        <p>{{task.description}}</p>
+      </div>
     </div>
     <div class="column__task-create">
-      <app-create-column></app-create-column>
+      <app-create-task [columnId]="column.id"></app-create-task>
     </div>
   </div>
 </div>

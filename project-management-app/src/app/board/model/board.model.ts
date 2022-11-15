@@ -10,22 +10,6 @@ export interface DataTask {
   id?: string
 }
 
-export interface Task {
-  id: string;
-  title: string;
-  order: number;
-  description: string;
-  userId: string;
-  boardId: string;
-  columnId: string;
-  files: FilesOfTask[]
-}
-
-interface FilesOfTask {
-  filename: string;
-  fileSize: number
-}
-
 export interface TaskUpdate {
   title: string;
   order: number;

@@ -4,14 +4,14 @@ import {
 } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import {
-  catchError, EMPTY, map, mergeMap,
+  catchError, EMPTY, forkJoin, map, mergeMap, of,
 } from 'rxjs';
 import { ApiBoardService } from 'src/app/board/services/api/api.service';
-import { ApiBoardActions, BoardActions } from '../../actions/board.actions';
-import { selectGetBoardId } from '../../selectors/board.selector';
+import { ApiBoardActions, BoardActions } from '../actions/board.actions';
+import { selectGetBoardId } from '../selectors/board.selector';
 
 @Injectable()
-export class ColumnEffects {
+export class BoardEffects {
   loadColumns$ = createEffect(
     () => {
       return this.actions$.pipe(
@@ -19,6 +19,20 @@ export class ColumnEffects {
         concatLatestFrom(() => this.store.select(selectGetBoardId)),
         mergeMap(([, id]) => this.api.getColumns(id)),
         map((columns) => ApiBoardActions.getColumnSuccess({ columns })),
+        catchError(() => EMPTY),
+      );
+    },
+  );
+
+  loadTasks$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(BoardActions.getTasks),
+        mergeMap((date) => {
+          const tasks = this.api.getTasks(date);
+          return forkJoin([of(date.columnId), tasks]);
+        }),
+        map(([columnId, tasks]) => ApiBoardActions.getTaskSuccess({ columnId, tasks })),
         catchError(() => EMPTY),
       );
     },

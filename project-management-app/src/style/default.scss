@@ -14,6 +14,7 @@ $columnBorderRad: 5px;
 $columnAddBack: #ebecf0;
 $widthColumn: 270px;
 $columnWrapperMargin: 0 5px;
+$taskShadow: 1px 1px 3px rgb(203 183 212 / 60%);
 
 @mixin wh($width: auto, $height: auto) {
   width: $width;

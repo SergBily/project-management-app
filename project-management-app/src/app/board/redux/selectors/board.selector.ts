@@ -5,12 +5,12 @@ export const selectState = createFeatureSelector<StateBoard>('board');
 
 export const selectGetBoards = createSelector(
   selectState,
-  (state) => state.columnsOpenBoard,
+  (state) => state.columns,
 );
 
-export const selectGetTasks = createSelector(
+export const selectGetTasks = (columnId: string) => createSelector(
   selectState,
-  (state) => state.tasks,
+  (state) => state.tasks[columnId],
 );
 
 export const selectGetBoardId = createSelector(

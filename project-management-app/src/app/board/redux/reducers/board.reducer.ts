@@ -5,8 +5,8 @@ import { ApiBoardActions, BoardActions } from '../actions/board.actions';
 import { StateBoard } from '../state.model';
 
 export const initialState: StateBoard = {
-  columnsOpenBoard: [],
-  tasks: [],
+  columns: [],
+  tasks: {},
   idOpenBoard: '',
 };
 
@@ -15,11 +15,15 @@ export const boardReducer = createReducer(
   on(BoardActions.loadOpenBoard, (state, { id }): StateBoard => ({
     ...state,
     idOpenBoard: id,
-    columnsOpenBoard: [],
+    columns: [],
   })),
   on(ApiBoardActions.getColumnSuccess, (state, { columns }): StateBoard => ({
     ...state,
-    columnsOpenBoard: columns,
+    columns,
+  })),
+  on(ApiBoardActions.getTaskSuccess, (state, { columnId, tasks }): StateBoard => ({
+    ...state,
+    tasks: { ...state.tasks, [columnId]: tasks },
   })),
 );
 

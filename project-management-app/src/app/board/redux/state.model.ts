@@ -1,6 +1,6 @@
 export interface StateBoard {
-  columnsOpenBoard: Column[];
-  tasks: Task[];
+  columns: Column[];
+  tasks: Tasks;
   idOpenBoard: string;
 }
 
@@ -10,7 +10,7 @@ export interface Column {
   order: number
 }
 
-interface Task {
+export interface StateTask {
   id: string;
   title: string;
   order: number;
@@ -24,4 +24,8 @@ interface Task {
 interface File {
   filename: string;
   fileSize: number;
+}
+
+export interface Tasks {
+  [propName: string]: StateTask[]
 }

@@ -12,7 +12,7 @@ import { ColumnComponent } from './components/column/column.component';
 import { ColumnsListComponent } from './components/columns-list/columns-list.component';
 import { CreateColumnComponent } from './components/create-column/create-column.component';
 import { TextBtnDirective } from './directives/text-btn/text-btn.directive';
-import { ColumnEffects } from './redux/effects/column/column-effects.service';
+import { BoardEffects } from './redux/effects/effects.service';
 import { reducer } from './redux/reducers/board.reducer';
 import { CreateTaskComponent } from './components/create-task/create-task.component';
 
@@ -33,7 +33,7 @@ import { CreateTaskComponent } from './components/create-task/create-task.compon
     ReactiveFormsModule,
     FormsModule,
     StoreModule.forFeature('board', reducer),
-    EffectsModule.forFeature([ColumnEffects]),
+    EffectsModule.forFeature([BoardEffects]),
   ],
 })
 export class BoardModule { }

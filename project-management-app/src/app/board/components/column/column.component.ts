@@ -1,4 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { selectGetTasks } from '../../redux/selectors/board.selector';
+import { Column, StateTask } from '../../redux/state.model';
 
 @Component({
   selector: 'app-column',
@@ -6,12 +10,15 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./column.component.scss'],
 })
 export class ColumnComponent implements OnInit {
-  @Input() title!: string;
+  @Input() column!: Column;
 
   isChangeTitle = false;
 
-  constructor() { }
+  tasks$!: Observable<StateTask[]>;
+
+  constructor(private store: Store) { }
 
   ngOnInit(): void {
+    this.tasks$ = this.store.select(selectGetTasks(this.column.id));
   }
 }
