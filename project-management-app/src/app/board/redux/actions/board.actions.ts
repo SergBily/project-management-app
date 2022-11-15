@@ -1,13 +1,7 @@
 import {
-  createAction, createActionGroup, emptyProps, props,
+  createActionGroup, emptyProps, props,
 } from '@ngrx/store';
 import { Column, StateTask } from '../state.model';
-
-export namespace BoardActionss{
-  export const getColumns = createAction('[Board page] Get columns', props<{ columns: Column[] }>);
-  export const getTasks = createAction('[Board page] Get tasks');
-  export const setTask = createAction('[Board page] Set task');
-}
 
 export const BoardActions = createActionGroup({
   source: 'Board page',

@@ -3,7 +3,9 @@
     <div class="board__header">board {{ boardId }} works!</div>
     <div class="board">
       <ng-container *ngFor="let column of stateColumnsOpenBoard$ | async">
-        <app-column [column]="column"></app-column>
+        <app-column
+          [dataForApi]="{ boardId, column }"
+        ></app-column>
       </ng-container>
       <app-create-column [typeOfBtnCreate]="'column'"></app-create-column>
     </div>

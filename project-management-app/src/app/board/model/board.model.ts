@@ -1,3 +1,5 @@
+import { Column } from '../redux/state.model';
+
 export interface DataColumn {
   id: string;
   title: string
@@ -25,4 +27,9 @@ export interface ParamApiTask {
   boardId: string;
   columnId: string;
   taskId: string
+}
+
+export interface DataBoardAndColumn {
+  column: Column;
+  boardId: string
 }

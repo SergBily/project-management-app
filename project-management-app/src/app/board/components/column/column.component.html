@@ -2,17 +2,18 @@
   <div class="column__container">
     <div class="column__title">
       <h2 class="column__title-header" *ngIf="!isChangeTitle; else changeTitle">
-        {{ column.title }}
+        {{ dataForApi.column.title }}
       </h2>
     </div>
-    <div class="column__tasks" *ngFor="let task of tasks$ | async">
-      <div class="t">
-        <p>{{task.title}}</p>
-        <p>{{task.description}}</p>
-      </div>
+    <div class="column__tasks">
+      <ng-container *ngFor="let task of tasks$ | async">
+        <!-- <div class="column__tasks-container"> -->
+        <app-task [task]="task"></app-task>
+        <!-- </div> -->
+      </ng-container>
     </div>
     <div class="column__task-create">
-      <app-create-task [columnId]="column.id"></app-create-task>
+      <app-create-task [columnId]="dataForApi.column.id"></app-create-task>
     </div>
   </div>
 </div>

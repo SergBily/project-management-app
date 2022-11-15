@@ -13,7 +13,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  padding: 5px;
+  padding: 7px;
   border-radius: $columnBorderRad;
   -webkit-border-radius: $columnBorderRad;
   -moz-border-radius: $columnBorderRad;
@@ -23,15 +23,23 @@
 
     .column__title {
       @include wh(100%, auto);
+      flex: 0 0 auto;
       margin: 5px 0;
-      border: 1px solid red;
+
+        .column__title-header {
+          margin: 0;
+        }
     }
 
     .column__tasks {
-      border: 1px solid red;
+      flex: 1 1 auto;
       display: flex;
       flex-direction: column;
       gap: 5px;
+      margin: 5px 0;
+      min-height: 0;
+      overflow-x: hidden;
+      overflow-y: auto;
     }
 
     .column__task-create {
@@ -39,7 +47,9 @@
     }
 }
 
-.t {
-  @include wh(100%, 40px);
-  border: 1px solid green;
+.column__tasks-container {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
 }

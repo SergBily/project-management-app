@@ -1,8 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { DataBoardAndColumn } from '../../model/board.model';
+import { BoardActions } from '../../redux/actions/board.actions';
 import { selectGetTasks } from '../../redux/selectors/board.selector';
-import { Column, StateTask } from '../../redux/state.model';
+import { StateTask } from '../../redux/state.model';
 
 @Component({
   selector: 'app-column',
@@ -10,7 +12,7 @@ import { Column, StateTask } from '../../redux/state.model';
   styleUrls: ['./column.component.scss'],
 })
 export class ColumnComponent implements OnInit {
-  @Input() column!: Column;
+  @Input() dataForApi!: DataBoardAndColumn;
 
   isChangeTitle = false;
 
@@ -19,6 +21,11 @@ export class ColumnComponent implements OnInit {
   constructor(private store: Store) { }
 
   ngOnInit(): void {
-    this.tasks$ = this.store.select(selectGetTasks(this.column.id));
+    this.store.dispatch(BoardActions.getTasks(
+      {
+        boardId: this.dataForApi.boardId, columnId: this.dataForApi.column.id,
+      },
+    ));
+    this.tasks$ = this.store.select(selectGetTasks(this.dataForApi.column.id));
   }
 }
