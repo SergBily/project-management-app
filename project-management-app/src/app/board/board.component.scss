@@ -1,0 +1,29 @@
+@import '../../style/default.scss';
+
+.board__page {
+  min-height: 100%;
+
+  .board__wrapper {
+    @include flex();
+    position: relative;
+    flex-direction: column;
+
+
+    .board__header {
+      @include wh (100%, auto);
+      padding: 10px;
+    }
+
+      .board {
+        @include wh (100%, 100%);
+        @include flex($justify-content: flex-start, $align-items: flex-start);
+        position: relative;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding-bottom: 10px;
+        user-select: none;
+      }
+  }
+}
+
+

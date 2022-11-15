@@ -1,0 +1,43 @@
+@import '../../../../style/default.scss';
+
+.task__wrapper {
+  @include wh(100%, auto);
+  margin: 3px 0;
+  box-shadow: $taskShadow;
+  border-radius: $columnBorderRad;
+  -webkit-border-radius: $columnBorderRad;
+  -moz-border-radius: $columnBorderRad;
+  -ms-border-radius: $columnBorderRad;
+  -o-border-radius: $columnBorderRad;
+  background-color: #ffffff;
+}
+.task__container {
+  width: 100%;
+  min-height: 50px;
+  max-height: 110px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.task__title-container {
+  padding: $paddingForElemTask;
+  box-shadow: 0 1px 2px $btnBackColorHover;
+  margin-bottom: 10px;
+}
+
+.task__title {
+  margin: 0;
+}
+
+.task__description-container {
+  width: 100%;
+  min-height: 30px;
+  max-height: 70px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: $paddingForElemTask;
+}
+
+.task__description {
+  word-break: break-all;
+}

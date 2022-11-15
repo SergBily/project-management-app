@@ -10,6 +10,7 @@ import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { AuthTemplateComponent } from './components/auth-template/auth-template.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { BtnExitComponent } from './components/btn-exit/btn-exit.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
     SignupComponent,
     AuthTemplateComponent,
     EditProfileComponent,
+    BtnExitComponent,
   ],
   imports: [
     CommonModule,

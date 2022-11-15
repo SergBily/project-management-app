@@ -1,1 +1,13 @@
-<p>board {{boardId}} works!</p>
+<div class="board__page">
+  <div class="board__wrapper">
+    <div class="board__header">board {{ boardId }} works!</div>
+    <div class="board">
+      <ng-container *ngFor="let column of stateColumnsOpenBoard$ | async">
+        <app-column
+          [dataForApi]="{ boardId, column }"
+        ></app-column>
+      </ng-container>
+      <app-create-column></app-create-column>
+    </div>
+  </div>
+</div>

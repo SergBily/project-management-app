@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EditProfileComponent } from './edit-profile.component';
+import { BtnExitComponent } from './btn-exit.component';
 
-describe('EditProfileComponent', () => {
-  let component: EditProfileComponent;
-  let fixture: ComponentFixture<EditProfileComponent>;
+describe('BtnExitComponent', () => {
+  let component: BtnExitComponent;
+  let fixture: ComponentFixture<BtnExitComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [EditProfileComponent],
+      declarations: [BtnExitComponent],
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(EditProfileComponent);
+    fixture = TestBed.createComponent(BtnExitComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
