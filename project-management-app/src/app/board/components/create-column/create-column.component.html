@@ -2,11 +2,7 @@
   <ng-container *ngIf="!isCreateColumn; else addColumn">
     <button class="column__btn-create" (click)="isCreateColumn = true">
       <mat-icon>add</mat-icon>
-      <span
-        class="column__btn-text"
-        [appTextBtn]="typeOfBtnCreate"
-        elem="span"
-      ></span>
+      <span class="column__btn-text"> Add another column</span>
     </button>
   </ng-container>
 </div>
@@ -22,16 +18,15 @@
         placeholder="Enter column title..."
         autofocus
       />
-
       <div class="column__control">
         <button
           type="button"
           class="column__btn-add"
           mat-raised-button
-          [appTextBtn]="typeOfBtnCreate"
-          elem="button"
           (click)="onCreateColumn()"
-        ></button>
+        >
+          Add column
+        </button>
         <button
           type="button"
           class="column__btn-close"

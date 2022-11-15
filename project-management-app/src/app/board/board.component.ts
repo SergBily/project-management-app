@@ -4,8 +4,6 @@ import { Store } from '@ngrx/store';
 import {
   Observable, take,
 } from 'rxjs';
-// import { Board } from '../main/models/board';
-import { BoardsApiService } from '../main/services/boards/boards.service';
 import { BoardActions } from './redux/actions/board.actions';
 import { selectGetBoards } from './redux/selectors/board.selector';
 import { Column } from './redux/state.model';
@@ -23,7 +21,6 @@ export class BoardComponent implements OnInit {
   constructor(
     public route: ActivatedRoute,
     public router: Router,
-    private boardsApi: BoardsApiService,
     private store: Store,
   ) { }
 

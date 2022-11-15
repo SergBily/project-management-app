@@ -11,7 +11,6 @@ import { BoardComponent } from './board.component';
 import { ColumnComponent } from './components/column/column.component';
 import { ColumnsListComponent } from './components/columns-list/columns-list.component';
 import { CreateColumnComponent } from './components/create-column/create-column.component';
-import { TextBtnDirective } from './directives/text-btn/text-btn.directive';
 import { BoardEffects } from './redux/effects/effects.service';
 import { reducer } from './redux/reducers/board.reducer';
 import { CreateTaskComponent } from './components/create-task/create-task.component';
@@ -23,7 +22,6 @@ import { TaskComponent } from './components/task/task.component';
     ColumnComponent,
     ColumnsListComponent,
     CreateColumnComponent,
-    TextBtnDirective,
     CreateTaskComponent,
     TaskComponent,
   ],

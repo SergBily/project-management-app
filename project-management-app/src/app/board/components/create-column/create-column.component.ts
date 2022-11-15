@@ -1,7 +1,7 @@
 import {
   animate, state, style, transition, trigger,
 } from '@angular/animations';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { take } from 'rxjs';
 import { BoardActions } from '../../redux/actions/board.actions';
@@ -22,8 +22,6 @@ import { ApiBoardService } from '../../services/api/api.service';
   ],
 })
 export class CreateColumnComponent implements OnInit {
-  @Input() typeOfBtnCreate!: string;
-
   isCreateColumn = false;
 
   titleForm!: string;
