@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { take } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
 import { Board } from '../../models/board';
 import { BoardsApiService } from '../../services/boards/boards.service';
 
@@ -13,6 +15,7 @@ export class BoardItemComponent implements OnInit {
 
   constructor(
     private boardsApi: BoardsApiService,
+    public dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -20,6 +23,20 @@ export class BoardItemComponent implements OnInit {
 
   deleteBoard(event: Event) {
     event.stopPropagation();
-    this.boardsApi.deleteBoard(this.board.id).pipe(take(1)).subscribe();
+    // call modal window
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      maxWidth: '500px',
+      data: {
+        title: 'Are you sure?',
+        message: `You are about to delete board ${this.board.title}`,
+      },
+    });
+
+    // listen to response
+    dialogRef.afterClosed().subscribe((dialogResult) => {
+    // if user pressed yes dialogResult will be true,
+    // if he pressed no - it will be false
+      if (dialogResult) this.boardsApi.deleteBoard(this.board.id).pipe(take(1)).subscribe();
+    });
   }
 }
