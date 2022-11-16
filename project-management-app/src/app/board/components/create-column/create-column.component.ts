@@ -44,6 +44,8 @@ export class CreateColumnComponent implements OnInit {
     this.api.createColumn({ id: this.idBoard, title: this.titleForm }).pipe(take(1)).subscribe(
       () => { this.store.dispatch(BoardActions.getColumns()); },
     );
+    this.titleForm = '';
+    this.isCreateColumn = false;
   }
 
   openDialog(): void {

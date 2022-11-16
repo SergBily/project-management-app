@@ -16,6 +16,7 @@ $widthColumn: 270px;
 $columnWrapperMargin: 0 5px;
 $taskShadow: 1px 1px 3px rgb(203 183 212 / 60%);
 $paddingForElemTask: 5px 15px 10px 10px;
+$colorTitltColumn: #172b4d;
 
 @mixin wh($width: auto, $height: auto) {
   width: $width;

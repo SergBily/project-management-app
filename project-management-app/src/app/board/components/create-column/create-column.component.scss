@@ -33,6 +33,7 @@
 .column__btn-conf {
   height: 24px;
   position: absolute;
+  visibility: hidden;
   top: 8px;
   right: -26px;
   font-size: 1.5rem;
@@ -49,6 +50,7 @@
 
 .column__wrapper:hover .column__btn-conf {
   right: 5px;
+  visibility: visible;
   transition: all 0.3s ease-in-out;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
