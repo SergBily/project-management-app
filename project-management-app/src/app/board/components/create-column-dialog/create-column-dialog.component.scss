@@ -1,1 +1,21 @@
+@import '../../../../style/default.scss';
 
+.dialog__buttons {
+  gap: 45px;
+}
+
+.dialog__field {
+  width: 100%
+}
+
+.active:hover {
+  @include btn-hover();
+}
+
+.btn__no {
+  @include btn($background-color: #cbb7d42d, $color: black);
+}
+
+.active {
+  @include btn();
+}

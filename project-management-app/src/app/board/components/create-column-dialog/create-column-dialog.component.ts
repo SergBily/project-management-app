@@ -1,6 +1,9 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import {
+  Component, Inject, OnDestroy, OnInit,
+} from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Subscription } from 'rxjs';
 import { DialogData } from 'src/app/shared/components/add-board-dialog/add-board-dialog.component';
 
 @Component({
@@ -8,8 +11,12 @@ import { DialogData } from 'src/app/shared/components/add-board-dialog/add-board
   templateUrl: './create-column-dialog.component.html',
   styleUrls: ['./create-column-dialog.component.scss'],
 })
-export class CreateColumnDialogComponent implements OnInit {
+export class CreateColumnDialogComponent implements OnInit, OnDestroy {
   formColumn!: FormControl;
+
+  isValidForm = false;
+
+  subscription$!: Subscription;
 
   constructor(
     public dialogRef: MatDialogRef<CreateColumnDialogComponent>,
@@ -18,9 +25,20 @@ export class CreateColumnDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.formColumn = new FormControl('', Validators.required);
+    this.subscription$ = this.formColumn.statusChanges.subscribe((status) => {
+      if (status === 'VALID') {
+        this.isValidForm = true;
+      } else {
+        this.isValidForm = false;
+      }
+    });
   }
 
   onNoClick(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(false);
+  }
+
+  ngOnDestroy(): void {
+    this.subscription$.unsubscribe();
   }
 }
