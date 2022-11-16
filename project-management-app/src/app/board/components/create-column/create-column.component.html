@@ -4,6 +4,11 @@
       <mat-icon>add</mat-icon>
       <span class="column__btn-text"> Add another column</span>
     </button>
+    <button class="column__btn-conf">
+      <mat-icon [inline]="true" (click)="openDialog()"
+        >add_circle_outline</mat-icon
+      >
+    </button>
   </ng-container>
 </div>
 <ng-template #addColumn>

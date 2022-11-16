@@ -3,6 +3,7 @@
 .column__wrapper {
   @include wh(260px, 40px);
   display: inline-block;
+  position: relative;
   // margin: $columnWrapperMargin;
   padding: 4px;
   vertical-align: top;
@@ -15,8 +16,8 @@
 }
 
 .column__btn-create {
-    @include wh(100%, 32px);
-    @include flex();
+  @include wh(100%, 32px);
+  @include flex();
   color: $btnColor;
   border: 0;
   background-color: transparent;
@@ -27,6 +28,32 @@
     .column__btn-text {
       margin-left: 10px;
     }
+}
+
+.column__btn-conf {
+  height: 24px;
+  position: absolute;
+  top: 8px;
+  right: -26px;
+  font-size: 1.5rem;
+  border: 0;
+  background-color: transparent;
+  color: $btnColor;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+}
+
+.column__wrapper:hover .column__btn-conf {
+  right: 5px;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
 }
 
 .column__wrapper:hover {
