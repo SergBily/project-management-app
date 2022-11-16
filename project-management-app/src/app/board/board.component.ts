@@ -5,7 +5,7 @@ import {
   Observable, take,
 } from 'rxjs';
 import { BoardActions } from './redux/actions/board.actions';
-import { selectGetBoards } from './redux/selectors/board.selector';
+import { selectCountColumns, selectGetBoards } from './redux/selectors/board.selector';
 import { Column } from './redux/state.model';
 
 @Component({
@@ -18,6 +18,8 @@ export class BoardComponent implements OnInit {
 
   stateColumnsOpenBoard$!: Observable<Column[]>;
 
+  countColumns$!: Observable<number>;
+
   constructor(
     public route: ActivatedRoute,
     public router: Router,
@@ -29,6 +31,7 @@ export class BoardComponent implements OnInit {
       this.boardId = params['id'];
       this.store.dispatch(BoardActions.loadOpenBoard({ id: this.boardId }));
       this.stateColumnsOpenBoard$ = this.store.select(selectGetBoards);
+      this.countColumns$ = this.store.select(selectCountColumns);
     });
   }
 }

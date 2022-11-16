@@ -2,12 +2,13 @@
   <div class="board__wrapper">
     <div class="board__header">board {{ boardId }} works!</div>
     <div class="board">
-      <ng-container *ngFor="let column of stateColumnsOpenBoard$ | async">
+      <ng-container *ngFor="let column of stateColumnsOpenBoard$ | async; let count">
         <app-column
+          [style]="{ order: column.order }"
           [dataForApi]="{ boardId, column }"
         ></app-column>
       </ng-container>
-      <app-create-column></app-create-column>
+      <app-create-column [style]="{order: countColumns$ | async }"></app-create-column>
     </div>
   </div>
 </div>
