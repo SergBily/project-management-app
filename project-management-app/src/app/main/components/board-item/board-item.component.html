@@ -1,15 +1,20 @@
-<mat-card class="board" routerLink="/boards/{{board.id}}">
-  <mat-card-title class="board__title">{{board.title}}</mat-card-title>
+<mat-card
+  class="board"
+  routerLink="/boards/{{ board.id }}"
+  [queryParams]="{ title: board.title }"
+>
+  <mat-card-title class="board__title">{{ board.title }}</mat-card-title>
   <mat-card-content>
-    <p class="board__description">{{board.description}}</p>
+    <p class="board__description">{{ board.description }}</p>
   </mat-card-content>
   <mat-card-actions align="end">
     <button
       mat-icon-button
       color="warn"
       aria-label="remove board"
-      (click)="deleteBoard($event)">
-        <mat-icon class="material-symbols-outlined">delete_forever</mat-icon>
+      (click)="deleteBoard($event)"
+    >
+      <mat-icon class="material-symbols-outlined">delete_forever</mat-icon>
     </button>
   </mat-card-actions>
 </mat-card>

@@ -3,7 +3,7 @@ import { StateBoard } from '../state.model';
 
 export const selectState = createFeatureSelector<StateBoard>('board');
 
-export const selectGetBoards = createSelector(
+export const selectGetColumns = createSelector(
   selectState,
   (state) => state.columns,
 );
