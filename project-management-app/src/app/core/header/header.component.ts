@@ -14,11 +14,16 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
   }
   
+  letModal = false
+
   show() {
     return this.AuthStateService.getCurrentState()
+  }
+
+  showModal(){
+    console.log(document.documentElement)
   }
  
 }

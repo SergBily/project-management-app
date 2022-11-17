@@ -18,6 +18,7 @@
 
 .header-right {
   display: flex;
+  // justify-content: space-between;
 }
 
 .btn-wrap {
@@ -94,3 +95,75 @@
 .registration {
   display: flex;
 }
+
+.burger{
+  height: 40px;
+  width: 40x;
+  color: $btnColor;
+  background-color: $btnBackColor;
+  display: none;
+}
+
+.modal{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  // display: none;
+}
+
+.modal-opacity{
+  background-color: rgb(51, 50, 50);
+  width: 100%;
+  opacity: .6;
+}
+
+.modal-menu{
+  width: 250px;
+  height: 100vh;
+  background-color: $burgerMenuColor;
+  z-index: 2;
+  color: $textColor;
+  font-size: $textBurgerMenu;
+}
+
+.wrapper-list{
+  margin: 30px 0;
+}
+
+.list{
+  width: 100%;
+  padding: 10px 30px;
+  cursor: pointer;
+  &:hover{
+    background-color: $hoverListBurgerMenu;
+  }
+}
+
+.wrapper-btn-modal{
+  display: flex;
+  justify-content: center;
+}
+
+.hide{
+  display: none;
+}
+
+@media (max-width: 1200px){
+  .burger{
+     display: flex;
+  }
+
+  .registration, .wrapper-button{
+    display: none;
+   }
+
+  .hide{
+    display: flex;
+  }
+
+}
+  
+  

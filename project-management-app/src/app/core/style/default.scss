@@ -2,7 +2,11 @@ $titleSize: 40px;
 $textSize: 16px;
 $textName: 18px;
 $bigTextSize: 20px;
+$textBurgerMenu: 20px;
 $textColor: #7b1fa2;
+$cardColor: #e8e1e8;
+$burgerMenuColor:  #eae6ff;
+$hoverListBurgerMenu: #e7d9ec;;
 
 @mixin design {
     display: flex;

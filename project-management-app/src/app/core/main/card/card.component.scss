@@ -8,6 +8,7 @@
     max-width: 350px;
     @include btn-hover;
     border-radius: 5px;
+    background-color: $cardColor;
 }
 
 .name{

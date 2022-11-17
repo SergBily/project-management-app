@@ -1,7 +1,12 @@
 <div class="wrapper-header">
   <div class="header-left">
     <div class="logo">
-      <img src="../../../assets/images/logo.png" alt="" width="110" height="65">
+      <img
+        src="../../../assets/images/logo.png"
+        alt=""
+        width="110"
+        height="65"
+      />
     </div>
   </div>
 
@@ -10,10 +15,16 @@
     <div class="btn-ru">RU</div>
   </div>
 
-  <div class="header-right">
+  <div class="search-wrap hide" *ngIf="show()">
+    <input type="text" placeholder="Search" class="search" />
+    <div class="cancel" style="cursor: pointer">
+      <mat-icon>cancel</mat-icon>
+    </div>
+  </div>
 
+  <div class="header-right">
     <div class="registration" *ngIf="show(); else registrationNot">
-      <div class="search-wrap" >
+      <div class="search-wrap">
         <input type="text" placeholder="Search" class="search" />
         <div class="cancel" style="cursor: pointer">
           <mat-icon>cancel</mat-icon>
@@ -23,17 +34,20 @@
         Team
         <mat-icon>expand_more</mat-icon>
       </div>
-      <div class="btn-wrap additionally"  routerLink="/auth/signin" >Login</div>
-      <div class="btn-wrap black additionally"  routerLink="/auth/signup">Sing-up
+      <div class="btn-wrap additionally" routerLink="/auth/signin">Login</div>
+      <div class="btn-wrap black additionally" routerLink="/auth/signup">
+        Sing-up
       </div>
 
-      <div class="btn-wrap additionally" >All boards</div>
-      <div class="btn-wrap additionally" >
+      <div class="btn-wrap additionally">All boards</div>
+      <div class="btn-wrap additionally">
         Create new <br />
         board
       </div>
-      <div class="btn-wrap additionally"  routerLink="/auth/profile">Edit profile</div>
-      <div class="btn-wrap black additionally" >Logout</div>
+      <div class="btn-wrap additionally" routerLink="/auth/profile">
+        Edit profile
+      </div>
+      <div class="btn-wrap black additionally">Logout</div>
     </div>
 
     <ng-template #registrationNot>
@@ -42,33 +56,58 @@
           Team
           <mat-icon>expand_more</mat-icon>
         </div>
-        <div class="btn-wrap additionally"  routerLink="/auth/signin" >Login</div>
-        <div class="btn-wrap black additionally"   routerLink="/auth/signup">
+        <div class="btn-wrap additionally" routerLink="/auth/signin">Login</div>
+        <div class="btn-wrap black additionally" routerLink="/auth/signup">
           Sing-up
         </div>
       </div>
     </ng-template>
 
 
-    <!-- <div class="search-wrap" *ngIf="registrationYes">
+    <!-- <div class="search-wrap">
       <input type="text" placeholder="Search" class="search" />
       <div class="cancel" style="cursor: pointer">
         <mat-icon>cancel</mat-icon>
       </div>
-    </div>
-    <div class="btn-wrap additionally">
-      Team
-      <mat-icon>expand_more</mat-icon>
-    </div>
-    <div class="btn-wrap additionally" *ngIf="registrationNo" routerLink="/auth/signin" (click)="show()">Login</div>
-    <div class="btn-wrap black additionally" *ngIf="registrationNo" (click)="show()" routerLink="/auth/signup">Sing-up</div>
+    </div> -->
 
-    <div class="btn-wrap additionally" *ngIf="registrationYes">All boards</div>
-    <div class="btn-wrap additionally" *ngIf="registrationYes">
-      Create new <br />
-      board
+
+    <div class="btn-wrap burger" (click)="letModal=!letModal">
+      <mat-icon>menu </mat-icon>
     </div>
-    <div class="btn-wrap additionally" *ngIf="registrationYes" routerLink="/auth/profile">Edit profile</div>
-    <div class="btn-wrap black additionally" *ngIf="registrationYes" (click)="exit()" >Logout</div> -->
+
+    <div class="modal" *ngIf="letModal">
+      
+      <div class="modal-menu" *ngIf="!show(); else registrationYes ">
+        <ul class="wrapper-list">
+          <li class="list">Login</li>
+          <li class="list">Sing-up</li>
+          <li class="list">Team</li>
+        </ul>
+        <div class="wrapper-btn-modal">
+          <div class="btn-en">EN</div>
+          <div class="btn-ru">RU</div>
+        </div>
+      </div>
+
+      <ng-template #registrationYes>
+        <div class="modal-menu">
+          <ul class="wrapper-list">
+            <li class="list">Edit profile</li>
+            <li class="list">Team</li>
+            <li class="list">All board</li>
+            <li class="list">Crete new board</li>
+            <li class="list">Logout</li>
+          </ul>
+          <div class="wrapper-btn-modal">
+            <div class="btn-en">EN</div>
+            <div class="btn-ru">RU</div>
+          </div>
+        </div>
+      </ng-template>
+
+      <div class="modal-opacity" (click)="letModal=!letModal"></div>
+    </div>
+
   </div>
 </div>
