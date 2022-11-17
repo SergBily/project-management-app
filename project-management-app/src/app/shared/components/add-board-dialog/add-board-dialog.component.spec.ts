@@ -8,9 +8,9 @@ describe('AddBoardDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddBoardDialogComponent ]
+      declarations: [AddBoardDialogComponent],
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(AddBoardDialogComponent);
     component = fixture.componentInstance;

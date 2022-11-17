@@ -16,6 +16,7 @@ $widthColumn: 270px;
 $columnWrapperMargin: 0 5px;
 $taskShadow: 1px 1px 3px rgb(203 183 212 / 60%);
 $paddingForElemTask: 5px 15px 10px 10px;
+$colorTitltColumn: #172b4d;
 
 @mixin wh($width: auto, $height: auto) {
   width: $width;
@@ -42,7 +43,7 @@ $letter-spacing: 0.5px, $transition: all 0.4s ease-in-out) {
 }
 
 @mixin btn-hover ($background-color: $btnBackColorHover, $color: $btnColorHover, $transition: all 0.4s ease-in-out,
-$box-shadow: #6c5a74 2px 5px 15px, $font-weight: 700) {
+$box-shadow: #6c5a74 2px 5px 10px, $font-weight: 700) {
   background-color: $background-color;
   color: $color;
   transition: $transition;

@@ -2,7 +2,7 @@
   <h2 class="dialog__title" mat-dialog-title>{{data.title}}</h2>
   <p class="dialog__message">{{data.message}}</p>
   <div class="dialog__buttons" mat-dialog-actions align="end">
-      <button mat-button (click)="onDismiss()">No</button>
-      <button mat-raised-button color="primary" (click)="onConfirm()">Yes</button>
+      <button mat-button class="btn__no" (click)="onDismiss()">No</button>
+      <button mat-raised-button class="btn__yes" (click)="onConfirm()">Yes</button>
   </div>
 </div>

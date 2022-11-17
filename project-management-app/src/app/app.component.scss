@@ -1,9 +1,15 @@
 @import '../style/default.scss';
 
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
 .container {
   width: 100%;
   margin: 0 auto;
-  padding: 0 16px;
+  flex: 1 1 auto;
 }
 
 .header {
@@ -15,21 +21,12 @@
   background-color: rgb(203, 183, 212);
 }
 
-.test {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
 .btn__signup, .btn__signin {
   width: 90px;
   height: 30px;
   cursor: pointer;
   border: 0;
   font-size: 16px;
-}
-.p {
-  flex: 1 1 auto;
 }
 
 .btn__cont {
@@ -55,10 +52,4 @@
 .btn__signup:hover,
 .btn__signin:hover {
   @include btn-hover();
-}
-
-.btn_cont {
-  display: flex;
-  width: 200px;
-  justify-content: space-around;
 }
