@@ -1,0 +1,50 @@
+<div class="task__wrapper" [ngClass]="{ 'task-add': isCreateTask }">
+  <ng-container *ngIf="!isCreateTask; else addtask">
+    <button class="task__btn-create" (click)="isCreateTask = true">
+      <mat-icon>add</mat-icon>
+      <span class="task__btn-text">Add task</span>
+    </button>
+  </ng-container>
+</div>
+<ng-template #addtask>
+  <form [formGroup]="taskForm">
+    <div class="task__container" @openTaskAdd>
+      <input
+        formControlName="title"
+        [(ngModel)]="titleForm"
+        name="title"
+        class="task__input"
+        type="text"
+        autocomplete="off"
+        placeholder="Enter a title for this task..."
+        autofocus
+      />
+      <textarea
+        class="task__textarea"
+        formControlName="description"
+        name=""
+        id=""
+        cols="33"
+        rows="5"
+        placeholder="Enter a description for this task..."
+      ></textarea>
+      <div class="task__control">
+        <button
+          type="button"
+          class="task__btn-add"
+          mat-raised-button
+          (click)="onCreateTask()"
+        >
+          Add task
+        </button>
+        <button
+          type="button"
+          class="task__btn-close"
+          (click)="isCreateTask = false"
+        >
+          <mat-icon inline="true">close</mat-icon>
+        </button>
+      </div>
+    </div>
+  </form>
+</ng-template>

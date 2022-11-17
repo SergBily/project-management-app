@@ -1,19 +1,9 @@
-.board {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  border: 1px solid;
-  width: 150px;
-  min-height: 120px;
-  padding: 10px;
+:host {
   cursor: pointer;
+  width: 200px;
 }
 
-.board__title {
-  font-weight: 700;
-}
 
-.board__remove {
-  margin-top: auto;
+.mat-card {
+  min-width: 200px;
 }

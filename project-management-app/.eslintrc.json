@@ -21,6 +21,7 @@
         "airbnb-typescript/base"
       ],
       "rules": {
+        "arrow-body-style": "off",
         "import/prefer-default-export": "off",
         "class-methods-use-this": "off",
         "max-len": [

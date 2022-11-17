@@ -1,3 +1,10 @@
+<button
+  mat-fab
+  color="primary"
+  aria-label="Add new board"
+  (click)="openDialog()">
+  <mat-icon class="material-symbols-outlined">assignment_add</mat-icon>
+</button>
 <ul class="boards">
   <li *ngFor="let board of boards$ | async">
     <app-board-item [board]="board"></app-board-item>

@@ -1,0 +1,51 @@
+@import '../../style/default.scss';
+
+.board__page {
+  min-height: 100%;
+
+  .board__wrapper {
+    @include flex();
+    position: relative;
+    flex-direction: column;
+
+
+    .board__header {
+      @include wh (100%, auto);
+      @include flex($justify-content: flex-start);
+      gap: 2rem;
+      padding: 10px;
+      margin-bottom: 10px;
+      box-shadow: 0 3px 2px $btnBackColorHover;
+
+        .board__title {
+          margin: 0;
+        }
+
+        .board__btn-back {
+          @include wh(210px, auto);
+          @include btn();
+
+          .board__btn-text {
+            margin-left: 10px;
+          }
+        }
+
+        .board__btn-back:hover {
+          @include btn-hover();
+        }
+    }
+
+      .board {
+        @include wh (100%, 100%);
+        @include flex($justify-content: flex-start, $align-items: flex-start);
+        position: relative;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding: 0 10px 10px 10px;
+        margin-top: 5px;
+        user-select: none;
+      }
+  }
+}
+
+

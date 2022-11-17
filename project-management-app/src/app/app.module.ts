@@ -5,12 +5,14 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { MatDialogModule } from '@angular/material/dialog';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
 import { CoreModule } from './core/core.module';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { UrlHeadersInterceptor } from './auth/interceptors/url-headers.interceptor';
+import { SharedModule } from './shared/shared.module';
 
 
 @NgModule({
@@ -27,7 +29,9 @@ import { UrlHeadersInterceptor } from './auth/interceptors/url-headers.intercept
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     EffectsModule.forRoot([]),
     CoreModule,
-    BrowserAnimationsModule
+    SharedModule,
+    MatDialogModule,
+
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: UrlHeadersInterceptor, multi: true },

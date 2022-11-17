@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { take } from 'rxjs';
-import { Board } from '../main/models/board';
-import { BoardsApiService } from '../main/services/boards/boards.service';
+import { Store } from '@ngrx/store';
+import {
+  Observable, take,
+} from 'rxjs';
+import { BoardActions } from './redux/actions/board.actions';
+import { selectCountColumns, selectGetColumns } from './redux/selectors/board.selector';
+import { Column } from './redux/state.model';
 
 @Component({
   selector: 'app-board',
@@ -12,21 +16,25 @@ import { BoardsApiService } from '../main/services/boards/boards.service';
 export class BoardComponent implements OnInit {
   boardId = '';
 
-  board: Board | undefined;
+  title!: string;
+
+  stateColumnsOpenBoard$!: Observable<Column[]>;
+
+  countColumns$!: Observable<number>;
 
   constructor(
     public route: ActivatedRoute,
     public router: Router,
-    private boardsApi: BoardsApiService,
+    private store: Store,
   ) { }
 
   ngOnInit(): void {
     this.route.params.pipe(take(1)).subscribe((params) => {
       this.boardId = params['id'];
+      this.store.dispatch(BoardActions.loadOpenBoard({ id: this.boardId }));
+      this.stateColumnsOpenBoard$ = this.store.select(selectGetColumns);
+      this.countColumns$ = this.store.select(selectCountColumns);
     });
-
-    this.boardsApi.getBoard(this.boardId).subscribe((board) => {
-      this.board = board;
-    });
+    this.route.queryParams.pipe(take(1)).subscribe((param) => { this.title = param['title']; });
   }
 }

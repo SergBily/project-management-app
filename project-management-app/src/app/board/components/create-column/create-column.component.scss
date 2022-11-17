@@ -1,0 +1,121 @@
+@import '../../../../style/default.scss';
+
+.column__wrapper {
+  @include wh(260px, 40px);
+  display: inline-block;
+  position: relative;
+  // margin: $columnWrapperMargin;
+  padding: 4px;
+  vertical-align: top;
+  background-color: #0000003d;
+  border-radius: $columnBorderRad;
+  -webkit-border-radius: $columnBorderRad;
+  -moz-border-radius: $columnBorderRad;
+  -ms-border-radius: $columnBorderRad;
+  -o-border-radius: $columnBorderRad;
+}
+
+.column__btn-create {
+  @include wh(100%, 32px);
+  @include flex();
+  color: $btnColor;
+  border: 0;
+  background-color: transparent;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+
+    .column__btn-text {
+      margin-left: 10px;
+    }
+}
+
+.column__btn-conf {
+  height: 24px;
+  position: absolute;
+  visibility: hidden;
+  top: 8px;
+  right: -26px;
+  font-size: 1.5rem;
+  border: 0;
+  background-color: transparent;
+  color: $btnColor;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+}
+
+.column__wrapper:hover .column__btn-conf {
+  right: 5px;
+  visibility: visible;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+}
+
+.column__wrapper:hover {
+  background-color: #0000004d;
+}
+
+.column__container {
+  @include wh(100%, 77px);
+  @include flex($justify-content: space-around);
+  flex-direction: column;
+
+    .column__input {
+      @include wh(100%, 32px);
+      padding: 0 5px;
+      font-size: 16px;
+      border: 0;
+      outline: 0;
+    }
+}
+
+.column__control {
+  @include wh(100%, auto);
+  @include flex($justify-content: flex-start);
+  position: relative;
+  gap: 15px;
+
+    .column__btn-add {
+      @include wh(100px, auto);
+      @include flex();
+      @include btn($font-size: 14px);
+    }
+
+    .column__btn-add:hover {
+      @include btn-hover($box-shadow: #6c5a74 1px 2px 5px,);
+    }
+
+    .column__btn-close {
+      @include btn-exit();
+      margin-top: 5px;
+    }
+
+    .column__btn-close:hover {
+      @include btn-exit-hover();
+    }
+}
+
+.column-add {
+  height: 85px;
+  background-color: $columnAddBack;
+}
+
+.column-add:hover {
+  background-color: $columnAddBack;
+}
+
+.task__textarea {
+  outline: none;
+  border: none;
+  box-shadow: none;
+  min-height: 50px;
+  max-height: 160px;
+  resize: none;
+}

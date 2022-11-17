@@ -10,6 +10,13 @@ $FooterHeight: 50px;
 $errorMessage: #ff0000;
 $modalWindowShadow:rgb(203 183 212 / 60%) 0px 10px 30px;
 $modalWindowBorderRad: 10px;
+$columnBorderRad: 5px;
+$columnAddBack: #ebecf0;
+$widthColumn: 270px;
+$columnWrapperMargin: 0 5px;
+$taskShadow: 1px 1px 3px rgb(203 183 212 / 60%);
+$paddingForElemTask: 5px 15px 10px 10px;
+$colorTitltColumn: #172b4d;
 
 @mixin wh($width: auto, $height: auto) {
   width: $width;
@@ -36,7 +43,7 @@ $letter-spacing: 0.5px, $transition: all 0.4s ease-in-out) {
 }
 
 @mixin btn-hover ($background-color: $btnBackColorHover, $color: $btnColorHover, $transition: all 0.4s ease-in-out,
-$box-shadow: #6c5a74 2px 5px 15px, $font-weight: 700) {
+$box-shadow: #6c5a74 2px 5px 10px, $font-weight: 700) {
   background-color: $background-color;
   color: $color;
   transition: $transition;
@@ -52,6 +59,32 @@ $box-shadow: #6c5a74 2px 5px 15px, $font-weight: 700) {
   position: $position;
   top: $top;
   left: $left;
+  transform: $transform;
+  -webkit-transform: $transform;
+  -moz-transform: $transform;
+  -ms-transform: $transform;
+  -o-transform: $transform;
+}
+
+@mixin btn-exit () {
+  @include wh(26px,26px);
+  font-size: 1.6em;
+  background-color: transparent;
+  color: #352c5f;
+  border: 0;
+  text-align: center;
+  cursor: pointer;
+  transition: all, 0.5s ease-in-out;
+  -webkit-transition: all, 0.5s ease-in-out;
+  -moz-transition: all, 0.5s ease-in-out;
+  -ms-transition: all, 0.5s ease-in-out;
+  -o-transition: all, 0.5s ease-in-out;
+}
+
+@mixin btn-exit-hover ($transform: rotate(180deg)) {
+  @include wh(30px,30px);
+  font-size: 2.0em;
+  color: $circleBtnBackColor;
   transform: $transform;
   -webkit-transform: $transform;
   -moz-transform: $transform;

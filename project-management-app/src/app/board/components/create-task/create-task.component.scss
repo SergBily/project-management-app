@@ -1,0 +1,110 @@
+@import '../../../../style/default.scss';
+
+.task__wrapper {
+  @include wh(260px, 40px);
+  display: inline-block;
+  padding: 4px;
+  vertical-align: top;
+  background-color: #0000003d;
+  border-radius: $columnBorderRad;
+  -webkit-border-radius: $columnBorderRad;
+  -moz-border-radius: $columnBorderRad;
+  -ms-border-radius: $columnBorderRad;
+  -o-border-radius: $columnBorderRad;
+}
+
+.task__btn-create {
+    @include wh(100%, 32px);
+    @include flex();
+  color: $btnColor;
+  border: 0;
+  background-color: transparent;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+
+    .task__btn-text {
+      margin-left: 10px;
+    }
+}
+
+.task__wrapper:hover {
+  background-color: #0000004d;
+}
+
+.task__container {
+  @include wh(100%, 100%);
+  @include flex($justify-content: space-around);
+  flex-direction: column;
+
+    .task__input {
+      @include wh(100%, 32px);
+      padding: 0 5px;
+      font-size: 16px;
+      border: 0;
+      outline: 0;
+      border-radius: $columnBorderRad;
+      -webkit-border-radius: $columnBorderRad;
+      -moz-border-radius: $columnBorderRad;
+      -ms-border-radius: $columnBorderRad;
+      -o-border-radius: $columnBorderRad;
+      box-shadow: $taskShadow;
+    }
+}
+
+.task__control {
+  @include wh(100%, auto);
+  @include flex($justify-content: flex-start);
+  position: relative;
+  gap: 15px;
+
+    .task__btn-add {
+      @include wh(100px, auto);
+      @include flex();
+      @include btn($font-size: 14px);
+    }
+
+    .task__btn-add:hover {
+      @include btn-hover($box-shadow: #6c5a74 1px 2px 5px,);
+    }
+
+    .task__btn-close {
+      @include btn-exit();
+      margin-top: 5px;
+    }
+
+    .task__btn-close:hover {
+      @include btn-exit-hover();
+    }
+}
+
+.task-add {
+  height: 165px;
+  background-color: $columnAddBack;
+}
+
+.task-add:hover {
+  background-color: $columnAddBack;
+}
+
+// .task__textarea {
+//   outline: none;
+//   border: none;
+//   box-shadow: none;
+//   min-height: 50px;
+//   max-height: 160px;
+//   resize: none;
+// }
+
+.task__textarea {
+  margin: 5px 0;
+  border-radius: $columnBorderRad;
+  -webkit-border-radius: $columnBorderRad;
+  -moz-border-radius: $columnBorderRad;
+  -ms-border-radius: $columnBorderRad;
+  -o-border-radius: $columnBorderRad;
+  box-shadow: $taskShadow;
+  resize: none;
+  outline: none;
+  border: none;
+}

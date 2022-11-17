@@ -1,1 +1,27 @@
-
+<div class="column__wrapper">
+  <div class="column__container">
+    <div class="column__title">
+      <h3 class="column__title-header" *ngIf="!isChangeTitle; else changeTitle">
+        {{ dataForApi.column.title }}
+      </h3>
+      <button
+        class="column__title-settings"
+        title="delete column"
+        (click)="deleteBoard($event)"
+      >
+        <mat-icon [inline]="true">delete_forever</mat-icon>
+      </button>
+    </div>
+    <div class="column__tasks">
+      <ng-container *ngFor="let task of tasks$ | async">
+        <app-task [task]="task"></app-task>
+      </ng-container>
+    </div>
+    <div class="column__task-create">
+      <app-create-task [columnId]="dataForApi.column.id"></app-create-task>
+    </div>
+  </div>
+</div>
+<ng-template #changeTitle>
+  <textarea name="" id="" cols="30" rows="10"></textarea>
+</ng-template>

@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: 'main', loadChildren: () => import('./main/main.module').then((m) => m.MainModule) },
   { path: 'boards', loadChildren: () => import('./board/board.module').then((m) => m.BoardModule) },
   { path: '**', component: PageNotFoundComponent }
-];
+]
 
 @NgModule({
   imports: [RouterModule.forRoot(
