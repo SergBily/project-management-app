@@ -1,5 +1,6 @@
 @import '../../../../style/default.scss';
 
+
 .column__wrapper {
   display: inline-block;
   width: $widthColumn;
@@ -62,6 +63,7 @@
   margin-top: 5px;
   cursor: pointer;
   color: $colorTitltColumn;
+  background-color: transparent;
   transition: all 0.3s ease-in-out;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;

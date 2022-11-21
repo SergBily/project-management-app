@@ -2,7 +2,7 @@
 
 .task__wrapper {
   @include wh(100%, auto);
-  margin: 3px 0;
+  margin: 7px 0;
   box-shadow: $taskShadow;
   border-radius: $columnBorderRad;
   -webkit-border-radius: $columnBorderRad;
@@ -11,6 +11,16 @@
   -o-border-radius: $columnBorderRad;
   background-color: #ffffff;
 }
+
+.task__wrapper:hover {
+  box-shadow: 3px 3px 10px rgb(203 183 212);;
+  border-radius: $columnBorderRad;
+  -webkit-border-radius: $columnBorderRad;
+  -moz-border-radius: $columnBorderRad;
+  -ms-border-radius: $columnBorderRad;
+  -o-border-radius: $columnBorderRad;
+}
+
 .task__container {
   width: 100%;
   overflow-x: hidden;
@@ -18,9 +28,61 @@
 }
 
 .task__title-container {
-  padding: $paddingForElemTask;
-  box-shadow: 0 1px 2px $btnBackColorHover;
-  margin-bottom: 10px;
+  // padding: $paddingForElemTask;
+  // box-shadow: 0 1px 2px $btnBackColorHover;
+  // margin-bottom: 10px;
+  position: relative;
+    cursor: pointer;
+    height: auto;
+
+      .face {
+        @include wh (100%, auto);
+      }
+
+      .face1 {
+        @include flex();
+        position: relative;
+        min-height: 40px;
+        max-height: 100px;
+        margin-bottom: 10px;
+        z-index: 1;
+        overflow-y: auto;
+        padding: 10px;
+        background-color: #cbb7d43d;
+
+          .content{
+          @include wh (100%, inherit);
+          }
+      }
+
+
+      .face2 {
+        @include flex();
+        position: relative;
+        min-height: 30px;
+        max-height: 100px;
+        overflow-y: auto;
+        border-bottom-left-radius: $columnBorderRad;
+        border-bottom-right-radius: $columnBorderRad;
+
+        .content{
+          padding: 10px;
+        }
+      }
+}
+
+.task__title-container:hover .face.face1 {
+  background-color: #cbb7d4;
+  border-top-left-radius: $columnBorderRad;
+  border-top-right-radius: $columnBorderRad;
+}
+
+.task__title-container:hover .face.face2 {
+  height: 100%;
+}
+
+.task__title-container:hover .face.face2 {
+  transform: translateY(0);
 }
 
 .task__title {
