@@ -1,0 +1,21 @@
+@import '../../../../style/default.scss';
+
+.wrapper-team{
+    margin-top: 50px;
+    @include flexCenter;
+    flex-direction: column;
+    color: $textColor;
+}
+
+.title{
+    font-size: $titleSize;
+    line-height: 50px;
+    text-align: center;
+}
+
+.wrapper-cards{
+    display: flex;
+    justify-content: center;
+    max-width: 1200px;
+    flex-wrap: wrap;
+}

@@ -1,20 +1,12 @@
 <div class="wrapper">
-  <header class="header">
-    <div class="logo">
-      <img src="../assets/images/logo.png" width="110" height="65" alt="" />
-    </div>
-    <div class="btn__cont">
-      <button class="btn__signup" routerLink="/auth/signup">sign Up</button>
-      <button class="btn__signin" routerLink="/auth/signin">sign In</button>
-      <button class="btn__signin" routerLink="/auth/profile">
-        edit profile
-      </button>
-    </div>
-  </header>
+  <app-header></app-header>
   <div class="container">
     <router-outlet></router-outlet>
   </div>
-  <footer class="footer"></footer>
+  <app-footer></app-footer>
 </div>
 
+
+
+ 
 

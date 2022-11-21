@@ -9,6 +9,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
+import { CoreModule } from './core/core.module';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { UrlHeadersInterceptor } from './auth/interceptors/url-headers.interceptor';
 import { SharedModule } from './shared/shared.module';
@@ -26,6 +27,7 @@ import { SharedModule } from './shared/shared.module';
     StoreModule.forRoot({}, {}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     EffectsModule.forRoot([]),
+    CoreModule,
     SharedModule,
     MatDialogModule,
   ],
