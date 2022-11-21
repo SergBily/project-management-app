@@ -24,7 +24,7 @@ export class CreateColumnDialogComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.formColumn = new FormControl('', Validators.required);
+    this.formColumn = new FormControl('', [Validators.required, Validators.maxLength(45)]);
     this.subscription$ = this.formColumn.statusChanges.subscribe((status) => {
       if (status === 'VALID') {
         this.isValidForm = true;

@@ -35,6 +35,8 @@ export class CreateColumnComponent implements OnInit, OnDestroy {
 
   subscription$!: Subscription;
 
+  hasErrors!: boolean;
+
   constructor(
     private api: ApiBoardService,
     private store: Store,
@@ -42,7 +44,7 @@ export class CreateColumnComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.tForm = new FormControl('', Validators.required);
+    this.tForm = new FormControl('', [Validators.required, Validators.maxLength(45)]);
     this.subscription$ = this.tForm.statusChanges.subscribe((status) => {
       if (status === 'VALID') {
         this.isValidForm = true;
@@ -72,6 +74,11 @@ export class CreateColumnComponent implements OnInit, OnDestroy {
         this.onCreateColumn(result);
       }
     });
+  }
+
+  cancelCreateColumn(): void {
+    this.isCreateColumn = false;
+    this.tForm.reset();
   }
 
   ngOnDestroy(): void {

@@ -10,8 +10,11 @@
         autocomplete="off"
       />
       <mat-error *ngIf="formColumn.hasError('required')"
-        >That field is required</mat-error
-      >
+        >That field is required
+      </mat-error>
+      <mat-error *ngIf="formColumn.hasError('maxlength')"
+        >Max length 45 character
+      </mat-error>
     </mat-form-field>
   </div>
   <div mat-dialog-actions class="dialog__buttons">

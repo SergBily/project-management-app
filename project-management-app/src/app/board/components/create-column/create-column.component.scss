@@ -85,10 +85,13 @@
     .column__btn-add {
       @include wh(100px, auto);
       @include flex();
+    }
+
+    .valid {
       @include btn($font-size: 14px);
     }
 
-    .column__btn-add:hover {
+    .valid:hover {
       @include btn-hover($box-shadow: #6c5a74 1px 2px 5px,);
     }
 
