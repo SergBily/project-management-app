@@ -30,29 +30,31 @@
           <mat-icon>cancel</mat-icon>
         </div>
       </div>
-      <div class="btn-wrap additionally">
+      <div class="btn-wrap additionally" routerLink="/team">
         Team
         <mat-icon>expand_more</mat-icon>
       </div>
-      <div class="btn-wrap additionally" routerLink="/auth/signin">Login</div>
-      <div class="btn-wrap black additionally" routerLink="/auth/signup">
+      <!-- <div class="btn-wrap additionally" routerLink="/auth/signin">Login</div> -->
+      <!-- <div class="btn-wrap black additionally" routerLink="/auth/signup">
         Sing-up
-      </div>
+      </div> -->
 
-      <div class="btn-wrap additionally">All boards</div>
-      <div class="btn-wrap additionally">
+      <div class="btn-wrap additionally" routerLink="/main">All boards</div>
+      <div class="btn-wrap additionally" (click)="openDialog()">
         Create new <br />
         board
       </div>
       <div class="btn-wrap additionally" routerLink="/auth/profile">
         Edit profile
       </div>
-      <div class="btn-wrap black additionally">Logout</div>
+      <div class="btn-wrap black additionally" routerLink="/auth/signin">Logout</div>
     </div>
+
+
 
     <ng-template #registrationNot>
       <div class="registration">
-        <div class="btn-wrap additionally">
+        <div class="btn-wrap additionally" routerLink="/team" (click)="letModal = !letModal">
           Team
           <mat-icon>expand_more</mat-icon>
         </div>
@@ -63,15 +65,6 @@
       </div>
     </ng-template>
 
-
-    <!-- <div class="search-wrap">
-      <input type="text" placeholder="Search" class="search" />
-      <div class="cancel" style="cursor: pointer">
-        <mat-icon>cancel</mat-icon>
-      </div>
-    </div> -->
-
-
     <div class="btn-wrap burger" (click)="letModal=!letModal">
       <mat-icon>menu </mat-icon>
     </div>
@@ -80,9 +73,9 @@
       
       <div class="modal-menu" *ngIf="!show(); else registrationYes ">
         <ul class="wrapper-list">
-          <li class="list">Login</li>
-          <li class="list">Sing-up</li>
-          <li class="list">Team</li>
+          <li class="list" routerLink="/auth/signin" (click)="letModal = !letModal">Login</li>
+          <li class="list" routerLink="/auth/signup" (click)="letModal = !letModal">Sing-up</li>
+          <li class="list" routerLink="/team" (click)="letModal = !letModal">Team</li>
         </ul>
         <div class="wrapper-btn-modal">
           <div class="btn-en">EN</div>
@@ -93,11 +86,11 @@
       <ng-template #registrationYes>
         <div class="modal-menu">
           <ul class="wrapper-list">
-            <li class="list">Edit profile</li>
-            <li class="list">Team</li>
-            <li class="list">All board</li>
-            <li class="list">Crete new board</li>
-            <li class="list">Logout</li>
+            <li class="list" routerLink="/auth/signup" (click)="letModal = !letModal">Edit profile</li>
+            <li class="list" routerLink="./team" (click)="letModal = !letModal">Team</li>
+            <li class="list" routerLink="/main" (click)="letModal = !letModal">All board</li>
+            <li class="list" (click)="openDialog()" (click)="letModal = !letModal">Crete new board</li>
+            <li class="list" routerLink="/auth/signin" (click)="letModal = !letModal">Logout</li>
           </ul>
           <div class="wrapper-btn-modal">
             <div class="btn-en">EN</div>

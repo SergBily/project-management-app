@@ -9,6 +9,7 @@ import { HeaderService } from './services/header.service';
 import { MainComponent } from './main/main.component';
 import { CardComponent } from './main/card/card.component';
 import { FooterComponent } from './footer/footer.component';
+import { TeamComponent } from './main/team/team.component';
 
 @NgModule({
   declarations: [
@@ -17,19 +18,20 @@ import { FooterComponent } from './footer/footer.component';
     MainComponent,
     CardComponent,
     FooterComponent,
+    TeamComponent,
   ],
   imports: [
     CommonModule,
     CoreRoutingModule,
-    MatIconModule
+    MatIconModule,
   ],
   providers: [HeaderService],
   exports: [
     HeaderComponent,
     MainComponent,
     // CardComponent
-    // CoreComponent
-    FooterComponent
+    // CoreComponent,
+    FooterComponent,    
   ]
 })
 export class CoreModule { }

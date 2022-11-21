@@ -1,5 +1,4 @@
 @import '../../../style/default.scss';
-@import '../style/default.scss';
 
 .wrapper-main{
     display: flex;
@@ -8,13 +7,6 @@
     background-color: #fafafa;
     padding: 100px 100px;
     color: $textColor;
-}
-
-.wrapper-cards{
-    display: flex;
-    justify-content: center;
-    max-width: 1200px;
-    flex-wrap: wrap;
 }
 
 .title{
@@ -31,7 +23,6 @@
 .text{
     font-size: $bigTextSize;
     line-height: 30px;
-    margin-bottom: 90px;
 }
 
 .top{
@@ -50,7 +41,6 @@
         @include btn-hover
     }
 }
-
 
 .hide{
     display: none;

@@ -14,23 +14,13 @@ import { HeaderService } from '../services/header.service';
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss'],
-  // animations: [
-  //   trigger('fade', [
-  //     transition('void =>*', [
-  //       style({
-  //         background- color: 'yellow',
-  //         opacity: 1,
-  //         }),
-  //       animate(1000)
-  //     ])
-  //   ])
-  // ]
+
 })
 export class MainComponent implements OnInit {
-  constructor(public arrData: HeaderService) {}
-
-  ngOnInit(): void {}
-  cards = this.arrData.arr;
+  constructor() {}
+  ngOnInit(): void {
+  }
+  
   a: boolean = true;
 
   @HostListener('document:scroll')

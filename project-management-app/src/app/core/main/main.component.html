@@ -5,12 +5,6 @@
         <h1 class="projec-name">Project Ultra Management Application</h1>
         <div class="text">Bring your teammates to optimize the work process, improve efficiency and bring your results to the new level!</div>
     </div>
-    <p class="title">About our team</p>
-    <div class="wrapper-cards">
-        <app-card 
-        *ngFor="let card of cards"
-        [card] = "card"
-        ></app-card>
-    </div>
+    <app-team></app-team>
     <div class="top" (click)="top()" [ngClass]="{hide: a}">TOP</div>
 </div>

@@ -1,5 +1,4 @@
 @import "../../../style/default.scss";
-@import "../style/default.scss";
 
 .wrapper-header {
   padding: 6px 4px;
@@ -117,14 +116,15 @@
 .modal-opacity{
   background-color: rgb(51, 50, 50);
   width: 100%;
-  opacity: .6;
+  opacity: .7;
+  z-index: 99;
 }
 
 .modal-menu{
   width: 250px;
   height: 100vh;
   background-color: $burgerMenuColor;
-  z-index: 2;
+  z-index: 20;
   color: $textColor;
   font-size: $textBurgerMenu;
 }
@@ -151,7 +151,7 @@
   display: none;
 }
 
-@media (max-width: 1200px){
+@media (max-width: 960px){
   .burger{
      display: flex;
   }
