@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HeaderService } from '../../services/header.service';
+import { arr } from '../../../../environments/environment'
 
 @Component({
   selector: 'app-team',
@@ -8,9 +8,9 @@ import { HeaderService } from '../../services/header.service';
 })
 export class TeamComponent implements OnInit {
 
-  constructor(public arrData: HeaderService) { }
+  constructor() { }
 
   ngOnInit(): void {}
-  cards = this.arrData.arr;
-
+  
+  cards = arr;
 }

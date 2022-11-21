@@ -14,7 +14,6 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
 import { UrlHeadersInterceptor } from './auth/interceptors/url-headers.interceptor';
 import { SharedModule } from './shared/shared.module';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +30,6 @@ import { SharedModule } from './shared/shared.module';
     CoreModule,
     SharedModule,
     MatDialogModule,
-
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: UrlHeadersInterceptor, multi: true },

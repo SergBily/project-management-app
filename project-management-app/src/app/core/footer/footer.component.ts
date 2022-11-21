@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HeaderService } from '../services/header.service';
+import { arr } from '../../../environments/environment'
 
 @Component({
   selector: 'app-footer',
@@ -8,13 +8,10 @@ import { HeaderService } from '../services/header.service';
 })
 export class FooterComponent implements OnInit {
 
-  constructor(public HeaderService: HeaderService) { }
+  constructor() { }
 
-  ngOnInit(): void {
-    console.log(this.HeaderService.arr[0].name)
+  ngOnInit(): void {  
   }
 
-  arrs = this.HeaderService.arr
-
-
+  arrs = arr
 }

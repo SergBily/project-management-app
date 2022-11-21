@@ -5,9 +5,8 @@ import { MainComponent } from './main/main.component';
 import { TeamComponent } from './main/team/team.component';
 
 const routes: Routes = [
+  { path: 'team', component: TeamComponent },
   { path: '', component: MainComponent },
-  { path: 'team', component: TeamComponent }
-  // { path: 'coremain', loadChildren:() => import('./main/main.component').then(m=>m.MainComponent)}
 ];
 
 @NgModule({
