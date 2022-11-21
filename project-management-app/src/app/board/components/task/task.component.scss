@@ -13,8 +13,6 @@
 }
 .task__container {
   width: 100%;
-  min-height: 50px;
-  max-height: 110px;
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -30,9 +28,7 @@
 }
 
 .task__description-container {
-  width: 100%;
-  min-height: 30px;
-  max-height: 70px;
+  @include wh(100%, auto);
   overflow-x: hidden;
   overflow-y: auto;
   padding: $paddingForElemTask;

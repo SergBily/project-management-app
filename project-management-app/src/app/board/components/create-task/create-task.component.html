@@ -11,7 +11,6 @@
     <div class="task__container" @openTaskAdd>
       <input
         formControlName="title"
-        [(ngModel)]="titleForm"
         name="title"
         class="task__input"
         type="text"
@@ -22,8 +21,6 @@
       <textarea
         class="task__textarea"
         formControlName="description"
-        name=""
-        id=""
         cols="33"
         rows="5"
         placeholder="Enter a description for this task..."

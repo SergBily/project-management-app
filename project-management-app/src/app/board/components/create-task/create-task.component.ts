@@ -7,7 +7,6 @@ import { Store } from '@ngrx/store';
 import { take } from 'rxjs';
 import { DateUserService } from 'src/app/auth/services/date-user/date-user';
 import { BoardActions } from '../../redux/actions/board.actions';
-// import { BoardActions } from '../../redux/actions/board.actions';
 import { selectGetBoardId } from '../../redux/selectors/board.selector';
 import { ApiBoardService } from '../../services/api/api.service';
 
@@ -28,8 +27,6 @@ export class CreateTaskComponent implements OnInit {
   @Input() columnId!: string;
 
   isCreateTask = false;
-
-  titleForm!: string;
 
   idBoard!: string;
 

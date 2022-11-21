@@ -7,18 +7,16 @@
         <span class="board__btn-text">Back to your boards</span>
       </button>
     </div>
-    <div class="board">
-      <ng-container
-        *ngFor="let column of stateColumnsOpenBoard$ | async; let count"
-      >
-        <app-column
-          [style]="{ order: column.order }"
-          [dataForApi]="{ boardId, column }"
-        ></app-column>
-      </ng-container>
-      <app-create-column
-        [style]="{ order: countColumns$ | async }"
-      ></app-create-column>
+    <div class="board__content">
+      <div class="board">
+        <div class="board__container">
+          <app-column
+            *ngFor="let column of stateColumnsOpenBoard$ | async"
+            [dataForApi]="{ boardId, column }"
+          ></app-column>
+        </div>
+        <app-create-column></app-create-column>
+      </div>
     </div>
   </div>
 </div>
