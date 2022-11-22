@@ -1,8 +1,9 @@
 import { Column } from '../redux/state.model';
 
 export interface DataColumn {
-  id: string;
-  title: string
+  title: string;
+  order?: number;
+  id?: string;
 }
 
 export interface DataTask {
@@ -27,6 +28,12 @@ export interface ParamApiTask {
   boardId: string;
   columnId: string;
   taskId: string
+}
+
+export interface ParamApiColumn {
+  data: DataColumn;
+  boardId: string;
+  columnId: string;
 }
 
 export interface DataBoardAndColumn {
