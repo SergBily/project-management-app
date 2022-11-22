@@ -1,20 +1,24 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component, Input, OnDestroy, OnInit,
+} from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
-import { DataBoardAndColumn, ParamApiTask } from '../../model/board.model';
+import { DataBoardAndColumn, ParamApiColumn, ParamApiTask } from '../../model/board.model';
 import { BoardActions } from '../../redux/actions/board.actions';
 import { selectGetTasks } from '../../redux/selectors/board.selector';
 import { StateTask } from '../../redux/state.model';
 import { ApiBoardService } from '../../services/api/api.service';
+import { ValidatorColumnTitleService } from '../../services/custom-validator/validator-column-title.service';
 
 @Component({
   selector: 'app-column',
   templateUrl: './column.component.html',
   styleUrls: ['./column.component.scss'],
 })
-export class ColumnComponent implements OnInit {
+export class ColumnComponent implements OnInit, OnDestroy {
   @Input() dataForApi!: DataBoardAndColumn;
 
   isChangeTitle = false;
@@ -23,13 +27,36 @@ export class ColumnComponent implements OnInit {
 
   param!: Pick<ParamApiTask, 'boardId' | 'columnId'>;
 
+  titleForm!: FormControl;
+
+  subscription$!: Subscription;
+
+  isValidForm = false;
+
+  title!: string;
+
   constructor(
     private store: Store,
     public dialog: MatDialog,
     private api: ApiBoardService,
+    private customValidator: ValidatorColumnTitleService,
   ) { }
 
   ngOnInit(): void {
+    this.title = this.dataForApi.column.title;
+    this.titleForm = new FormControl(
+      `${this.title}`,
+      [Validators.required, Validators.maxLength(45),
+        this.customValidator.customValidatorForColumnTitle(this.title)],
+    );
+    this.subscription$ = this.titleForm.statusChanges.subscribe((status) => {
+      if (status === 'VALID') {
+        this.isValidForm = true;
+      } else {
+        this.isValidForm = false;
+      }
+    });
+
     this.param = {
       boardId: this.dataForApi.boardId, columnId: this.dataForApi.column.id,
     };
@@ -37,7 +64,7 @@ export class ColumnComponent implements OnInit {
     this.tasks$ = this.store.select(selectGetTasks(this.dataForApi.column.id));
   }
 
-  deleteBoard(event: Event) {
+  deleteBoard(event: Event): void {
     event.stopPropagation();
 
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
@@ -55,5 +82,33 @@ export class ColumnComponent implements OnInit {
         });
       }
     });
+  }
+
+  openChangeTitle(): void {
+    this.titleForm.setValue(this.title);
+    this.onChangeView();
+  }
+
+  onChangeView(): void {
+    this.isChangeTitle = !this.isChangeTitle;
+  }
+
+  changeColumnTitle(): void {
+    const param: ParamApiColumn = {
+      data: {
+        title: this.titleForm.value,
+        order: this.dataForApi.column.order,
+      },
+      boardId: this.dataForApi.boardId,
+      columnId: this.dataForApi.column.id,
+    };
+
+    this.title = this.titleForm.value;
+
+    this.api.updateColumn(param).subscribe(() => this.onChangeView());
+  }
+
+  ngOnDestroy(): void {
+    this.subscription$.unsubscribe();
   }
 }
