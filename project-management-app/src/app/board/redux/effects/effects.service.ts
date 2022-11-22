@@ -35,7 +35,10 @@ export class BoardEffects {
           const tasks = this.api.getTasks(date);
           return forkJoin([of(date.columnId), tasks]);
         }),
-        map(([columnId, tasks]) => ApiBoardActions.getTaskSuccess({ columnId, tasks })),
+        map(([columnId, tasks]) => {
+          tasks.sort((a, b) => a.order - b.order);
+          return ApiBoardActions.getTaskSuccess({ columnId, tasks });
+        }),
         catchError(() => EMPTY),
       );
     },

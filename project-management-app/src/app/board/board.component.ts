@@ -6,7 +6,7 @@ import {
   Observable, take,
 } from 'rxjs';
 import { BoardActions, DragAndDropActions } from './redux/actions/board.actions';
-import { selectGetBoards } from './redux/selectors/board.selector';
+import { selectGetColumns } from './redux/selectors/board.selector';
 import { Column } from './redux/state.model';
 import { ApiBoardService } from './services/api/api.service';
 
@@ -31,11 +31,11 @@ export class BoardComponent implements OnInit {
     this.route.params.pipe(take(1)).subscribe((params) => {
       this.boardId = params['id'];
       this.store.dispatch(BoardActions.loadOpenBoard({ id: this.boardId }));
-      this.stateColumnsOpenBoard$ = this.store.select(selectGetBoards);
+      this.stateColumnsOpenBoard$ = this.store.select(selectGetColumns);
     });
   }
 
-  drop(event: CdkDragDrop<string[]>) {
+  dropColumn(event: CdkDragDrop<string[]>) {
     this.stateColumnsOpenBoard$.pipe(
       take(1),
     )

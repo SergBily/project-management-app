@@ -1,10 +1,12 @@
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { DataBoardAndColumn } from '../../model/board.model';
-import { BoardActions } from '../../redux/actions/board.actions';
-import { selectGetTasks } from '../../redux/selectors/board.selector';
-import { StateTask } from '../../redux/state.model';
+import { Observable, take } from 'rxjs';
+import { DataBoardAndColumn, TaskUpdate } from '../../model/board.model';
+import { BoardActions, DragAndDropActions } from '../../redux/actions/board.actions';
+import { selectGetColumns, selectGetTasks, selectGetAllTasks } from '../../redux/selectors/board.selector';
+import { Column, StateTask, Tasks } from '../../redux/state.model';
+import { ApiBoardService } from '../../services/api/api.service';
 
 @Component({
   selector: 'app-column',
@@ -18,7 +20,14 @@ export class ColumnComponent implements OnInit {
 
   tasks$!: Observable<StateTask[]>;
 
-  constructor(private store: Store) { }
+  allTasks$!: Observable<Tasks>;
+
+  stateColumnsOpenBoard$!: Observable<Column[]>;
+
+  constructor(
+    private store: Store,
+    private boardsApi: ApiBoardService,
+  ) { }
 
   ngOnInit(): void {
     this.store.dispatch(BoardActions.getTasks(
@@ -27,5 +36,51 @@ export class ColumnComponent implements OnInit {
       },
     ));
     this.tasks$ = this.store.select(selectGetTasks(this.dataForApi.column.id));
+    this.stateColumnsOpenBoard$ = this.store.select(selectGetColumns);
+    this.allTasks$ = this.store.select(selectGetAllTasks);
+  }
+
+  getColumnsId(columnId: string): string[] {
+    const columnsId: string[] = [];
+    this.stateColumnsOpenBoard$.pipe(
+      take(1),
+    ).subscribe((columns) => {
+      columns.forEach((column) => {
+        if (column.id !== columnId) columnsId.push(column.id);
+      });
+    });
+    return columnsId;
+  }
+
+  dropTask(event: CdkDragDrop<string[]>) {
+    // console.log(event);
+    if (event.previousContainer === event.container) {
+      // console.log('current');
+      this.tasks$.pipe(
+        take(1),
+      ).subscribe((tasks) => {
+        const tasksCopy = tasks.map((task) => ({ ...task }));
+        moveItemInArray(tasksCopy, event.previousIndex, event.currentIndex);
+        tasksCopy.forEach((task, index) => {
+          // eslint-disable-next-line no-param-reassign
+          task.order = index + 1;
+          const taskDataApi: TaskUpdate = { ...task };
+          delete taskDataApi.id;
+          delete taskDataApi.files;
+          this.boardsApi.updateTask({
+            boardId: this.dataForApi.boardId,
+            columnId: this.dataForApi.column.id,
+            taskId: task.id,
+            data: { ...taskDataApi },
+          }).subscribe();
+        });
+        this.store.dispatch(DragAndDropActions.changeTaskPositionInColumn({
+          columnId: this.dataForApi.column.id,
+          tasks: tasksCopy,
+        }));
+      });
+    } else {
+      console.log('other');
+    }
   }
 }

@@ -28,8 +28,8 @@ export class ApiBoardService {
       );
   }
 
-  public updateColumn(boardId: string, columnId: string, date: ColumnUpdate) {
-    return this.http.put(`/boards/${boardId}/columns/${columnId}`, date).pipe(
+  updateColumn(boardId: string, columnId: string, data: ColumnUpdate) {
+    return this.http.put(`/boards/${boardId}/columns/${columnId}`, data).pipe(
       retry(2),
       take(1),
     );

@@ -5,11 +5,13 @@
         {{ dataForApi.column.title }}
       </h2>
     </div>
-    <div class="column__tasks">
+    <div class="column__tasks"
+      cdkDropList
+      id={{dataForApi.column.id}}
+      [cdkDropListConnectedTo]="getColumnsId(dataForApi.column.id)"
+      (cdkDropListDropped)="dropTask($event)">
       <ng-container *ngFor="let task of tasks$ | async">
-        <!-- <div class="column__tasks-container"> -->
-        <app-task [task]="task"></app-task>
-        <!-- </div> -->
+        <app-task cdkDrag [task]="task"></app-task>
       </ng-container>
     </div>
     <div class="column__task-create">

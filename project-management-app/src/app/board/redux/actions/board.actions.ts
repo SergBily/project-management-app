@@ -1,7 +1,7 @@
 import {
   createActionGroup, emptyProps, props,
 } from '@ngrx/store';
-import { Column, StateTask } from '../state.model';
+import { Column, StateTask, Tasks } from '../state.model';
 
 export const BoardActions = createActionGroup({
   source: 'Board page',
@@ -24,5 +24,7 @@ export const DragAndDropActions = createActionGroup({
   source: 'Board page',
   events: {
     'Change column position': props<{ columns: Column[] }>(),
+    'Change task position': props<{ tasks: Tasks }>(),
+    'Change task position in column': props<{ columnId: string, tasks: StateTask[] }>(),
   },
 });
