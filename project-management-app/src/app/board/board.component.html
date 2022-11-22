@@ -1,9 +1,10 @@
 <div class="board__page">
   <div class="board__wrapper">
     <div class="board__header">board {{ boardId }} works!</div>
-    <div class="board">
+    <div class="board" cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop($event)">
       <ng-container *ngFor="let column of stateColumnsOpenBoard$ | async">
         <app-column
+          cdkDrag
           [dataForApi]="{ boardId, column }"
         ></app-column>
       </ng-container>

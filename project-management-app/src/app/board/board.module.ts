@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { BoardRoutingModule } from './board-routing.module';
 import { BoardComponent } from './board.component';
 import { ColumnComponent } from './components/column/column.component';
@@ -34,6 +35,7 @@ import { TaskComponent } from './components/task/task.component';
     FormsModule,
     StoreModule.forFeature('board', reducer),
     EffectsModule.forFeature([BoardEffects]),
+    DragDropModule,
   ],
 })
 export class BoardModule { }

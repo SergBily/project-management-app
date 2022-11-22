@@ -33,3 +33,8 @@ export interface DataBoardAndColumn {
   column: Column;
   boardId: string
 }
+
+export interface ColumnUpdate {
+  title: string;
+  order: number;
+}

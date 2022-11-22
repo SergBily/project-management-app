@@ -19,3 +19,10 @@ export const ApiBoardActions = createActionGroup({
     'Get task success': props<{ columnId: string, tasks: StateTask[] }>(),
   },
 });
+
+export const DragAndDropActions = createActionGroup({
+  source: 'Board page',
+  events: {
+    'Change column position': props<{ columns: Column[] }>(),
+  },
+});
