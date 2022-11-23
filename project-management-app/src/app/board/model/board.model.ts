@@ -40,3 +40,8 @@ export interface DataBoardAndColumn {
   column: Column;
   boardId: string
 }
+
+export interface DataOfConfirm {
+  title: string;
+  description: string
+}

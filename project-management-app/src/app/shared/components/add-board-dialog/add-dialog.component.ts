@@ -5,21 +5,27 @@ import { FormBuilder, Validators } from '@angular/forms';
 export interface DialogData {
   title: string;
   description: string;
+  maxLengthDescription: number;
+  maxLengthTitle: number;
 }
 
 @Component({
   selector: 'app-add-board-dialog',
-  templateUrl: './add-board-dialog.component.html',
-  styleUrls: ['./add-board-dialog.component.scss'],
+  templateUrl: './add-dialog.component.html',
+  styleUrls: ['./add-dialog.component.scss'],
 })
-export class AddBoardDialogComponent {
+export class AddDialogComponent {
   public addBoardForm = this.fb.group({
-    title: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
-    description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(250)]],
+    title: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(this.data.maxLengthTitle)]],
+    description: ['',
+      [
+        Validators.required,
+        Validators.minLength(10),
+        Validators.maxLength(this.data.maxLengthDescription)]],
   });
 
   constructor(
-    public dialogRef: MatDialogRef<AddBoardDialogComponent>,
+    public dialogRef: MatDialogRef<AddDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private fb: FormBuilder,
   ) {}

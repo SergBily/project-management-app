@@ -7,9 +7,12 @@ import {
 import {
   FormBuilder, FormControl, FormGroup, Validators,
 } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { Subscription, take } from 'rxjs';
 import { DateUserService } from 'src/app/auth/services/date-user/date-user';
+import { AddDialogComponent } from 'src/app/shared/components/add-board-dialog/add-dialog.component';
+import { DataOfConfirm } from '../../model/board.model';
 import { BoardActions } from '../../redux/actions/board.actions';
 import { selectGetBoardId } from '../../redux/selectors/board.selector';
 import { ApiBoardService } from '../../services/api/api.service';
@@ -45,6 +48,7 @@ export class CreateTaskComponent implements OnInit, OnDestroy {
     private store: Store,
     private fb: FormBuilder,
     private user: DateUserService,
+    public dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -64,13 +68,13 @@ export class CreateTaskComponent implements OnInit, OnDestroy {
     this.store.select(selectGetBoardId).pipe(take(1)).subscribe((id) => { this.idBoard = id; });
   }
 
-  onCreateTask(): void {
+  onCreateTask(data?: DataOfConfirm): void {
     const param = {
       boardId: this.idBoard,
       columnId: this.columnId,
       data: {
-        title: this.taskForm.get('title')?.value,
-        description: this.taskForm.get('description')?.value,
+        title: data ? data.title : this.taskForm.get('title')?.value,
+        description: data ? data.description : this.taskForm.get('description')?.value,
         userId: this.user.getloginedUserId(),
       },
     };
@@ -84,6 +88,23 @@ export class CreateTaskComponent implements OnInit, OnDestroy {
     );
     this.taskForm.reset();
     this.isCreateTask = false;
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(AddDialogComponent, {
+      maxWidth: '500px',
+      data: {
+        title: 'Create new task:',
+        maxLengthDescription: 150,
+        maxLengthTitle: 45,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.onCreateTask(result);
+      }
+    });
   }
 
   ngOnDestroy(): void {

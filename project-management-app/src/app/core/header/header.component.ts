@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthStateService } from 'src/app/auth/services/auth-state/auth-state.service';
 import { BoardsApiService } from 'src/app/main/services/boards/boards.service';
 import { MatDialog } from '@angular/material/dialog';
-import { AddBoardDialogComponent } from 'src/app/shared/components/add-board-dialog/add-board-dialog.component';
+import { AddDialogComponent } from 'src/app/shared/components/add-board-dialog/add-dialog.component';
 
 @Component({
   selector: 'app-header',
@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit {
   letModal = false;
 
   openDialog() {
-    const dialogRef = this.dialog.open(AddBoardDialogComponent, {
+    const dialogRef = this.dialog.open(AddDialogComponent, {
       maxWidth: '500px',
     });
 

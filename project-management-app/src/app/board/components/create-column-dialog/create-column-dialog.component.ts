@@ -4,7 +4,7 @@ import {
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
-import { DialogData } from 'src/app/shared/components/add-board-dialog/add-board-dialog.component';
+import { DialogData } from 'src/app/shared/components/add-board-dialog/add-dialog.component';
 
 @Component({
   selector: 'app-create-column-dialog',

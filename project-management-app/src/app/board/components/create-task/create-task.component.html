@@ -4,6 +4,11 @@
       <mat-icon>add</mat-icon>
       <span class="task__btn-text">Add task</span>
     </button>
+    <button class="task__btn-conf">
+      <mat-icon [inline]="true" (click)="openDialog()"
+        >add_circle_outline</mat-icon
+      >
+    </button>
   </ng-container>
 </div>
 <ng-template #addtask>

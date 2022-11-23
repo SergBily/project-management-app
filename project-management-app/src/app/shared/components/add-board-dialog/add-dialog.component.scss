@@ -1,0 +1,18 @@
+@import '../../../../style/default.scss';
+
+.field__container {
+  display: flex;
+  gap: 15px;
+}
+
+.active:hover {
+  @include btn-hover();
+}
+
+.btn__cancel {
+  @include btn($background-color: #cbb7d42d, $color: black);
+}
+
+.active {
+  @include btn();
+}

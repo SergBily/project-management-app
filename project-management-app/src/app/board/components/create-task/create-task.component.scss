@@ -3,6 +3,7 @@
 .task__wrapper {
   @include wh(260px, 40px);
   display: inline-block;
+  position: relative;
   padding: 4px;
   vertical-align: top;
   border-radius: $columnBorderRad;
@@ -104,4 +105,32 @@
 
 .valid:hover {
   @include btn-hover($box-shadow: #6c5a74 1px 2px 5px,);
+}
+
+.task__btn-conf {
+  height: 24px;
+  position: absolute;
+  visibility: hidden;
+  top: 8px;
+  right: -26px;
+  font-size: 1.5rem;
+  border: 0;
+  background-color: transparent;
+  color: $btnColor;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+}
+
+.task__wrapper:hover .task__btn-conf {
+  right: 10px;
+  visibility: visible;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
 }
