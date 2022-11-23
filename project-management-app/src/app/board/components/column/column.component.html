@@ -1,9 +1,16 @@
 <div class="column__wrapper">
   <div class="column__container">
     <div class="column__title">
-      <h2 class="column__title-header" *ngIf="!isChangeTitle; else changeTitle">
+      <h3 class="column__title-header" *ngIf="!isChangeTitle; else changeTitle">
         {{ dataForApi.column.title }}
-      </h2>
+      </h3>
+      <button
+        class="column__title-settings"
+        title="delete column"
+        (click)="deleteBoard($event)"
+      >
+        <mat-icon [inline]="true">delete_forever</mat-icon>
+      </button>
     </div>
     <div class="column__tasks"
       cdkDropList

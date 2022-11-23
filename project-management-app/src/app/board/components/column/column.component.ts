@@ -1,9 +1,11 @@
 /* eslint-disable no-param-reassign */
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { Observable, take } from 'rxjs';
-import { DataBoardAndColumn, TaskUpdate } from '../../model/board.model';
+import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
+import { DataBoardAndColumn, ParamApiTask, TaskUpdate } from '../../model/board.model';
 import { BoardActions, DragAndDropActions } from '../../redux/actions/board.actions';
 import { selectGetColumns, selectGetTasks } from '../../redux/selectors/board.selector';
 import { Column, StateTask } from '../../redux/state.model';
@@ -21,19 +23,21 @@ export class ColumnComponent implements OnInit {
 
   tasks$!: Observable<StateTask[]>;
 
+  param!: Pick<ParamApiTask, 'boardId' | 'columnId'>;
+
   stateColumnsOpenBoard$!: Observable<Column[]>;
 
   constructor(
     private store: Store,
+    public dialog: MatDialog,
     private boardsApi: ApiBoardService,
   ) { }
 
   ngOnInit(): void {
-    this.store.dispatch(BoardActions.getTasks(
-      {
-        boardId: this.dataForApi.boardId, columnId: this.dataForApi.column.id,
-      },
-    ));
+    this.param = {
+      boardId: this.dataForApi.boardId, columnId: this.dataForApi.column.id,
+    };
+    this.store.dispatch(BoardActions.getTasks(this.param));
     this.tasks$ = this.store.select(selectGetTasks(this.dataForApi.column.id));
     this.stateColumnsOpenBoard$ = this.store.select(selectGetColumns);
   }
@@ -132,5 +136,25 @@ export class ColumnComponent implements OnInit {
         }));
       });
     }
+  }
+
+  deleteBoard(event: Event) {
+    event.stopPropagation();
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      maxWidth: '500px',
+      data: {
+        title: 'Are you sure?',
+        message: `You are about to delete column ${this.dataForApi.column.title}`,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((dialogResult) => {
+      if (dialogResult) {
+        this.boardsApi.deleteColumn(this.param).subscribe(() => {
+          this.store.dispatch(BoardActions.getColumns());
+        });
+      }
+    });
   }
 }

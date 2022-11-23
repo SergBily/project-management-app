@@ -1,18 +1,29 @@
 <div class="board__page">
   <div class="board__wrapper">
-    <div class="board__header">board {{ boardId }} works!</div>
+    <div class="board__header">
+      <h1 class="board__title">{{ title }}</h1>
+      <button mat-raised-button class="board__btn-back" routerLink="/main">
+        <mat-icon inline="true">home</mat-icon>
+        <span class="board__btn-text">Back to your boards</span>
+      </button>
+    </div>
     <div class="board"
       cdkDropList
       cdkDropListOrientation="horizontal"
       (cdkDropListDropped)="dropColumn($event)">
-      <ng-container *ngFor="let column of stateColumnsOpenBoard$ | async">
+      <ng-container
+        *ngFor="let column of stateColumnsOpenBoard$ | async; let count"
+      >
         <app-column
+          [style]="{ order: column.order }"
           cdkDrag
           cdkDragLockAxis="x"
           [dataForApi]="{ boardId, column }"
         ></app-column>
       </ng-container>
-      <app-create-column></app-create-column>
+      <app-create-column
+        [style]="{ order: countColumns$ | async }"
+      ></app-create-column>
     </div>
   </div>
 </div>

@@ -35,6 +35,14 @@ export class ApiBoardService {
     );
   }
 
+  deleteColumn(param: Pick<ParamApiTask, 'boardId' | 'columnId'>): Observable<null> {
+    return this.http.delete<null>(`/boards/${param.boardId}/columns/${param.columnId}`)
+      .pipe(
+        retry(2),
+        take(1),
+      );
+  }
+
   createTask(param: Omit<ParamApiTask, 'taskId'>): Observable<DataTask> {
     return this.http.post<DataTask>(
       `/boards/${param.boardId}/columns/${param.columnId}/tasks`,
@@ -66,8 +74,8 @@ export class ApiBoardService {
       );
   }
 
-  deleteTask(param: Omit<ParamApiTask, 'data'>): Observable<undefined> {
-    return this.http.delete<undefined>(
+  deleteTask(param: Omit<ParamApiTask, 'data'>): Observable<null> {
+    return this.http.delete<null>(
       `/boards/${param.boardId}/columns/${param.columnId}/tasks/${param.taskId}`,
     )
       .pipe(

@@ -4,14 +4,18 @@
       <mat-icon>add</mat-icon>
       <span class="column__btn-text"> Add another column</span>
     </button>
+    <button class="column__btn-conf">
+      <mat-icon [inline]="true" (click)="openDialog()"
+        >add_circle_outline</mat-icon
+      >
+    </button>
   </ng-container>
 </div>
 <ng-template #addColumn>
   <form>
     <div class="column__container" @openColumnAdd>
       <input
-        [(ngModel)]="titleForm"
-        name="title"
+        [formControl]="tForm"
         class="column__input"
         type="text"
         autocomplete="off"
@@ -23,7 +27,8 @@
           type="button"
           class="column__btn-add"
           mat-raised-button
-          (click)="onCreateColumn()"
+          (click)="onCreateColumn(tForm.value)"
+          [disabled]="!isValidForm"
         >
           Add column
         </button>

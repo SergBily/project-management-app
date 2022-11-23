@@ -17,3 +17,8 @@ export const selectGetBoardId = createSelector(
   selectState,
   (state) => state.idOpenBoard,
 );
+
+export const selectCountColumns = createSelector(
+  selectState,
+  (state) => state.columns.length,
+);
