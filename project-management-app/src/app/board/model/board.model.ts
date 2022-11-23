@@ -1,8 +1,9 @@
 import { Column } from '../redux/state.model';
 
 export interface DataColumn {
-  id: string;
-  title: string
+  title: string;
+  order?: number;
+  id?: string;
 }
 
 export interface DataTask {
@@ -19,7 +20,13 @@ export interface TaskUpdate {
   userId: string;
   boardId: string;
   columnId: string;
-  id?: string
+  id?: string;
+  files?: TaskFile[];
+}
+
+export interface TaskFile {
+  filename: string,
+  fileSize: number,
 }
 
 export interface ParamApiTask {
@@ -29,7 +36,18 @@ export interface ParamApiTask {
   taskId: string
 }
 
+export interface ParamApiColumn {
+  data: DataColumn;
+  boardId: string;
+  columnId: string;
+}
+
 export interface DataBoardAndColumn {
   column: Column;
   boardId: string
+}
+
+export interface DataOfConfirm {
+  title: string;
+  description: string
 }

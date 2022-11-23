@@ -1,0 +1,32 @@
+<form>
+  <h1 mat-dialog-title>Create column</h1>
+  <div mat-dialog-content>
+    <mat-form-field
+      appearance="fill"
+      class="dialog__field"
+      hintLabel="current/min/max characters"
+    >
+      <mat-label>Enter column title...</mat-label>
+      <input
+        #title
+        class="input"
+        matInput
+        [formControl]="formColumn"
+        autocomplete="off"
+      />
+      <mat-hint align="end">{{ title.value.length || 0 }}/3/45</mat-hint>
+      <mat-error *ngIf="formColumn.errors">{{ getErrorMessage() }} </mat-error>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions class="dialog__buttons">
+    <button mat-button class="btn__cancel" (click)="onCancel()">Cancel</button>
+    <button
+      mat-button
+      [disabled]="!formColumn.valid"
+      [class]="{ active: formColumn.valid }"
+      [mat-dialog-close]="formColumn.getRawValue()"
+    >
+      Add
+    </button>
+  </div>
+</form>

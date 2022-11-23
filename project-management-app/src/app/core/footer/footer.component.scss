@@ -1,0 +1,53 @@
+@import "../../../style/default.scss";
+
+.footer-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: $btnBackColorHover;
+  height: 50px;
+  padding: 0 10px;
+  color: $textColor;
+}
+
+.link {
+  color: $textColor;
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+.link:hover {
+  transform: scale(1.1);
+  transition: 0.3s;
+}
+
+.img {
+  @include flexCenter;
+  height: 40px;
+}
+
+.img:hover {
+  transform: scale(1.1);
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.years {
+  margin-right: 10px;
+}
+
+@media (max-width: 460px) {
+  .footer-wrapper {
+    font-size: 10px;
+  }
+
+  .img {
+    height: 30px;
+  }
+}
+
+@media (max-width: 350px) {
+  .img {
+    height: 20px;
+  }
+}

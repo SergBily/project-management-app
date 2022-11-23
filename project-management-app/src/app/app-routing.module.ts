@@ -4,9 +4,12 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
 
 const routes: Routes = [
   { path: 'auth', loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule) },
+  { path: '', loadChildren: () => import('./core/core.module').then((m) => m.CoreModule) },
+  { path: 'team', loadChildren: () => import('./core/core.module').then((m) => m.CoreModule) },
+  { path: 'redirect', redirectTo: '/main', pathMatch: 'full' },
+
   { path: 'main', loadChildren: () => import('./main/main.module').then((m) => m.MainModule) },
   { path: 'boards', loadChildren: () => import('./board/board.module').then((m) => m.BoardModule) },
-  { path: '', redirectTo: '/main', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
 ];
 

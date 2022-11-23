@@ -4,14 +4,18 @@
       <mat-icon>add</mat-icon>
       <span class="task__btn-text">Add task</span>
     </button>
+    <button class="task__btn-conf">
+      <mat-icon [inline]="true" (click)="openDialog()"
+        >add_circle_outline</mat-icon
+      >
+    </button>
   </ng-container>
 </div>
 <ng-template #addtask>
-  <form [formGroup]="taskForm">
-    <div class="task__container" @openTaskAdd>
+  <form [formGroup]="taskForm" @openTaskAdd>
+    <div class="task__container">
       <input
         formControlName="title"
-        [(ngModel)]="titleForm"
         name="title"
         class="task__input"
         type="text"
@@ -22,8 +26,6 @@
       <textarea
         class="task__textarea"
         formControlName="description"
-        name=""
-        id=""
         cols="33"
         rows="5"
         placeholder="Enter a description for this task..."
@@ -33,6 +35,8 @@
           type="button"
           class="task__btn-add"
           mat-raised-button
+          [disabled]="!taskForm.valid"
+          [ngClass]="{ valid: taskForm.valid}"
           (click)="onCreateTask()"
         >
           Add task
@@ -42,7 +46,7 @@
           class="task__btn-close"
           (click)="isCreateTask = false"
         >
-          <mat-icon [inline]="true">close</mat-icon>
+          <mat-icon inline="true">close</mat-icon>
         </button>
       </div>
     </div>

@@ -1,5 +1,19 @@
+@import '../../../../style/default.scss';
+
 .dialog__buttons {
   display: flex;
   justify-content: center;
   gap: 10px;
+}
+
+.btn__yes {
+  @include btn();
+}
+
+.btn__yes:hover {
+  @include btn-hover();
+}
+
+.btn__no {
+  @include btn($background-color: #cbb7d42d, $color: black);
 }

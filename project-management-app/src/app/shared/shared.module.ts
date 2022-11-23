@@ -8,7 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
-import { AddBoardDialogComponent } from './components/add-board-dialog/add-board-dialog.component';
+import { AddDialogComponent } from './components/add-board-dialog/add-dialog.component';
 
 const MATERIAL = [
   MatCardModule,
@@ -22,7 +22,7 @@ const MATERIAL = [
 @NgModule({
   declarations: [
     ConfirmDialogComponent,
-    AddBoardDialogComponent,
+    AddDialogComponent,
   ],
   imports: [
     CommonModule,
