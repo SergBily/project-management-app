@@ -7,8 +7,8 @@
   </ng-container>
 </div>
 <ng-template #addtask>
-  <form [formGroup]="taskForm">
-    <div class="task__container" @openTaskAdd>
+  <form [formGroup]="taskForm" @openTaskAdd>
+    <div class="task__container">
       <input
         formControlName="title"
         name="title"
@@ -30,6 +30,8 @@
           type="button"
           class="task__btn-add"
           mat-raised-button
+          [disabled]="!isValidForm"
+          [ngClass]="{ valid: isValidForm }"
           (click)="onCreateTask()"
         >
           Add task

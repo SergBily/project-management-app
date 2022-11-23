@@ -57,16 +57,17 @@
 
 
       .face2 {
-        @include flex();
+        // @include flex();
         position: relative;
         min-height: 30px;
-        max-height: 100px;
+        max-height: 160px;
         overflow-y: auto;
         border-bottom-left-radius: $columnBorderRad;
         border-bottom-right-radius: $columnBorderRad;
 
         .content{
           padding: 10px;
+          height: 100%;
         }
       }
 }
@@ -87,6 +88,7 @@
 
 .task__title {
   margin: 0;
+  word-break: break-all;
 }
 
 .task__description-container {
@@ -98,4 +100,5 @@
 
 .task__description {
   word-break: break-all;
+  margin: 0;
 }
