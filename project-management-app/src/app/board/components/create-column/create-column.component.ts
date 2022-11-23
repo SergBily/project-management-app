@@ -40,7 +40,10 @@ export class CreateColumnComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.tForm = new FormControl('', [Validators.required, Validators.maxLength(45)]);
+    this.tForm = new FormControl(
+      '',
+      [Validators.required, Validators.minLength(3), Validators.maxLength(45)],
+    );
 
     this.store.select(selectGetBoardId).pipe(take(1)).subscribe((id) => { this.idBoard = id; });
   }

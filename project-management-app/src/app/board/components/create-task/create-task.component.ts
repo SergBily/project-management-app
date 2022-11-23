@@ -49,8 +49,14 @@ export class CreateTaskComponent implements OnInit {
 
   ngOnInit(): void {
     this.taskForm = this.fb.group({
-      title: new FormControl('', [Validators.required, Validators.maxLength(45)]),
-      description: new FormControl('', [Validators.required, Validators.maxLength(150)]),
+      title: new FormControl(
+        '',
+        [Validators.required, Validators.minLength(3), Validators.maxLength(45)],
+      ),
+      description: new FormControl(
+        '',
+        [Validators.required, Validators.minLength(10), Validators.maxLength(150)],
+      ),
     });
 
     this.store.select(selectGetBoardId).pipe(take(1)).subscribe((id) => { this.idBoard = id; });

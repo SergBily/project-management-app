@@ -20,7 +20,10 @@ export class CreateColumnDialogComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.formColumn = new FormControl('', [Validators.required, Validators.maxLength(45)]);
+    this.formColumn = new FormControl(
+      '',
+      [Validators.required, Validators.minLength(3), Validators.maxLength(45)],
+    );
   }
 
   onNoClick(): void {
