@@ -1,16 +1,18 @@
 <div class="column__wrapper">
   <div class="column__container">
     <div class="column__title">
-      <h3 class="column__title-header" *ngIf="!isChangeTitle; else changeTitle">
-        {{ dataForApi.column.title }}
-      </h3>
-      <button
-        class="column__title-settings"
-        title="delete column"
-        (click)="deleteBoard($event)"
-      >
-        <mat-icon [inline]="true">delete_forever</mat-icon>
-      </button>
+      <ng-container *ngIf="!isChangeTitle; else change">
+        <h3 class="column__title-header" (click)="openChangeTitle()">
+          {{ title }}
+        </h3>
+        <button
+          class="column__title-settings"
+          title="delete column"
+          (click)="deleteBoard($event)"
+        >
+          <mat-icon [inline]="true">delete_forever</mat-icon>
+        </button>
+      </ng-container>
     </div>
     <div class="column__tasks"
       cdkDropList
@@ -26,6 +28,29 @@
     </div>
   </div>
 </div>
-<ng-template #changeTitle>
-  <textarea name="" id="" cols="30" rows="10"></textarea>
+
+<ng-template #change>
+  <div class="column__title-change">
+    <input
+      [formControl]="titleForm"
+      class="column__input"
+      type="text"
+      autocomplete="off"
+      placeholder="Enter column title..."
+      autofocus
+    />
+    <div class="btn__continer">
+      <button
+        class="column__btn-change"
+        [ngClass]="{ valid: titleForm.valid }"
+        [disabled]="!titleForm.valid"
+        (click)="changeColumnTitle()"
+      >
+        Submit
+      </button>
+      <button class="column__btn-change btn__cancel" (click)="onChangeView()">
+        Cancel
+      </button>
+    </div>
+  </div>
 </ng-template>

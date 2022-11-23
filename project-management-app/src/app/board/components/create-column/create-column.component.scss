@@ -4,10 +4,9 @@
   @include wh(260px, 40px);
   display: inline-block;
   position: relative;
-  // margin: $columnWrapperMargin;
   padding: 4px;
   vertical-align: top;
-  background-color: #0000003d;
+  background-color: #7a6a8c7d;
   border-radius: $columnBorderRad;
   -webkit-border-radius: $columnBorderRad;
   -moz-border-radius: $columnBorderRad;
@@ -18,11 +17,16 @@
 .column__btn-create {
   @include wh(100%, 32px);
   @include flex();
-  color: $btnColor;
+  color: #172b4d;
   border: 0;
-  background-color: transparent;
+  background-color: #7a6a8c5d;
   text-align: center;
   font-size: 16px;
+  border-radius: $columnBorderRad;
+  -webkit-border-radius: $columnBorderRad;
+  -moz-border-radius: $columnBorderRad;
+  -ms-border-radius: $columnBorderRad;
+  -o-border-radius: $columnBorderRad;
   cursor: pointer;
 
     .column__btn-text {
@@ -59,7 +63,7 @@
 }
 
 .column__wrapper:hover {
-  background-color: #0000004d;
+  background-color: #7a6a8c9d;
 }
 
 .column__container {
@@ -85,10 +89,13 @@
     .column__btn-add {
       @include wh(100px, auto);
       @include flex();
+    }
+
+    .valid {
       @include btn($font-size: 14px);
     }
 
-    .column__btn-add:hover {
+    .valid:hover {
       @include btn-hover($box-shadow: #6c5a74 1px 2px 5px,);
     }
 

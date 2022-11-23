@@ -1,11 +1,11 @@
 import {
   animate, state, style, transition, trigger,
 } from '@angular/animations';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { Subscription, take } from 'rxjs';
+import { take } from 'rxjs';
 import { BoardActions } from '../../redux/actions/board.actions';
 import { selectGetBoardId } from '../../redux/selectors/board.selector';
 import { ApiBoardService } from '../../services/api/api.service';
@@ -24,16 +24,14 @@ import { CreateColumnDialogComponent } from '../create-column-dialog/create-colu
     ]),
   ],
 })
-export class CreateColumnComponent implements OnInit, OnDestroy {
+export class CreateColumnComponent implements OnInit {
   isCreateColumn = false;
 
   idBoard!: string;
 
   tForm!: FormControl;
 
-  isValidForm = false;
-
-  subscription$!: Subscription;
+  hasErrors!: boolean;
 
   constructor(
     private api: ApiBoardService,
@@ -42,14 +40,10 @@ export class CreateColumnComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.tForm = new FormControl('', Validators.required);
-    this.subscription$ = this.tForm.statusChanges.subscribe((status) => {
-      if (status === 'VALID') {
-        this.isValidForm = true;
-      } else {
-        this.isValidForm = false;
-      }
-    });
+    this.tForm = new FormControl(
+      '',
+      [Validators.required, Validators.minLength(3), Validators.maxLength(45)],
+    );
 
     this.store.select(selectGetBoardId).pipe(take(1)).subscribe((id) => { this.idBoard = id; });
   }
@@ -74,7 +68,8 @@ export class CreateColumnComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(): void {
-    this.subscription$.unsubscribe();
+  cancelCreateColumn(): void {
+    this.isCreateColumn = false;
+    this.tForm.reset();
   }
 }

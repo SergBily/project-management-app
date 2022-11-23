@@ -1,3 +1,4 @@
+import { FormControl, Validators } from '@angular/forms';
 /* eslint-disable no-param-reassign */
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, Input, OnInit } from '@angular/core';
@@ -5,11 +6,14 @@ import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { Observable, take } from 'rxjs';
 import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
-import { DataBoardAndColumn, ParamApiTask, TaskUpdate } from '../../model/board.model';
+import {
+  DataBoardAndColumn, ParamApiColumn, ParamApiTask, TaskUpdate,
+} from '../../model/board.model';
 import { BoardActions, DragAndDropActions } from '../../redux/actions/board.actions';
 import { selectGetColumns, selectGetTasks } from '../../redux/selectors/board.selector';
 import { Column, StateTask } from '../../redux/state.model';
 import { ApiBoardService } from '../../services/api/api.service';
+import { ValidatorColumnTitleService } from '../../services/custom-validator/validator-column-title.service';
 
 @Component({
   selector: 'app-column',
@@ -25,15 +29,27 @@ export class ColumnComponent implements OnInit {
 
   param!: Pick<ParamApiTask, 'boardId' | 'columnId'>;
 
+  titleForm!: FormControl;
+
+  title!: string;
+
   stateColumnsOpenBoard$!: Observable<Column[]>;
 
   constructor(
     private store: Store,
     public dialog: MatDialog,
     private boardsApi: ApiBoardService,
+    private customValidator: ValidatorColumnTitleService,
   ) { }
 
   ngOnInit(): void {
+    this.title = this.dataForApi.column.title;
+    this.titleForm = new FormControl(
+      `${this.title}`,
+      [Validators.required, Validators.maxLength(45),
+        this.customValidator.customValidatorForColumnTitle(this.title)],
+    );
+
     this.param = {
       boardId: this.dataForApi.boardId, columnId: this.dataForApi.column.id,
     };
@@ -138,7 +154,7 @@ export class ColumnComponent implements OnInit {
     }
   }
 
-  deleteBoard(event: Event) {
+  deleteBoard(event: Event): void {
     event.stopPropagation();
 
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
@@ -156,5 +172,29 @@ export class ColumnComponent implements OnInit {
         });
       }
     });
+  }
+
+  openChangeTitle(): void {
+    this.titleForm.setValue(this.title);
+    this.onChangeView();
+  }
+
+  onChangeView(): void {
+    this.isChangeTitle = !this.isChangeTitle;
+  }
+
+  changeColumnTitle(): void {
+    const param: ParamApiColumn = {
+      data: {
+        title: this.titleForm.value,
+        order: this.dataForApi.column.order,
+      },
+      boardId: this.dataForApi.boardId,
+      columnId: this.dataForApi.column.id,
+    };
+
+    this.title = this.titleForm.value;
+
+    this.boardsApi.updateColumn(param).subscribe(() => this.onChangeView());
   }
 }
