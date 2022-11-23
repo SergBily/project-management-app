@@ -28,14 +28,15 @@
           class="column__btn-add"
           mat-raised-button
           (click)="onCreateColumn(tForm.value)"
-          [disabled]="!isValidForm"
+          [disabled]="!tForm.valid"
+          [ngClass]="{valid: tForm.valid}"
         >
           Add column
         </button>
         <button
           type="button"
           class="column__btn-close"
-          (click)="isCreateColumn = false"
+          (click)="cancelCreateColumn()"
         >
           <mat-icon [inline]="true">close</mat-icon>
         </button>

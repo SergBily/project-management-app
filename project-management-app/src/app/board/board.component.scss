@@ -1,21 +1,28 @@
 @import '../../style/default.scss';
 
 .board__page {
-  min-height: 100%;
+  height: 100%;
 
   .board__wrapper {
     @include flex();
-    position: relative;
+    height: 100%;
     flex-direction: column;
+    overflow-x: hidden;
 
 
     .board__header {
       @include wh (100%, auto);
-      @include flex($justify-content: flex-start);
       gap: 2rem;
       padding: 10px;
       margin-bottom: 10px;
       box-shadow: 0 3px 2px $btnBackColorHover;
+
+        .board__animate {
+          @include wh (100%, auto);
+          @include flex($justify-content: flex-start);
+          gap: 2rem;
+          padding: 10px;
+        }
 
         .board__title {
           margin: 0;
@@ -35,17 +42,34 @@
         }
     }
 
+    .board__content {
+      flex-grow: 1;
+      position: relative;
+      width: 100%
+    }
+
+    .board__container {
+      height: 100%;
+    }
+
       .board {
         @include wh (100%, 100%);
         @include flex($justify-content: flex-start, $align-items: flex-start);
-        position: relative;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
         overflow-x: auto;
         overflow-y: hidden;
         padding: 0 10px 10px 10px;
         margin-top: 5px;
         user-select: none;
+        white-space: nowrap;
       }
   }
 }
+
+
 
 

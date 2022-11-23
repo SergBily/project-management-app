@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
-import { AddBoardDialogComponent } from 'src/app/shared/components/add-board-dialog/add-board-dialog.component';
+import { AddDialogComponent } from 'src/app/shared/components/add-board-dialog/add-dialog.component';
 import { Board } from '../../models/board';
 import { BoardsApiService } from '../../services/boards/boards.service';
 
@@ -19,8 +19,13 @@ export class BoardsListComponent {
   ) { }
 
   openDialog() {
-    const dialogRef = this.dialog.open(AddBoardDialogComponent, {
+    const dialogRef = this.dialog.open(AddDialogComponent, {
       maxWidth: '500px',
+      data: {
+        title: 'Create new board:',
+        maxLengthDescription: 250,
+        maxLengthTitle: 20,
+      },
     });
 
     dialogRef.afterClosed().subscribe((dialogResult) => {

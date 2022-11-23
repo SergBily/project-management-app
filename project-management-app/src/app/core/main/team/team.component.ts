@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { arr } from '../../../../environments/environment'
+import { environment } from '../../../../environments/environment';
+import { ICard } from '../../models/interface-card';
 
 @Component({
   selector: 'app-team',
   templateUrl: './team.component.html',
-  styleUrls: ['./team.component.scss']
+  styleUrls: ['./team.component.scss'],
 })
 export class TeamComponent implements OnInit {
+  team: ICard[] = environment.team;
 
   constructor() { }
 
   ngOnInit(): void {}
-  
-  cards = arr;
 }
