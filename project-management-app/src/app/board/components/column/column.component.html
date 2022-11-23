@@ -12,9 +12,13 @@
         <mat-icon [inline]="true">delete_forever</mat-icon>
       </button>
     </div>
-    <div class="column__tasks">
+    <div class="column__tasks"
+      cdkDropList
+      id={{dataForApi.column.id}}
+      [cdkDropListConnectedTo]="getColumnsId(dataForApi.column.id)"
+      (cdkDropListDropped)="dropTask($event)">
       <ng-container *ngFor="let task of tasks$ | async">
-        <app-task [task]="task"></app-task>
+        <app-task cdkDrag [task]="task" id={{task.id}}></app-task>
       </ng-container>
     </div>
     <div class="column__task-create">

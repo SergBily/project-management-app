@@ -7,12 +7,17 @@
         <span class="board__btn-text">Back to your boards</span>
       </button>
     </div>
-    <div class="board">
+    <div class="board"
+      cdkDropList
+      cdkDropListOrientation="horizontal"
+      (cdkDropListDropped)="dropColumn($event)">
       <ng-container
         *ngFor="let column of stateColumnsOpenBoard$ | async; let count"
       >
         <app-column
           [style]="{ order: column.order }"
+          cdkDrag
+          cdkDragLockAxis="x"
           [dataForApi]="{ boardId, column }"
         ></app-column>
       </ng-container>

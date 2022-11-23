@@ -18,7 +18,10 @@ export class BoardEffects {
         ofType(BoardActions.getColumns, BoardActions.loadOpenBoard),
         concatLatestFrom(() => this.store.select(selectGetBoardId)),
         mergeMap(([, id]) => this.api.getColumns(id)),
-        map((columns) => ApiBoardActions.getColumnSuccess({ columns })),
+        map((columns) => {
+          columns.sort((a, b) => a.order - b.order);
+          return ApiBoardActions.getColumnSuccess({ columns });
+        }),
         catchError(() => EMPTY),
       );
     },
@@ -32,7 +35,10 @@ export class BoardEffects {
           const tasks = this.api.getTasks(date);
           return forkJoin([of(date.columnId), tasks]);
         }),
-        map(([columnId, tasks]) => ApiBoardActions.getTaskSuccess({ columnId, tasks })),
+        map(([columnId, tasks]) => {
+          tasks.sort((a, b) => a.order - b.order);
+          return ApiBoardActions.getTaskSuccess({ columnId, tasks });
+        }),
         catchError(() => EMPTY),
       );
     },

@@ -1,7 +1,7 @@
 import {
   Action, createReducer, on,
 } from '@ngrx/store';
-import { ApiBoardActions, BoardActions } from '../actions/board.actions';
+import { ApiBoardActions, BoardActions, DragAndDropActions } from '../actions/board.actions';
 import { StateBoard } from '../state.model';
 
 export const initialState: StateBoard = {
@@ -22,6 +22,14 @@ export const boardReducer = createReducer(
     columns,
   })),
   on(ApiBoardActions.getTaskSuccess, (state, { columnId, tasks }): StateBoard => ({
+    ...state,
+    tasks: { ...state.tasks, [columnId]: tasks },
+  })),
+  on(DragAndDropActions.changeColumnPosition, (state, { columns }): StateBoard => ({
+    ...state,
+    columns,
+  })),
+  on(DragAndDropActions.changeTaskPositionInColumn, (state, { columnId, tasks }): StateBoard => ({
     ...state,
     tasks: { ...state.tasks, [columnId]: tasks },
   })),
