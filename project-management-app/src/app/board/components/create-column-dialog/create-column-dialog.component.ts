@@ -26,7 +26,16 @@ export class CreateColumnDialogComponent implements OnInit {
     );
   }
 
-  onNoClick(): void {
+  onCancel(): void {
     this.dialogRef.close(false);
+  }
+
+  getErrorMessage(): string {
+    if (this.formColumn.hasError('required')) {
+      return 'That field is required';
+    } if (this.formColumn.hasError('minlength')) {
+      return 'min length 3 character';
+    }
+    return 'Max length 45 character';
   }
 }

@@ -12,7 +12,7 @@
   @include btn-hover();
 }
 
-.btn__no {
+.btn__cancel {
   @include btn($background-color: #cbb7d42d, $color: black);
 }
 
