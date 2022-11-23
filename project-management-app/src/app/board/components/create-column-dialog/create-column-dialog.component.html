@@ -21,8 +21,8 @@
     <button mat-button class="btn__no" (click)="onNoClick()">No Thanks</button>
     <button
       mat-button
-      [disabled]="!isValidForm"
-      [class]="{ active: isValidForm }"
+      [disabled]="!formColumn.valid"
+      [class]="{ active: formColumn.valid }"
       [mat-dialog-close]="formColumn.getRawValue()"
     >
       Create

@@ -1,10 +1,10 @@
 import {
-  Component, Input, OnDestroy, OnInit,
+  Component, Input, OnInit,
 } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
 import { DataBoardAndColumn, ParamApiColumn, ParamApiTask } from '../../model/board.model';
 import { BoardActions } from '../../redux/actions/board.actions';
@@ -18,7 +18,7 @@ import { ValidatorColumnTitleService } from '../../services/custom-validator/val
   templateUrl: './column.component.html',
   styleUrls: ['./column.component.scss'],
 })
-export class ColumnComponent implements OnInit, OnDestroy {
+export class ColumnComponent implements OnInit {
   @Input() dataForApi!: DataBoardAndColumn;
 
   isChangeTitle = false;
@@ -28,10 +28,6 @@ export class ColumnComponent implements OnInit, OnDestroy {
   param!: Pick<ParamApiTask, 'boardId' | 'columnId'>;
 
   titleForm!: FormControl;
-
-  subscription$!: Subscription;
-
-  isValidForm = false;
 
   title!: string;
 
@@ -49,13 +45,6 @@ export class ColumnComponent implements OnInit, OnDestroy {
       [Validators.required, Validators.maxLength(45),
         this.customValidator.customValidatorForColumnTitle(this.title)],
     );
-    this.subscription$ = this.titleForm.statusChanges.subscribe((status) => {
-      if (status === 'VALID') {
-        this.isValidForm = true;
-      } else {
-        this.isValidForm = false;
-      }
-    });
 
     this.param = {
       boardId: this.dataForApi.boardId, columnId: this.dataForApi.column.id,
@@ -106,9 +95,5 @@ export class ColumnComponent implements OnInit, OnDestroy {
     this.title = this.titleForm.value;
 
     this.api.updateColumn(param).subscribe(() => this.onChangeView());
-  }
-
-  ngOnDestroy(): void {
-    this.subscription$.unsubscribe();
   }
 }

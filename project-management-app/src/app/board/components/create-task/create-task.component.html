@@ -35,8 +35,8 @@
           type="button"
           class="task__btn-add"
           mat-raised-button
-          [disabled]="!isValidForm"
-          [ngClass]="{ valid: isValidForm }"
+          [disabled]="!taskForm.valid"
+          [ngClass]="{ valid: taskForm.valid}"
           (click)="onCreateTask()"
         >
           Add task

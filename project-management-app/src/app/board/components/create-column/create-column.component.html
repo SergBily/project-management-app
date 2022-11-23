@@ -28,8 +28,8 @@
           class="column__btn-add"
           mat-raised-button
           (click)="onCreateColumn(tForm.value)"
-          [disabled]="!isValidForm"
-          [ngClass]="{valid: isValidForm}"
+          [disabled]="!tForm.valid"
+          [ngClass]="{valid: tForm.valid}"
         >
           Add column
         </button>

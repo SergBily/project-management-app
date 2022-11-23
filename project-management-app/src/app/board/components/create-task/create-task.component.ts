@@ -2,14 +2,14 @@ import {
   animate, style, transition, trigger,
 } from '@angular/animations';
 import {
-  Component, Input, OnDestroy, OnInit,
+  Component, Input, OnInit,
 } from '@angular/core';
 import {
   FormBuilder, FormControl, FormGroup, Validators,
 } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { Subscription, take } from 'rxjs';
+import { take } from 'rxjs';
 import { DateUserService } from 'src/app/auth/services/date-user/date-user';
 import { AddDialogComponent } from 'src/app/shared/components/add-board-dialog/add-dialog.component';
 import { DataOfConfirm } from '../../model/board.model';
@@ -30,7 +30,7 @@ import { ApiBoardService } from '../../services/api/api.service';
     ]),
   ],
 })
-export class CreateTaskComponent implements OnInit, OnDestroy {
+export class CreateTaskComponent implements OnInit {
   @Input() columnId!: string;
 
   isCreateTask = false;
@@ -38,10 +38,6 @@ export class CreateTaskComponent implements OnInit, OnDestroy {
   idBoard!: string;
 
   taskForm!: FormGroup;
-
-  subscription$!: Subscription;
-
-  isValidForm = false;
 
   constructor(
     private api: ApiBoardService,
@@ -55,14 +51,6 @@ export class CreateTaskComponent implements OnInit, OnDestroy {
     this.taskForm = this.fb.group({
       title: new FormControl('', [Validators.required, Validators.maxLength(45)]),
       description: new FormControl('', [Validators.required, Validators.maxLength(150)]),
-    });
-
-    this.subscription$ = this.taskForm.statusChanges.subscribe((status) => {
-      if (status === 'VALID') {
-        this.isValidForm = true;
-      } else {
-        this.isValidForm = false;
-      }
     });
 
     this.store.select(selectGetBoardId).pipe(take(1)).subscribe((id) => { this.idBoard = id; });
@@ -105,9 +93,5 @@ export class CreateTaskComponent implements OnInit, OnDestroy {
         this.onCreateTask(result);
       }
     });
-  }
-
-  ngOnDestroy(): void {
-    this.subscription$.unsubscribe();
   }
 }

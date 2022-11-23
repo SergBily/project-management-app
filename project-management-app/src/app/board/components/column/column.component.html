@@ -38,8 +38,8 @@
     <div class="btn__continer">
       <button
         class="column__btn-change"
-        [ngClass]="{ valid: isValidForm }"
-        [disabled]="!isValidForm"
+        [ngClass]="{ valid: titleForm.valid }"
+        [disabled]="!titleForm.valid"
         (click)="changeColumnTitle()"
       >
         Submit
