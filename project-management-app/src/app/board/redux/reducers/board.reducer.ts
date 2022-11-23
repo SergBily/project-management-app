@@ -29,10 +29,6 @@ export const boardReducer = createReducer(
     ...state,
     columns,
   })),
-  on(DragAndDropActions.changeTaskPosition, (state, { tasks }): StateBoard => ({
-    ...state,
-    tasks,
-  })),
   on(DragAndDropActions.changeTaskPositionInColumn, (state, { columnId, tasks }): StateBoard => ({
     ...state,
     tasks: { ...state.tasks, [columnId]: tasks },

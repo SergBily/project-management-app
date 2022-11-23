@@ -17,8 +17,3 @@ export const selectGetBoardId = createSelector(
   selectState,
   (state) => state.idOpenBoard,
 );
-
-export const selectGetAllTasks = createSelector(
-  selectState,
-  (state) => state.tasks,
-);

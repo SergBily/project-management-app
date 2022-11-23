@@ -1,11 +1,12 @@
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+/* eslint-disable no-param-reassign */
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, take } from 'rxjs';
 import { DataBoardAndColumn, TaskUpdate } from '../../model/board.model';
 import { BoardActions, DragAndDropActions } from '../../redux/actions/board.actions';
-import { selectGetColumns, selectGetTasks, selectGetAllTasks } from '../../redux/selectors/board.selector';
-import { Column, StateTask, Tasks } from '../../redux/state.model';
+import { selectGetColumns, selectGetTasks } from '../../redux/selectors/board.selector';
+import { Column, StateTask } from '../../redux/state.model';
 import { ApiBoardService } from '../../services/api/api.service';
 
 @Component({
@@ -19,8 +20,6 @@ export class ColumnComponent implements OnInit {
   isChangeTitle = false;
 
   tasks$!: Observable<StateTask[]>;
-
-  allTasks$!: Observable<Tasks>;
 
   stateColumnsOpenBoard$!: Observable<Column[]>;
 
@@ -37,7 +36,6 @@ export class ColumnComponent implements OnInit {
     ));
     this.tasks$ = this.store.select(selectGetTasks(this.dataForApi.column.id));
     this.stateColumnsOpenBoard$ = this.store.select(selectGetColumns);
-    this.allTasks$ = this.store.select(selectGetAllTasks);
   }
 
   getColumnsId(columnId: string): string[] {
@@ -53,16 +51,13 @@ export class ColumnComponent implements OnInit {
   }
 
   dropTask(event: CdkDragDrop<string[]>) {
-    // console.log(event);
     if (event.previousContainer === event.container) {
-      // console.log('current');
       this.tasks$.pipe(
         take(1),
       ).subscribe((tasks) => {
         const tasksCopy = tasks.map((task) => ({ ...task }));
         moveItemInArray(tasksCopy, event.previousIndex, event.currentIndex);
         tasksCopy.forEach((task, index) => {
-          // eslint-disable-next-line no-param-reassign
           task.order = index + 1;
           const taskDataApi: TaskUpdate = { ...task };
           delete taskDataApi.id;
@@ -79,8 +74,63 @@ export class ColumnComponent implements OnInit {
           tasks: tasksCopy,
         }));
       });
-    } else {
-      console.log('other');
+    }
+
+    if (event.previousContainer !== event.container) {
+      const previousTasks$ = this.store.select(selectGetTasks(event.previousContainer.id));
+      previousTasks$.pipe(
+        take(1),
+      ).subscribe((tasks) => {
+        const previousTasksCopy = tasks.map((task) => ({ ...task }));
+        const currentTasks$ = this.store.select(selectGetTasks(event.container.id));
+        let currentTasksCopy!: StateTask[];
+        currentTasks$.pipe(
+          take(1),
+        ).subscribe((currentTasks) => {
+          currentTasksCopy = currentTasks.map((task) => ({ ...task }));
+        });
+        transferArrayItem(
+          previousTasksCopy,
+          currentTasksCopy,
+          event.previousIndex,
+          event.currentIndex,
+        );
+
+        previousTasksCopy.forEach((task, index) => {
+          task.order = index + 1;
+          const taskDataApi: TaskUpdate = { ...task };
+          delete taskDataApi.id;
+          delete taskDataApi.files;
+          this.boardsApi.updateTask({
+            boardId: this.dataForApi.boardId,
+            columnId: task.columnId,
+            taskId: task.id,
+            data: { ...taskDataApi },
+          }).subscribe();
+        });
+        this.store.dispatch(DragAndDropActions.changeTaskPositionInColumn({
+          columnId: event.previousContainer.id,
+          tasks: previousTasksCopy,
+        }));
+
+        currentTasksCopy.forEach((task, index) => {
+          task.order = index + 1;
+          const taskDataApi: TaskUpdate = { ...task };
+          delete taskDataApi.id;
+          delete taskDataApi.files;
+          this.boardsApi.updateTask({
+            boardId: this.dataForApi.boardId,
+            columnId: task.columnId,
+            taskId: task.id,
+            data: { ...taskDataApi, columnId: event.container.id },
+          }).subscribe();
+          if (task.columnId !== event.container.id) task.columnId = event.container.id;
+        });
+        this.store.dispatch(DragAndDropActions.changeTaskPositionInColumn({
+          columnId: event.container.id,
+          tasks: currentTasksCopy,
+        }));
+      });
     }
   }
 }

@@ -11,7 +11,7 @@
       [cdkDropListConnectedTo]="getColumnsId(dataForApi.column.id)"
       (cdkDropListDropped)="dropTask($event)">
       <ng-container *ngFor="let task of tasks$ | async">
-        <app-task cdkDrag [task]="task"></app-task>
+        <app-task cdkDrag [task]="task" id={{task.id}}></app-task>
       </ng-container>
     </div>
     <div class="column__task-create">
