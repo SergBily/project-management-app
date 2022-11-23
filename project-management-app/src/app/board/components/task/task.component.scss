@@ -13,7 +13,7 @@
 }
 
 .task__wrapper:hover {
-  box-shadow: 3px 3px 10px rgb(203 183 212);;
+  box-shadow: 3px 3px 10px rgb(203 183 212);
   border-radius: $columnBorderRad;
   -webkit-border-radius: $columnBorderRad;
   -moz-border-radius: $columnBorderRad;
@@ -23,23 +23,22 @@
 
 .task__container {
   width: 100%;
+  position: relative;
   overflow-x: hidden;
   overflow-y: auto;
 }
 
 .task__title-container {
-  // padding: $paddingForElemTask;
-  // box-shadow: 0 1px 2px $btnBackColorHover;
-  // margin-bottom: 10px;
-  position: relative;
-    cursor: pointer;
-    height: auto;
 
-      .face {
+  position: relative;
+  cursor: pointer;
+  height: auto;
+
+      .task {
         @include wh (100%, auto);
       }
 
-      .face1 {
+      .task1 {
         @include flex();
         position: relative;
         min-height: 40px;
@@ -55,9 +54,7 @@
           }
       }
 
-
-      .face2 {
-        // @include flex();
+      .task2 {
         position: relative;
         min-height: 30px;
         max-height: 160px;
@@ -72,23 +69,16 @@
       }
 }
 
-.task__title-container:hover .face.face1 {
+.task__title-container:hover .task.task1 {
   background-color: #cbb7d4;
   border-top-left-radius: $columnBorderRad;
   border-top-right-radius: $columnBorderRad;
 }
 
-.task__title-container:hover .face.face2 {
-  height: 100%;
-}
-
-.task__title-container:hover .face.face2 {
-  transform: translateY(0);
-}
-
 .task__title {
   margin: 0;
   word-break: break-all;
+  margin-right: 15px;
 }
 
 .task__description-container {
@@ -101,4 +91,54 @@
 .task__description {
   word-break: break-all;
   margin: 0;
+}
+
+.task__btn-delete {
+  @include wh(28px, 28px);
+  position: absolute;
+  top: 10px;
+  right: -40px;
+  font-size: 1.5rem;
+  border: 0;
+  z-index: 1;
+  cursor: pointer;
+  color: $colorTitltColumn;
+  background-color: transparent;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+}
+
+.task__wrapper:hover .task__btn-delete {
+  right: 0;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+}
+
+.task__btn-delete:hover {
+  transform: scale(1.3);
+  -webkit-transform: scale(1.3);
+  -moz-transform: scale(1.3);
+  -ms-transform: scale(1.3);
+  -o-transform: scale(1.3);
+}
+
+.task__btn-delete:hover .task__wrapper {
+  box-shadow: 3px 3px 10px rgb(203 183 212);
+  border-radius: $columnBorderRad;
+  -webkit-border-radius: $columnBorderRad;
+  -moz-border-radius: $columnBorderRad;
+  -ms-border-radius: $columnBorderRad;
+  -o-border-radius: $columnBorderRad;
+}
+
+.task__btn-delete:hover .task.task1 {
+  background-color: #cbb7d4;
+  border-top-left-radius: $columnBorderRad;
+  border-top-right-radius: $columnBorderRad;
 }
