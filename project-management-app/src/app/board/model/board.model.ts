@@ -20,7 +20,13 @@ export interface TaskUpdate {
   userId: string;
   boardId: string;
   columnId: string;
-  id?: string
+  id?: string;
+  files?: TaskFile[];
+}
+
+export interface TaskFile {
+  filename: string,
+  fileSize: number,
 }
 
 export interface ParamApiTask {

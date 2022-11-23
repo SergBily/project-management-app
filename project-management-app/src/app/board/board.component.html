@@ -10,12 +10,17 @@
       </div>
     </div>
     <div class="board__content" @animateBoard>
-      <div class="board">
+      <div class="board"
+      cdkDropList
+      cdkDropListOrientation="horizontal"
+      (cdkDropListDropped)="dropColumn($event)">
         <div class="board__container">
           <ng-container
             *ngFor="let column of stateColumnsOpenBoard$ | async"
           >
-            <app-column [dataForApi]="{ boardId, column }"></app-column>
+            <app-column [dataForApi]="{ boardId, column }"
+            cdkDrag
+          cdkDragLockAxis="x"></app-column>
           </ng-container>
         </div>
         <app-create-column></app-create-column>
