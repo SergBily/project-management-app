@@ -7,15 +7,22 @@
     @include flex();
     height: 100%;
     flex-direction: column;
+    overflow-x: hidden;
 
 
     .board__header {
       @include wh (100%, auto);
-      @include flex($justify-content: flex-start);
       gap: 2rem;
       padding: 10px;
       margin-bottom: 10px;
       box-shadow: 0 3px 2px $btnBackColorHover;
+
+        .board__animate {
+          @include wh (100%, auto);
+          @include flex($justify-content: flex-start);
+          gap: 2rem;
+          padding: 10px;
+        }
 
         .board__title {
           margin: 0;

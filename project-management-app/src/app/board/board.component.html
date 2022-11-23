@@ -1,19 +1,22 @@
 <div class="board__page">
   <div class="board__wrapper">
     <div class="board__header">
-      <h1 class="board__title">{{ title }}</h1>
-      <button mat-raised-button class="board__btn-back" routerLink="/main">
-        <mat-icon inline="true">home</mat-icon>
-        <span class="board__btn-text">Back to your boards</span>
-      </button>
+      <div class="board__animate" @animateTitleBoard>
+        <h1 class="board__title">{{ title }}</h1>
+        <button mat-raised-button class="board__btn-back" routerLink="/main">
+          <mat-icon inline="true">home</mat-icon>
+          <span class="board__btn-text">Back to your boards</span>
+        </button>
+      </div>
     </div>
-    <div class="board__content">
+    <div class="board__content" @animateBoard>
       <div class="board">
         <div class="board__container">
-          <app-column
+          <ng-container
             *ngFor="let column of stateColumnsOpenBoard$ | async"
-            [dataForApi]="{ boardId, column }"
-          ></app-column>
+          >
+            <app-column [dataForApi]="{ boardId, column }"></app-column>
+          </ng-container>
         </div>
         <app-create-column></app-create-column>
       </div>
