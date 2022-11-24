@@ -7,7 +7,7 @@ import {
   animate, style, transition, trigger,
 } from '@angular/animations';
 import { BoardActions, DragAndDropActions } from './redux/actions/board.actions';
-import { selectGetColumns } from './redux/selectors/board.selector';
+import { selectGetColumns } from './redux/selectors/board.selectors';
 import { Column } from './redux/state.model';
 import { ApiBoardService } from './services/api/api.service';
 

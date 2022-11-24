@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import {
   catchError, EMPTY, Observable, retry, take,
@@ -10,13 +11,22 @@ import { PostBoardRequest, Board } from '../../models/board';
   providedIn: 'root',
 })
 export class BoardsApiService {
-  constructor(private http: HttpClient, public router: Router) { }
+  constructor(
+    private http: HttpClient,
+    public router: Router,
+    private snackBar: MatSnackBar,
+  ) { }
 
   public addBoard(data: PostBoardRequest): Observable<Board> {
     return this.http.post<Board>('/boards', data).pipe(
       retry(2),
       take(1),
-      catchError(() => EMPTY),
+      catchError(() => {
+        this.snackBar.open('Board not added :(', 'OK', {
+          duration: 2000,
+        });
+        return EMPTY;
+      }),
     );
   }
 

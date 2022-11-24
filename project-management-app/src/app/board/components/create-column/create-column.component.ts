@@ -7,7 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { take } from 'rxjs';
 import { BoardActions } from '../../redux/actions/board.actions';
-import { selectGetBoardId } from '../../redux/selectors/board.selector';
+import { selectGetBoardId } from '../../redux/selectors/board.selectors';
 import { ApiBoardService } from '../../services/api/api.service';
 import { CreateColumnDialogComponent } from '../create-column-dialog/create-column-dialog.component';
 

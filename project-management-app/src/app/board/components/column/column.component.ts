@@ -10,7 +10,7 @@ import {
   DataBoardAndColumn, ParamApiColumn, ParamApiTask, TaskUpdate,
 } from '../../model/board.model';
 import { BoardActions, DragAndDropActions } from '../../redux/actions/board.actions';
-import { selectGetColumns, selectGetTasks } from '../../redux/selectors/board.selector';
+import { selectGetColumns, selectGetTasks } from '../../redux/selectors/board.selectors';
 import { Column, StateTask } from '../../redux/state.model';
 import { ApiBoardService } from '../../services/api/api.service';
 import { ValidatorColumnTitleService } from '../../services/custom-validator/validator-column-title.service';
