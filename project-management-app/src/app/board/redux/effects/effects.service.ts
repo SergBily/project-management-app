@@ -8,7 +8,7 @@ import {
 } from 'rxjs';
 import { ApiBoardService } from 'src/app/board/services/api/api.service';
 import { ApiBoardActions, BoardActions } from '../actions/board.actions';
-import { selectGetBoardId } from '../selectors/board.selector';
+import { selectGetBoardId } from '../selectors/board.selectors';
 
 @Injectable()
 export class BoardEffects {

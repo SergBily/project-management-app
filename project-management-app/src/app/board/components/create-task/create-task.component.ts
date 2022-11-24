@@ -14,7 +14,7 @@ import { DateUserService } from 'src/app/auth/services/date-user/date-user';
 import { AddDialogComponent } from 'src/app/shared/components/add-board-dialog/add-dialog.component';
 import { DataOfConfirm } from '../../model/board.model';
 import { BoardActions } from '../../redux/actions/board.actions';
-import { selectGetBoardId } from '../../redux/selectors/board.selector';
+import { selectGetBoardId } from '../../redux/selectors/board.selectors';
 import { ApiBoardService } from '../../services/api/api.service';
 
 @Component({

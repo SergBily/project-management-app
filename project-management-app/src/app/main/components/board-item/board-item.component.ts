@@ -1,9 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { take } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
+import { Store } from '@ngrx/store';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Board } from '../../models/board';
 import { BoardsApiService } from '../../services/boards/boards.service';
+import { deleteMainBoard } from '../../store/actions/main-boards.actions';
 
 @Component({
   selector: 'app-board-item',
@@ -16,6 +18,8 @@ export class BoardItemComponent implements OnInit {
   constructor(
     private boardsApi: BoardsApiService,
     public dialog: MatDialog,
+    private store: Store,
+    private snackBar: MatSnackBar,
   ) { }
 
   ngOnInit(): void {
@@ -23,7 +27,6 @@ export class BoardItemComponent implements OnInit {
 
   deleteBoard(event: Event) {
     event.stopPropagation();
-    // call modal window
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       maxWidth: '500px',
       data: {
@@ -32,11 +35,16 @@ export class BoardItemComponent implements OnInit {
       },
     });
 
-    // listen to response
     dialogRef.afterClosed().subscribe((dialogResult) => {
-    // if user pressed yes dialogResult will be true,
-    // if he pressed no - it will be false
-      if (dialogResult) this.boardsApi.deleteBoard(this.board.id).pipe(take(1)).subscribe();
+      if (dialogResult) {
+        this.boardsApi.deleteBoard(this.board.id)
+          .subscribe(() => {
+            this.store.dispatch(deleteMainBoard({ id: this.board.id }));
+            this.snackBar.open('Board deleted', 'OK', {
+              duration: 2000,
+            });
+          });
+      }
     });
   }
 }
