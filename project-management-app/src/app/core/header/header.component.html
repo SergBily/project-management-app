@@ -34,7 +34,7 @@
         Team
         <mat-icon>expand_more</mat-icon>
       </div>
-  
+
       <div class="btn-wrap additionally" routerLink="/main">All boards</div>
       <div class="btn-wrap additionally" (click)="openDialog()">
         Create new <br />
@@ -64,7 +64,7 @@
     </div>
 
     <div class="modal" *ngIf="letModal">
-      
+
       <div class="modal-menu" *ngIf="!AuthStateService.getCurrentState(); else registrationYes ">
         <ul class="wrapper-list">
           <li class="list" routerLink="/auth/signin" (click)="letModal = !letModal">Login</li>
