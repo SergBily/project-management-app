@@ -4,7 +4,7 @@ import {
 } from '@angular/forms';
 import { SignUpData } from '../../models/auth.models';
 import { MessageError } from '../../models/enum';
-import { ApiService } from '../../services/api/api.service';
+import { ApiAuthService } from '../../services/api/api.service';
 import { CheckFormService } from '../../services/check-form/check-form.service';
 import { DataFormService } from '../../services/data-form/data-form.service';
 import { DateUserService } from '../../services/date-user/date-user';
@@ -32,7 +32,7 @@ export class EditProfileComponent implements OnInit {
   currentUserId!: string;
 
   constructor(
-    private api: ApiService,
+    private api: ApiAuthService,
     private check: CheckFormService,
     private dataForm: DataFormService,
     private userId: DateUserService,

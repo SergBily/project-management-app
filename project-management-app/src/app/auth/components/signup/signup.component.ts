@@ -3,7 +3,7 @@ import {
   FormControl, Validators, FormGroup,
 } from '@angular/forms';
 import { SignUpData } from '../../models/auth.models';
-import { ApiService } from '../../services/api/api.service';
+import { ApiAuthService } from '../../services/api/api.service';
 import { MessageError } from '../../models/enum';
 import { CheckFormService } from '../../services/check-form/check-form.service';
 import { DataFormService } from '../../services/data-form/data-form.service';
@@ -28,7 +28,7 @@ export class SignupComponent implements OnInit {
   authTemplate!: FormGroup;
 
   constructor(
-    private api: ApiService,
+    private api: ApiAuthService,
     private check: CheckFormService,
     private dataForm: DataFormService,
   ) { }
