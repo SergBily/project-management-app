@@ -1,0 +1,58 @@
+<div class="modal">
+  <div
+    class="modal-menu"
+    *ngIf="!AuthStateService.getCurrentState(); else registrationYes"
+  >
+    <ul class="wrapper-list">
+      <li class="list" routerLink="/auth/signin" (click)="writeEmitter()">
+        Login
+      </li>
+      <li class="list" routerLink="/auth/signup" (click)="writeEmitter()">
+        Sing-up
+      </li>
+      <li class="list" routerLink="/team" (click)="writeEmitter()">
+        Team
+      </li>
+    </ul>
+    <div class="wrapper-btn-modal">
+      <div class="btn-en">EN</div>
+      <div class="btn-ru">RU</div>
+    </div>
+  </div>
+
+  <ng-template #registrationYes>
+    <div class="modal-menu">
+      <ul class="wrapper-list">
+        <li
+          class="list"
+          routerLink="/auth/signup"
+          (click)="writeEmitter()"
+        >
+          Edit profile
+        </li>
+        <li class="list" routerLink="./team" (click)="writeEmitter()">
+          Team
+        </li>
+        <li class="list" routerLink="/main" (click)="writeEmitter()">
+          All board
+        </li>
+        <li class="list" (click)="openDialog()" (click)="writeEmitter()">
+          Crete new board
+        </li>
+        <li
+          class="list"
+          routerLink="/auth/signin"
+          (click)="writeEmitter()"
+        >
+          Logout
+        </li>
+      </ul>
+      <div class="wrapper-btn-modal">
+        <div class="btn-en">EN</div>
+        <div class="btn-ru">RU</div>
+      </div>
+    </div>
+  </ng-template>
+
+  <div class="modal-opacity" (click)="writeEmitter()"></div>
+</div>

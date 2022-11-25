@@ -26,6 +26,8 @@ $textColor: #7b1fa2;
 $cardColor: #e8e1e8;
 $burgerMenuColor:  #eae6ff;
 $hoverListBurgerMenu: #e7d9ec;
+$searchDarkColor: #574b75;
+$searchLightColor: #f2edf5;
 
 @mixin wh($width: auto, $height: auto) {
   width: $width;

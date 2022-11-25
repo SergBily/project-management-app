@@ -3,10 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { CoreComponent } from './core.component';
 import { MainComponent } from './main/main.component';
 import { TeamComponent } from './main/team/team.component';
+import { SearchComponent } from './search/search.component';
 
 const routes: Routes = [
   { path: 'team', component: TeamComponent },
-  { path: '', component: MainComponent },
+  { path: 'search', component: SearchComponent},
+  { path: '', component: MainComponent }
 ];
 
 @NgModule({

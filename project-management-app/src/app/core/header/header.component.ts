@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AuthStateService } from 'src/app/auth/services/auth-state/auth-state.service';
 import { BoardsApiService } from 'src/app/main/services/boards/boards.service'; 
 import { MatDialog } from '@angular/material/dialog';
 import { AddBoardDialogComponent } from 'src/app/shared/components/add-board-dialog/add-board-dialog.component';
+
+import { ServiceService } from '../service/service.service';
 
 @Component({
   selector: 'app-header',
@@ -16,13 +18,24 @@ export class HeaderComponent implements OnInit {
     public AuthStateService: AuthStateService, 
     private boardsApi: BoardsApiService,
     public dialog: MatDialog,
+    public  ServiceService: ServiceService
     ) {}
 
+    @Output() outEnter = new EventEmitter<string>()
+
+  letModal = false;
+
+  userText: string = ''
+
+
+  
   ngOnInit(): void {
   }
-  
-  letModal = false;
-  
+
+  hideModal(e: boolean){
+    this.letModal = e
+  }
+   
   openDialog() {
     const dialogRef = this.dialog.open(AddBoardDialogComponent, {
       maxWidth: '500px',
@@ -32,6 +45,24 @@ export class HeaderComponent implements OnInit {
       if (dialogResult) this.boardsApi.addBoard(dialogResult).subscribe();
     });
   }
+
+  getText(){
+    console.log('text--' + this.userText)
+    // this.outEnter.emit(this.userText)
+
+    this.ServiceService.shareUserText = this.userText
+    console.log('service--' + this.ServiceService.shareUserText)
+    if(this.userText){
+    //   return true
+
+    // routerLink="/search"
+    }
+  }
+
+  delete(){
+    this.userText = ''
+  }
+
 }
 
 

@@ -1,0 +1,90 @@
+@import "../../../style/default.scss";
+
+.wrapper {
+  display: flex;
+  margin-top: 40px;
+  width: 100%;
+  color: $btnColor;
+}
+
+.back {
+  padding: 20px 10px;
+  background-color: $searchLightColor;
+  border-radius: 10px 0 0 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.btn-small {
+    border: none;
+    @include btn;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    &:hover {
+      @include btn-hover();
+    }
+  margin-top: 10px;
+  width: 90px;
+  height: 25px;
+}
+
+.wrapper-results {
+  width: 100%;
+//   border-radius: 30px;
+}
+
+.title {
+  background-color: $searchDarkColor;
+  text-align: center;
+  height: 30px;
+  border-radius: 0 10px 0 0;
+}
+
+.sort-by {
+  color: $searchDarkColor;
+  font-weight: 700;
+}
+
+.wrapper-sort {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  background-color: $searchLightColor;
+}
+
+.btn {
+  border: none;
+  @include btn;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  &:hover {
+    @include btn-hover();
+  }
+  width: 140px;
+  height: 25px;
+  @include flexCenter;
+  margin: 5px;
+
+}
+
+.actionBtn{
+    background-color: $btnBackColorHover;
+    border: 2px solid $searchDarkColor;
+}
+
+.result{
+    background-color: $searchLightColor;
+    color: $searchDarkColor;
+    text-align: center;
+    padding-top: 50px;
+    min-height: 100vh; 
+    border-radius: 0 0 10px 0;
+}

@@ -5,3 +5,4 @@ export interface ICard{
     appointment: string,
     description: string
 }
+

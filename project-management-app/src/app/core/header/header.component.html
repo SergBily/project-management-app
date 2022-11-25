@@ -15,21 +15,15 @@
     <div class="btn-ru">RU</div>
   </div>
 
-  <div class="search-wrap hide" *ngIf="AuthStateService.getCurrentState()">
-    <input type="text" placeholder="Search" class="search" />
-    <div class="cancel" style="cursor: pointer">
+  <div class="search-wrap" *ngIf="AuthStateService.getCurrentState()">
+    <input type="text" [(ngModel)]="userText"   placeholder="Search" class="search" (keyup)="getText()" routerLink="/search">
+    <div class="cancel" style="cursor: pointer" (click)="delete()">
       <mat-icon>cancel</mat-icon>
     </div>
   </div>
 
   <div class="header-right">
     <div class="registration" *ngIf="AuthStateService.getCurrentState(); else registrationNot">
-      <div class="search-wrap">
-        <input type="text" placeholder="Search" class="search" />
-        <div class="cancel" style="cursor: pointer">
-          <mat-icon>cancel</mat-icon>
-        </div>
-      </div>
       <div class="btn-wrap additionally" routerLink="/team">
         Team
         <mat-icon>expand_more</mat-icon>
@@ -63,38 +57,10 @@
       <mat-icon>menu </mat-icon>
     </div>
 
-    <div class="modal" *ngIf="letModal">
-      
-      <div class="modal-menu" *ngIf="!AuthStateService.getCurrentState(); else registrationYes ">
-        <ul class="wrapper-list">
-          <li class="list" routerLink="/auth/signin" (click)="letModal = !letModal">Login</li>
-          <li class="list" routerLink="/auth/signup" (click)="letModal = !letModal">Sing-up</li>
-          <li class="list" routerLink="/team" (click)="letModal = !letModal">Team</li>
-        </ul>
-        <div class="wrapper-btn-modal">
-          <div class="btn-en">EN</div>
-          <div class="btn-ru">RU</div>
-        </div>
-      </div>
-
-      <ng-template #registrationYes>
-        <div class="modal-menu">
-          <ul class="wrapper-list">
-            <li class="list" routerLink="/auth/signup" (click)="letModal = !letModal">Edit profile</li>
-            <li class="list" routerLink="./team" (click)="letModal = !letModal">Team</li>
-            <li class="list" routerLink="/main" (click)="letModal = !letModal">All board</li>
-            <li class="list" (click)="openDialog()" (click)="letModal = !letModal">Crete new board</li>
-            <li class="list" routerLink="/auth/signin" (click)="letModal = !letModal">Logout</li>
-          </ul>
-          <div class="wrapper-btn-modal">
-            <div class="btn-en">EN</div>
-            <div class="btn-ru">RU</div>
-          </div>
-        </div>
-      </ng-template>
-
-      <div class="modal-opacity" (click)="letModal=!letModal"></div>
-    </div>
-
+    <app-modal 
+    *ngIf="letModal"
+    (hideModal)="hideModal($event)"
+    ></app-modal>
+    
   </div>
 </div>

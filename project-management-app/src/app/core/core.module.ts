@@ -8,6 +8,11 @@ import { MainComponent } from './main/main.component';
 import { CardComponent } from './main/card/card.component';
 import { FooterComponent } from './footer/footer.component';
 import { TeamComponent } from './main/team/team.component';
+import { ModalComponent } from './header/modal/modal.component';
+import { SearchComponent } from './search/search.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { ServiceService } from './service/service.service';
 
 @NgModule({
   declarations: [
@@ -17,17 +22,24 @@ import { TeamComponent } from './main/team/team.component';
     CardComponent,
     FooterComponent,
     TeamComponent,
+    ModalComponent,
+    SearchComponent,
   ],
   imports: [
     CommonModule,
     CoreRoutingModule,
     MatIconModule,
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [ServiceService],
   exports: [
     HeaderComponent,
     MainComponent,
-    FooterComponent,    
+    FooterComponent,
+    ModalComponent,
+    SearchComponent,
+    HttpClientModule    
   ]
 })
 export class CoreModule { }

@@ -1,0 +1,35 @@
+<div class="wrapper">
+
+    <div class="back">
+        <button class="btn-small">Back</button>
+        <button class="btn-small">All boards</button>
+    </div>
+
+    <div class="wrapper-results">
+        <div class="title">Search results</div>
+        <div class="wrapper-sort">
+            <span class="sort-by">Sort by:</span>
+            <button class="btn" (click)="sortTitle()" [ngClass]="{actionBtn : titleAction}">
+                <mat-icon *ngIf="titleArrow; else arrowDown">expand_more</mat-icon> 
+                Title
+                <ng-template #arrowDown>
+                <mat-icon>expand_less</mat-icon> 
+            </ng-template>
+            </button>
+            <button class="btn" (click)="sortDescription()" [ngClass]="{actionBtn : descriptionAction}">
+                <mat-icon *ngIf="descriptionArrow; else arrowDown">expand_more</mat-icon> 
+                Description
+            </button>
+        </div>
+        <div class="result" >
+             <p>Sorry, nothing matches.<br>
+
+                Try another search!</p>
+
+                <button (click)=" request()">request</button>
+                <p >{{variable}}</p>
+                <p >{{variable2}}</p>
+        </div>
+    </div>
+
+</div>
