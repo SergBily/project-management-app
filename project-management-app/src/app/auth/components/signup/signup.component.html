@@ -22,5 +22,5 @@
   <p class="sighup__message" [ngClass]="{ success: successMessage }">
     {{ errorMessage || successMessage }}
   </p>
-  <app-btn-exit routerLink="/main"></app-btn-exit>
+  <app-btn-exit [routerLink]="url.getChanhedPreviousUrl() | async"></app-btn-exit>
 </div>

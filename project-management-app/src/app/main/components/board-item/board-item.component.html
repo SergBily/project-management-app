@@ -1,7 +1,6 @@
 <mat-card
   class="board"
   routerLink="/boards/{{ board.id }}"
-  [queryParams]="{ title: board.title }"
 >
   <mat-card-title class="board__title">{{ board.title }}</mat-card-title>
   <mat-card-content>

@@ -9,6 +9,7 @@ import { ApiAuthService } from '../../services/api/api.service';
 import { AuthStateService } from '../../services/auth-state/auth-state.service';
 import { CheckFormService } from '../../services/check-form/check-form.service';
 import { DataFormService } from '../../services/data-form/data-form.service';
+import { UrlService } from '../../services/url/url.service';
 
 @Component({
   selector: 'app-login',
@@ -33,6 +34,7 @@ export class LoginComponent implements OnInit {
     public authState: AuthStateService,
     private check: CheckFormService,
     private dataForm: DataFormService,
+    public url: UrlService,
   ) { }
 
   ngOnInit(): void {}
