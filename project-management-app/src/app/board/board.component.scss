@@ -20,12 +20,23 @@
         .board__animate {
           @include wh (100%, auto);
           @include flex($justify-content: flex-start);
-          gap: 2rem;
           padding: 10px;
         }
 
+        .board__title-container {
+          flex-grow: 1;
+          @include flex();
+        }
+
         .board__title {
+          font-size: 3rem;
           margin: 0;
+          color: #342b5e ;
+          text-shadow: 1px 1px 0 #574b75 ,
+                       2px 2px 0 #7a6a8c,
+                       3px 3px 0 #9a87a3,
+                       4px 4px 0 #bba5ba,
+                       5px 5px 0 #d9c1cf
         }
 
         .board__btn-back {
@@ -63,13 +74,11 @@
         overflow-x: auto;
         overflow-y: hidden;
         padding: 0 10px 10px 10px;
-        margin-top: 5px;
         user-select: none;
         white-space: nowrap;
       }
   }
 }
-
 
 
 
