@@ -5,6 +5,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { StoreModule } from '@ngrx/store';
+import { TranslateModule } from '@ngx-translate/core';
 import { MainRoutingModule } from './main-routing.module';
 import { MainComponent } from './main.component';
 import { BoardsListComponent } from './components/boards-list/boards-list.component';
@@ -25,6 +26,7 @@ const MATERIAL = [MatCardModule, MatButtonModule, MatIconModule];
     ReactiveFormsModule,
     MATERIAL,
     StoreModule.forFeature('mainBoards', reducer),
+    TranslateModule,
   ],
 })
 export class MainModule { }

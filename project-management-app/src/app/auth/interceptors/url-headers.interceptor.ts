@@ -31,6 +31,10 @@ export class UrlHeadersInterceptor implements HttpInterceptor {
       url: environment.baseUrl + request.url,
       headers,
     });
+
+    if (request.url.indexOf('assets/i18n') !== -1) {
+      return next.handle(request);
+    }
     return next.handle(newRequest);
   }
 }

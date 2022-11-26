@@ -1,6 +1,8 @@
 <div class="container" [formGroup]="singupForm">
   <mat-form-field class="field" appearance="fill">
-    <mat-label>login</mat-label>
+    <mat-label>
+      {{'login' | translate }}
+    </mat-label>
     <input
       formControlName="login"
       matInput
@@ -12,7 +14,9 @@
     </mat-error>
   </mat-form-field>
   <mat-form-field class="field" appearance="fill">
-    <mat-label>password</mat-label>
+    <mat-label>
+      {{'password' | translate }}
+    </mat-label>
     <input
       formControlName="password"
       matInput

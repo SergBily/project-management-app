@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { TranslateModule } from '@ngx-translate/core';
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthComponent } from './auth.component';
 import { LoginComponent } from './components/login/login.component';
@@ -28,6 +29,7 @@ import { BtnExitComponent } from './components/btn-exit/btn-exit.component';
     MatIconModule,
     MatInputModule,
     MatButtonModule,
+    TranslateModule,
   ],
 })
 export class AuthModule { }
