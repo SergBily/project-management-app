@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
 import { Store } from '@ngrx/store';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { BoardTitleService } from 'src/app/board/services/board-title/board-title.service';
 import { Board } from '../../models/board';
 import { BoardsApiService } from '../../services/boards/boards.service';
 import { deleteMainBoard } from '../../store/actions/main-boards.actions';
@@ -20,6 +21,7 @@ export class BoardItemComponent implements OnInit {
     public dialog: MatDialog,
     private store: Store,
     private snackBar: MatSnackBar,
+    private boardTitle: BoardTitleService,
   ) { }
 
   ngOnInit(): void {
@@ -46,5 +48,9 @@ export class BoardItemComponent implements OnInit {
           });
       }
     });
+  }
+
+  getTitleOpenBoard(title: string): void {
+    this.boardTitle.setTitleBoard(title);
   }
 }

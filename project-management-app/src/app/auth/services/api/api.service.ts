@@ -11,7 +11,7 @@ import {
 @Injectable({
   providedIn: 'root',
 })
-export class ApiService {
+export class ApiAuthService {
   constructor(private http: HttpClient) { }
 
   public signUp(data: SignUpData): Observable<User> {
@@ -47,5 +47,13 @@ export class ApiService {
 
   public deleteUser(id: string): Observable<any> {
     return this.http.delete(`/users/${id}`);
+  }
+
+  public getUsers(): Observable<User> {
+    return this.http.get<User>('/users')
+      .pipe(
+        retry(2),
+        take(1),
+      );
   }
 }
