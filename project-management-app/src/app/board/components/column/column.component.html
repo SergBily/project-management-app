@@ -46,10 +46,10 @@
         [disabled]="!titleForm.valid"
         (click)="changeColumnTitle()"
       >
-        Submit
+      {{'submit' | translate }}
       </button>
       <button class="column__btn-change btn__cancel" (click)="onChangeView()">
-        Cancel
+        {{'cancel' | translate }}
       </button>
     </div>
   </div>

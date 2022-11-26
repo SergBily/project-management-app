@@ -11,12 +11,15 @@
   </div>
 
   <div class="wrapper-button">
-    <div class="btn-en">EN</div>
-    <div class="btn-ru">RU</div>
+    <div class="btn-en" [ngClass]="{'active': translate.currentLang === 'en'}" (click)="switchLang('en')">EN</div>
+    <div class="btn-ru" [ngClass]="{'active': translate.currentLang === 'ru'}" (click)="switchLang('ru')">RU</div>
   </div>
 
   <div class="search-wrap hide" *ngIf="authStateService.getStateChanged() | async">
-    <input type="text" placeholder="Search" class="search" />
+    <input
+      type="text"
+      placeholder="{{'placeholderSearch' | translate }}"
+      class="search">
     <div class="cancel" style="cursor: pointer">
       <mat-icon>cancel</mat-icon>
     </div>
@@ -25,33 +28,38 @@
   <div class="header-right">
     <div class="registration" *ngIf="authStateService.getStateChanged() | async; else registrationNot">
       <div class="search-wrap">
-        <input type="text" placeholder="Search" class="search" />
+        <input type="text" placeholder="{{'placeholderSearch' | translate }}" class="search" />
         <div class="cancel" style="cursor: pointer">
           <mat-icon>cancel</mat-icon>
         </div>
       </div>
       <ng-container *ngIf="url.getCurrentUrl() !== '/main'">
-        <div class="btn-wrap additionally" routerLink="/main">All boards</div>
+        <div class="btn-wrap additionally" routerLink="/main">
+          {{'allBoards' | translate }}
+        </div>
       </ng-container>
       <div class="btn-wrap additionally" routerLink="/team">
-        Team
+        {{'team' | translate }}
         <mat-icon>expand_more</mat-icon>
       </div>
       <div class="btn-wrap additionally" (click)="openDialog()">
-        Create new <br />
-        board
+        {{'createNewBoard' | translate }}
       </div>
       <div class="btn-wrap additionally" routerLink="/auth/profile">
-        Edit profile
+        {{'editProfile' | translate }}
       </div>
-      <div class="btn-wrap black additionally" routerLink="/auth/signin">Logout</div>
+      <div class="btn-wrap black additionally" routerLink="/auth/signin">
+        {{'logout' | translate }}
+      </div>
     </div>
 
     <ng-template #registrationNot>
       <div class="registration">
-        <div class="btn-wrap additionally" routerLink="/auth/signin">Login</div>
+        <div class="btn-wrap additionally" routerLink="/auth/signin">
+          {{'login' | translate }}
+        </div>
         <div class="btn-wrap black additionally" routerLink="/auth/signup">
-          Sing-up
+          {{'singUp' | translate }}
         </div>
       </div>
     </ng-template>
@@ -64,11 +72,21 @@
 
       <div class="modal-menu" *ngIf="authStateService.getStateChanged() | async; else logout ">
         <ul class="wrapper-list">
-          <li class="list" routerLink="/auth/signup" (click)="letModal = !letModal">Edit profile</li>
-          <li class="list" routerLink="./team" (click)="letModal = !letModal">Team</li>
-          <li class="list" routerLink="/main" (click)="letModal = !letModal">All board</li>
-          <li class="list" (click)="openDialog()" (click)="letModal = !letModal">Crete new board</li>
-          <li class="list" routerLink="/auth/signin" (click)="letModal = !letModal">Logout</li>
+          <li class="list" routerLink="/auth/signup" (click)="letModal = !letModal">
+            {{'editProfile' | translate }}
+          </li>
+          <li class="list" routerLink="./team" (click)="letModal = !letModal">
+            {{'team' | translate }}
+          </li>
+          <li class="list" routerLink="/main" (click)="letModal = !letModal">
+            {{'allBoards' | translate }}
+          </li>
+          <li class="list" (click)="openDialog()" (click)="letModal = !letModal">
+            {{'createNewBoard' | translate }}
+          </li>
+          <li class="list" routerLink="/auth/signin" (click)="letModal = !letModal">
+            {{'logout' | translate }}
+          </li>
         </ul>
         <div class="wrapper-btn-modal">
           <div class="btn-en">EN</div>
@@ -83,8 +101,8 @@
             <li class="list" routerLink="/auth/signup" (click)="letModal = !letModal">Sing-up</li>
           </ul>
           <div class="wrapper-btn-modal">
-            <div class="btn-en">EN</div>
-            <div class="btn-ru">RU</div>
+            <div class="btn-en" (click)="switchLang('en')">EN</div>
+            <div class="btn-ru" (click)="switchLang('ru')">RU</div>
           </div>
         </div>
       </ng-template>
