@@ -10,6 +10,7 @@ import { BoardActions, DragAndDropActions } from './redux/actions/board.actions'
 import { selectGetColumns } from './redux/selectors/board.selectors';
 import { Column } from './redux/state.model';
 import { ApiBoardService } from './services/api/api.service';
+import { BoardTitleService } from './services/board-title/board-title.service';
 
 @Component({
   selector: 'app-board',
@@ -33,8 +34,6 @@ import { ApiBoardService } from './services/api/api.service';
 export class BoardComponent implements OnInit {
   boardId = '';
 
-  title!: string;
-
   stateColumnsOpenBoard$!: Observable<Column[]>;
 
   countColumns$!: Observable<number>;
@@ -46,6 +45,7 @@ export class BoardComponent implements OnInit {
     public router: Router,
     private store: Store,
     private boardsApi: ApiBoardService,
+    public boardTitle: BoardTitleService,
   ) { }
 
   ngOnInit(): void {
@@ -55,9 +55,9 @@ export class BoardComponent implements OnInit {
       this.stateColumnsOpenBoard$ = this.store.select(selectGetColumns);
     });
 
-    this.route.queryParams.pipe(take(1)).subscribe((param) => {
-      this.title = param['title'];
-    });
+    // this.route.queryParams.pipe(take(1)).subscribe((param) => {
+    //   this.title = param['title'];
+    // });
   }
 
   dropColumn(event: CdkDragDrop<string[]>) {

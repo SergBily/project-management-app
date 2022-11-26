@@ -7,8 +7,9 @@ export enum MessageError {
   hasSpecialCharacter = `Your password isn't strong enough need
   inclusion of at least one special character, e.g., ! @ # ? % ^ & *]`,
   badResponse = 'You entered the wrong login or password ',
-  successResponse = 'SUCCESS',
+  successResponse = 'Profile delete successfully',
   badResponseSignup = 'Server not responding, please try again later',
+  signupSuccess = 'Profile create successfully',
   deleteUserError = 'User was not founded!',
   updateSuccess = 'Profile updated successfully',
 }

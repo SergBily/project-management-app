@@ -17,5 +17,5 @@ export interface User {
 export interface LoggedUser {
   userId: string,
   login: string,
-  iat: number
+  id: number
 }

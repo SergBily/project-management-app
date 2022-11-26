@@ -7,7 +7,6 @@ const routes: Routes = [
   { path: '', loadChildren: () => import('./core/core.module').then((m) => m.CoreModule) },
   { path: 'team', loadChildren: () => import('./core/core.module').then((m) => m.CoreModule) },
   { path: 'redirect', redirectTo: '/main', pathMatch: 'full' },
-
   { path: 'main', loadChildren: () => import('./main/main.module').then((m) => m.MainModule) },
   { path: 'boards', loadChildren: () => import('./board/board.module').then((m) => m.BoardModule) },
   { path: '**', component: PageNotFoundComponent },
