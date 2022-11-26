@@ -3,6 +3,7 @@ import {
   FormControl, Validators, FormGroup,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { SignUpData } from '../../models/auth.models';
 import { ApiAuthService } from '../../services/api/api.service';
 import { MessageError } from '../../models/enum';
@@ -35,6 +36,7 @@ export class SignupComponent implements OnInit {
     private dataForm: DataFormService,
     private router: Router,
     public url: UrlService,
+    private snackBar: MatSnackBar,
   ) { }
 
   ngOnInit(): void {
@@ -53,6 +55,9 @@ export class SignupComponent implements OnInit {
           this.authTemplate.reset();
           this.nameControl.reset();
           this.router.navigate(['/auth/signin']);
+          this.snackBar.open(MessageError.signupSuccess, 'OK', {
+            duration: 2000,
+          });
         },
       });
   }

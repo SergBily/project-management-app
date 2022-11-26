@@ -41,9 +41,9 @@
     @include btn-hover();
   }
 
-  .success {
-    color: $successMessage;
-  }
+  // .success {
+  //   color: $successMessage;
+  // }
 
     .container__btn {
       @include flex();

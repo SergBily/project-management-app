@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {
   FormControl, Validators, FormGroup,
 } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { take } from 'rxjs';
 import { SignUpData } from '../../models/auth.models';
 import { MessageError } from '../../models/enum';
 import { ApiAuthService } from '../../services/api/api.service';
@@ -26,8 +28,6 @@ export class EditProfileComponent implements OnInit {
 
   authTemplate!: FormGroup;
 
-  successMessage!: string;
-
   errorMessage!: string;
 
   loginUser!: string;
@@ -44,6 +44,7 @@ export class EditProfileComponent implements OnInit {
     private router: Router,
     private statusUser: AuthStateService,
     public url: UrlService,
+    private snackBar: MatSnackBar,
   ) { }
 
   ngOnInit(): void {
@@ -61,12 +62,14 @@ export class EditProfileComponent implements OnInit {
       .subscribe({
         next: (res) => localStorage.setItem('userId', res.id),
         error: () => {
-          this.successMessage = '';
           this.errorMessage = MessageError.badResponseSignup;
         },
         complete: () => {
           this.errorMessage = '';
-          this.successMessage = MessageError.updateSuccess;
+          this.url.getChanhedPreviousUrl().pipe(take(1)).subscribe((url) => this.router.navigate([url]));
+          this.snackBar.open(MessageError.updateSuccess, 'OK', {
+            duration: 2000,
+          });
         },
       });
   }
@@ -75,15 +78,16 @@ export class EditProfileComponent implements OnInit {
     this.api.deleteUser(this.currentUserId)
       .subscribe({
         error: () => {
-          this.successMessage = '';
           this.errorMessage = MessageError.deleteUserError;
         },
         complete: () => {
           this.errorMessage = '';
-          this.successMessage = MessageError.successResponse;
           localStorage.removeItem('token');
           this.statusUser.setAuthState(false);
           this.router.navigate(['/']);
+          this.snackBar.open(MessageError.successResponse, 'OK', {
+            duration: 2000,
+          });
         },
       });
   }
