@@ -2,11 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import {
   FormControl, Validators, FormGroup,
 } from '@angular/forms';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { SignUpData } from '../../models/auth.models';
-import { ApiService } from '../../services/api/api.service';
+import { ApiAuthService } from '../../services/api/api.service';
 import { MessageError } from '../../models/enum';
 import { CheckFormService } from '../../services/check-form/check-form.service';
 import { DataFormService } from '../../services/data-form/data-form.service';
+import { UrlService } from '../../services/url/url.service';
 
 @Component({
   selector: 'app-signup',
@@ -28,9 +31,12 @@ export class SignupComponent implements OnInit {
   authTemplate!: FormGroup;
 
   constructor(
-    private api: ApiService,
+    private api: ApiAuthService,
     private check: CheckFormService,
     private dataForm: DataFormService,
+    private router: Router,
+    public url: UrlService,
+    private snackBar: MatSnackBar,
   ) { }
 
   ngOnInit(): void {
@@ -40,16 +46,18 @@ export class SignupComponent implements OnInit {
   protected onSubmit(): void {
     this.api.signUp(this.data)
       .subscribe({
-        next: (res) => localStorage.setItem('user', JSON.stringify(res)),
         error: () => {
           this.successMessage = '';
           this.errorMessage = MessageError.badResponseSignup;
         },
         complete: () => {
           this.errorMessage = '';
-          this.successMessage = MessageError.successResponse;
           this.authTemplate.reset();
           this.nameControl.reset();
+          this.router.navigate(['/auth/signin']);
+          this.snackBar.open(MessageError.signupSuccess, 'OK', {
+            duration: 2000,
+          });
         },
       });
   }

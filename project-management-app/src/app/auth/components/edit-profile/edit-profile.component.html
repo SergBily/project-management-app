@@ -26,14 +26,15 @@
     <button
       class="btn__delete"
       mat-raised-button
-      [ngClass]="{ 'btn__form-valid': isValidForm }"
+      [disabled]="!isValidForm"
+      [ngClass]="{ 'btn__delete-valid': isValidForm }"
       (click)="onDelete()"
     >
       Delete profile
     </button>
   </div>
-  <p class="sighup__message" [ngClass]="{ success: successMessage }">
-    {{ errorMessage || successMessage }}
+  <p class="sighup__message">
+    {{ errorMessage }}
   </p>
-  <app-btn-exit routerLink="/main"></app-btn-exit>
+  <app-btn-exit [routerLink]="url.getChanhedPreviousUrl() | async"></app-btn-exit>
 </div>

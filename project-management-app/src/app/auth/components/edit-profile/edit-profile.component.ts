@@ -2,12 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import {
   FormControl, Validators, FormGroup,
 } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { take } from 'rxjs';
 import { SignUpData } from '../../models/auth.models';
 import { MessageError } from '../../models/enum';
-import { ApiService } from '../../services/api/api.service';
+import { ApiAuthService } from '../../services/api/api.service';
+import { AuthStateService } from '../../services/auth-state/auth-state.service';
 import { CheckFormService } from '../../services/check-form/check-form.service';
 import { DataFormService } from '../../services/data-form/data-form.service';
 import { DateUserService } from '../../services/date-user/date-user';
+import { UrlService } from '../../services/url/url.service';
 
 @Component({
   selector: 'app-edit-profile',
@@ -23,19 +28,23 @@ export class EditProfileComponent implements OnInit {
 
   authTemplate!: FormGroup;
 
-  successMessage!: string;
-
   errorMessage!: string;
 
   loginUser!: string;
 
   currentUserId!: string;
 
+  queryParam!: string;
+
   constructor(
-    private api: ApiService,
+    private api: ApiAuthService,
     private check: CheckFormService,
     private dataForm: DataFormService,
     private userId: DateUserService,
+    private router: Router,
+    private statusUser: AuthStateService,
+    public url: UrlService,
+    private snackBar: MatSnackBar,
   ) { }
 
   ngOnInit(): void {
@@ -53,12 +62,14 @@ export class EditProfileComponent implements OnInit {
       .subscribe({
         next: (res) => localStorage.setItem('userId', res.id),
         error: () => {
-          this.successMessage = '';
           this.errorMessage = MessageError.badResponseSignup;
         },
         complete: () => {
           this.errorMessage = '';
-          this.successMessage = MessageError.updateSuccess;
+          this.url.getChanhedPreviousUrl().pipe(take(1)).subscribe((url) => this.router.navigate([url]));
+          this.snackBar.open(MessageError.updateSuccess, 'OK', {
+            duration: 2000,
+          });
         },
       });
   }
@@ -67,12 +78,16 @@ export class EditProfileComponent implements OnInit {
     this.api.deleteUser(this.currentUserId)
       .subscribe({
         error: () => {
-          this.successMessage = '';
           this.errorMessage = MessageError.deleteUserError;
         },
         complete: () => {
           this.errorMessage = '';
-          this.successMessage = MessageError.successResponse;
+          localStorage.removeItem('token');
+          this.statusUser.setAuthState(false);
+          this.router.navigate(['/']);
+          this.snackBar.open(MessageError.successResponse, 'OK', {
+            duration: 2000,
+          });
         },
       });
   }
