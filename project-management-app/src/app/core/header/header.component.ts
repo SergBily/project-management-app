@@ -8,6 +8,7 @@ import { Board } from 'src/app/main/models/board';
 import { addMainBoard } from 'src/app/main/store/actions/main-boards.actions';
 import { Store } from '@ngrx/store';
 import { UrlService } from 'src/app/auth/services/url/url.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -23,6 +24,7 @@ export class HeaderComponent implements OnInit {
     private snackBar: MatSnackBar,
     private store: Store,
     public url: UrlService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -45,6 +47,7 @@ export class HeaderComponent implements OnInit {
         this.boardsApi.addBoard(dialogResult)
           .subscribe((board: Board) => {
             this.store.dispatch(addMainBoard({ board }));
+            this.router.navigate(['/main']);
             this.snackBar.open('New board added!', 'OK', {
               duration: 2000,
             });
