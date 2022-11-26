@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, retry, take } from 'rxjs';
 import {
-  DataColumn, ParamApiTask, DataTask, TaskUpdate,
+  DataColumn, ParamApiTask, DataTask, TaskUpdate, ParamApiColumn,
 } from '../../model/board.model';
 import { Column, StateTask } from '../../redux/state.model';
 
@@ -27,6 +27,24 @@ export class ApiBoardService {
         take(1),
       );
   }
+
+  updateColumn(param: ParamApiColumn): Observable<Column> {
+    return this.http.put<Column>(
+      `/boards/${param.boardId}/columns/${param.columnId}`,
+      param.data,
+    )
+      .pipe(
+        retry(2),
+        take(1),
+      );
+  }
+
+  // updateColumn(boardId: string, columnId: string, data: ColumnUpdate) {
+  //   return this.http.put(`/boards/${boardId}/columns/${columnId}`, data).pipe(
+  //     retry(2),
+  //     take(1),
+  //   );
+  // }
 
   deleteColumn(param: Pick<ParamApiTask, 'boardId' | 'columnId'>): Observable<null> {
     return this.http.delete<null>(`/boards/${param.boardId}/columns/${param.columnId}`)

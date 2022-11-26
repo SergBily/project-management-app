@@ -9,6 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { BoardRoutingModule } from './board-routing.module';
 import { BoardComponent } from './board.component';
 import { ColumnComponent } from './components/column/column.component';
@@ -46,6 +47,7 @@ const MATERIAL = [
     MATERIAL,
     StoreModule.forFeature('board', reducer),
     EffectsModule.forFeature([BoardEffects]),
+    DragDropModule,
   ],
 })
 export class BoardModule { }

@@ -8,9 +8,9 @@ describe('CreateColumnDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CreateColumnDialogComponent ]
+      declarations: [CreateColumnDialogComponent],
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(CreateColumnDialogComponent);
     component = fixture.componentInstance;

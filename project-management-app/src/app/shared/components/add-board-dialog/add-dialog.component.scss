@@ -1,11 +1,8 @@
 @import '../../../../style/default.scss';
 
-.dialog__buttons {
-  gap: 45px;
-}
-
-.dialog__field {
-  width: 100%
+.field__container {
+  display: flex;
+  gap: 15px;
 }
 
 .active:hover {
