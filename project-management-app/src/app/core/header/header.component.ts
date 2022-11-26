@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Board } from 'src/app/main/models/board';
 import { addMainBoard } from 'src/app/main/store/actions/main-boards.actions';
 import { Store } from '@ngrx/store';
+import { UrlService } from 'src/app/auth/services/url/url.service';
 
 @Component({
   selector: 'app-header',
@@ -21,6 +22,7 @@ export class HeaderComponent implements OnInit {
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
     private store: Store,
+    public url: UrlService,
   ) {}
 
   ngOnInit(): void {

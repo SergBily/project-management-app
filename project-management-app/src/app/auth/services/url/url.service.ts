@@ -7,13 +7,23 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class UrlService {
   private previousPage = new BehaviorSubject<string>('');
 
+  private currentsPage = new BehaviorSubject<string>('');
+
   constructor() {}
 
-  public setPreviousPage(url: string): void {
+  public setPreviousUrl(url: string): void {
     this.previousPage.next(url);
   }
 
-  getChanhedPreviousUrl(): Observable<string> {
+  public setCurrentUrl(url: string): void {
+    this.currentsPage.next(url);
+  }
+
+  public getChanhedPreviousUrl(): Observable<string> {
     return this.previousPage.asObservable();
+  }
+
+  public getCurrentUrl(): string {
+    return this.currentsPage.getValue();
   }
 }

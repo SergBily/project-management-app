@@ -37,7 +37,8 @@ export class AppComponent implements OnInit {
     ).subscribe((event: NavigationEnd) => {
       this.previousUrl = this.currentUrl;
       this.currentUrl = event.url;
-      this.url.setPreviousPage(this.previousUrl);
+      this.url.setPreviousUrl(this.previousUrl);
+      this.url.setCurrentUrl(this.currentUrl);
     });
   }
 }

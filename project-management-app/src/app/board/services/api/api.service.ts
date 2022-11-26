@@ -39,13 +39,6 @@ export class ApiBoardService {
       );
   }
 
-  // updateColumn(boardId: string, columnId: string, data: ColumnUpdate) {
-  //   return this.http.put(`/boards/${boardId}/columns/${columnId}`, data).pipe(
-  //     retry(2),
-  //     take(1),
-  //   );
-  // }
-
   deleteColumn(param: Pick<ParamApiTask, 'boardId' | 'columnId'>): Observable<null> {
     return this.http.delete<null>(`/boards/${param.boardId}/columns/${param.columnId}`)
       .pipe(

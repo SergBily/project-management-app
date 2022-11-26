@@ -35,7 +35,10 @@
         <mat-icon>expand_more</mat-icon>
       </div>
 
-      <div class="btn-wrap additionally" routerLink="/main">All boards</div>
+      <ng-container *ngIf="url.getCurrentUrl() !== '/main'">
+        <div class="btn-wrap additionally" routerLink="/main">All boards</div>
+      </ng-container>
+
       <div class="btn-wrap additionally" (click)="openDialog()">
         Create new <br />
         board
