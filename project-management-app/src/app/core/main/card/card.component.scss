@@ -1,0 +1,34 @@
+@import '../../../../style/default.scss';
+
+.wrapper-card{
+  height: 100%;
+  padding-bottom: 20px;
+  @include flexCenter;
+  flex-direction: column;
+  max-width: 350px;
+  @include btn-hover;
+  border-radius: 5px;
+  background-color: $cardColor;
+  color: $textColor;
+}
+
+.name{
+  font-size: $textName;
+  font-style: italic;
+  padding: 20px;
+}
+
+.photo{
+  max-width: 100%;
+  padding: 20px;
+}
+
+.photo-img {
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.description{
+  font-size: $textSize;
+  padding: 0 20px;
+}

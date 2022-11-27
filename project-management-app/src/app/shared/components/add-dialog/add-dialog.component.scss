@@ -1,0 +1,31 @@
+@import '../../../../style/default.scss';
+
+.field__container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.title-dialog {
+  font-size: 2rem;
+  text-align: center;
+  color: #342b5e ;
+}
+
+.textarea-dialog {
+  resize: none;
+  outline: none;
+  border: none;
+}
+
+.active:hover {
+  @include btn-hover();
+}
+
+.btn__cancel {
+  @include btn($background-color: #cbb7d42d, $color: black);
+}
+
+.active {
+  @include btn();
+}

@@ -1,0 +1,50 @@
+<form class="form-dialog" [formGroup]="addBoardForm">
+  <div mat-dialog-content>
+    <h2 class="title-dialog">{{ data.titleDialog }}</h2>
+    <div class="field__container">
+      <mat-form-field
+        class="gg"
+        hintLabel="{{'validationDescr' | translate }}"
+        appearance="fill"
+      >
+        <mat-label>{{'title' | translate }}</mat-label>
+        <input
+          matInput
+          formControlName="title"
+          #title
+          autocomplete="off"
+          placeholder="{{'placeholderTitle' | translate }}"
+        />
+        <mat-hint align="end">{{ title.value.length || 0 }}/3/45</mat-hint>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>{{'description' | translate }}</mat-label>
+        <textarea
+          matInput
+          formControlName="description"
+          class="textarea-dialog"
+          #description
+          autocomplete="off"
+          placeholder="{{'placeholderDescription' | translate }}"
+          cols="33"
+          rows="4"
+        ></textarea>
+        <mat-hint align="end"
+          >{{ description.value.length || 0 }}/10/150</mat-hint
+        >
+      </mat-form-field>
+    </div>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onCancel()" class="btn__cancel">{{'cancel' | translate }}</button>
+    <button
+      mat-button
+      type="submit"
+      [disabled]="!addBoardForm.valid"
+      [class]="{ active: addBoardForm.valid }"
+      [mat-dialog-close]="addBoardForm.getRawValue()"
+    >
+      {{data.button}}
+    </button>
+  </div>
+</form>

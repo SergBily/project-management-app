@@ -1,0 +1,56 @@
+<div class="column__wrapper" cdkDrag cdkDragLockAxis="x">
+  <div class="column__container">
+    <div class="column__title">
+      <ng-container *ngIf="!isChangeTitle; else change">
+        <h3 class="column__title-header" (click)="openChangeTitle()">
+          {{ title }}
+        </h3>
+        <button
+          class="column__title-settings"
+          title="delete column"
+          (click)="deleteBoard($event)"
+        >
+          <mat-icon [inline]="true">delete_forever</mat-icon>
+        </button>
+      </ng-container>
+    </div>
+    <div class="column__tasks"
+      cdkDropList
+      id={{dataForApi.column.id}}
+      [cdkDropListConnectedTo]="getColumnsId(dataForApi.column.id)"
+      (cdkDropListDropped)="dropTask($event)">
+      <ng-container *ngFor="let task of tasks$ | async">
+        <app-task cdkDrag [task]="task" id={{task.id}}></app-task>
+      </ng-container>
+    </div>
+    <div class="column__task-create">
+      <app-create-task [columnId]="dataForApi.column.id"></app-create-task>
+    </div>
+  </div>
+</div>
+
+<ng-template #change>
+  <div class="column__title-change">
+    <input
+      [formControl]="titleForm"
+      class="column__input"
+      type="text"
+      autocomplete="off"
+      placeholder="Enter column title..."
+      autofocus
+    />
+    <div class="btn__continer">
+      <button
+        class="column__btn-change"
+        [ngClass]="{ valid: titleForm.valid }"
+        [disabled]="!titleForm.valid"
+        (click)="changeColumnTitle()"
+      >
+      {{'submit' | translate }}
+      </button>
+      <button class="column__btn-change btn__cancel" (click)="onChangeView()">
+        {{'cancel' | translate }}
+      </button>
+    </div>
+  </div>
+</ng-template>

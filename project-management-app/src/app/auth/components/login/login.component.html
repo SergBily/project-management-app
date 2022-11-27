@@ -1,0 +1,34 @@
+<div class="container">
+  <ng-container *ngIf="!authState.getCurrentState(); else logout">
+    <form class="signin__input-fields">
+      <app-auth-template (formGroup)="checkForm($event)"></app-auth-template>
+      <button
+        type="button"
+        class="btn__form"
+        mat-raised-button
+        [disabled]="!isValidForm"
+        [ngClass]="{ 'btn__form-valid': isValidForm }"
+        (click)="onSubmit()"
+      >
+      {{'signIn' | translate }}
+      </button>
+    </form>
+
+    <p class="sighin__message" [ngClass]="{ success: successMessage }">
+      {{ errorMessage || successMessage }}
+    </p>
+  </ng-container>
+  <app-btn-exit [routerLink]="url.getChanhedPreviousUrl() | async"></app-btn-exit>
+</div>
+
+<ng-template #logout>
+  <button
+    type="button"
+    class="btn__form btn__form-valid btn__logout"
+    mat-raised-button
+    (click)="onLogout()"
+    routerLink="/"
+  >
+  {{'logout' | translate }}
+  </button>
+</ng-template>

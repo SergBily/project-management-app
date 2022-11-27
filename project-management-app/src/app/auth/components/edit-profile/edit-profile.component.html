@@ -1,0 +1,42 @@
+<div class="container">
+  <form class="edit__input-fields">
+    <mat-form-field class="field" appearance="fill">
+      <mat-label>
+        {{'name' | translate }}
+      </mat-label>
+      <input matInput [formControl]="nameControl" />
+      <mat-error *ngIf="nameControl.hasError('required')">
+        {{'thatFieldIsRequired' | translate }}
+      </mat-error>
+    </mat-form-field>
+    <app-auth-template
+      [valueLogin]="loginUser"
+      (formGroup)="checkForm($event)"
+    ></app-auth-template>
+    <button
+      type="button"
+      class="btn__form"
+      mat-raised-button
+      [disabled]="!isValidForm"
+      [ngClass]="{ 'btn__form-valid': isValidForm }"
+      (click)="onUpdate()"
+    >
+    {{'updateProfile' | translate }}
+    </button>
+  </form>
+  <div class="container__btn">
+    <button
+      class="btn__delete"
+      mat-raised-button
+      [disabled]="!isValidForm"
+      [ngClass]="{ 'btn__delete-valid': isValidForm }"
+      (click)="onDelete()"
+    >
+    {{'deleteProfile' | translate }}
+    </button>
+  </div>
+  <p class="sighup__message">
+    {{ errorMessage }}
+  </p>
+  <app-btn-exit [routerLink]="url.getChanhedPreviousUrl() | async"></app-btn-exit>
+</div>

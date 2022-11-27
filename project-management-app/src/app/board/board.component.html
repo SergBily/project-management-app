@@ -1,0 +1,30 @@
+<div class="board__page">
+  <div class="board__wrapper">
+    <div class="board__header">
+      <div class="board__animate" @animateTitleBoard>
+        <button mat-raised-button class="board__btn-back" routerLink="/main">
+          <mat-icon inline="true">home</mat-icon>
+          <span class="board__btn-text">
+            {{'backToYourBoards' | translate }}
+          </span>
+        </button>
+        <div class="board__title-container">
+          <h1 class="board__title">{{ boardTitle.getTitleBoard() }}</h1>
+        </div>
+      </div>
+    </div>
+    <div class="board__content" @animateBoard>
+      <div class="board"
+        cdkDropList
+        cdkDropListOrientation="horizontal"
+        (cdkDropListDropped)="dropColumn($event)">
+        <div class="board__container">
+          <ng-container *ngFor="let column of stateColumnsOpenBoard$ | async">
+            <app-column [dataForApi]="{ boardId, column }"></app-column>
+          </ng-container>
+        </div>
+        <app-create-column></app-create-column>
+      </div>
+    </div>
+  </div>
+</div>

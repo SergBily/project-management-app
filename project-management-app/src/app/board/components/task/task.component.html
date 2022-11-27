@@ -1,0 +1,23 @@
+<div class="task__wrapper" (click)="updateTask()">
+  <div class="task__container">
+    <div class="task__title-container">
+      <div class="task task1">
+        <div class="content">
+          <h3 class="task__title">{{ task.title }}</h3>
+        </div>
+      </div>
+      <div class="task task2">
+        <div class="content">
+          <p class="task__description">{{ task.description }}</p>
+        </div>
+      </div>
+    </div>
+    <button
+          class="task__btn-delete"
+          title="delete task"
+          (click)="deleteTask($event)"
+        >
+          <mat-icon [inline]="true">delete_forever</mat-icon>
+        </button>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+:host {
+  cursor: pointer;
+  width: 200px;
+}
+
+
+.mat-card {
+  min-width: 200px;
+}
+
+.board-button {
+  &:hover {
+    transform: scale(1.2);
+    transition: all 0.3s;
+  }
+}

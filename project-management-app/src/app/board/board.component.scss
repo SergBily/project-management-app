@@ -1,0 +1,77 @@
+@import '../../style/default.scss';
+
+.board__page {
+  height: 100%;
+
+  .board__wrapper {
+    @include flex();
+    height: 100%;
+    flex-direction: column;
+    overflow-x: hidden;
+
+
+    .board__header {
+      @include wh (100%, auto);
+      gap: 2rem;
+      padding: 10px;
+      margin-bottom: 10px;
+      box-shadow: 0 3px 2px $btnBackColorHover;
+
+        .board__animate {
+          @include wh (100%, auto);
+          @include flex($justify-content: flex-start);
+          padding: 10px;
+        }
+
+        .board__title-container {
+          flex-grow: 1;
+          @include flex();
+        }
+
+        .board__title {
+          @include title();
+        }
+
+        .board__btn-back {
+          @include wh(210px, auto);
+          @include btn();
+
+          .board__btn-text {
+            margin-left: 10px;
+          }
+        }
+
+        .board__btn-back:hover {
+          @include btn-hover();
+        }
+    }
+
+    .board__content {
+      flex-grow: 1;
+      position: relative;
+      width: 100%
+    }
+
+    .board__container {
+      height: 100%;
+    }
+
+      .board {
+        @include wh (100%, 100%);
+        @include flex($justify-content: flex-start, $align-items: flex-start);
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding: 0 10px 10px 10px;
+        user-select: none;
+        white-space: nowrap;
+      }
+  }
+}
+
+
+

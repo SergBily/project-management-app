@@ -1,0 +1,48 @@
+<div class="column__wrapper" [ngClass]="{ 'column-add': isCreateColumn }">
+  <ng-container *ngIf="!isCreateColumn; else addColumn">
+    <button class="column__btn-create" (click)="isCreateColumn = true">
+      <mat-icon>add</mat-icon>
+      <span class="column__btn-text">
+        {{'addAnotherColumn' | translate }}
+      </span>
+    </button>
+    <button class="column__btn-conf">
+      <mat-icon [inline]="true" (click)="openDialog()"
+        >add_circle_outline</mat-icon
+      >
+    </button>
+  </ng-container>
+</div>
+<ng-template #addColumn>
+  <form>
+    <div class="column__container" @openColumnAdd>
+      <input
+        [formControl]="tForm"
+        class="column__input"
+        type="text"
+        autocomplete="off"
+        placeholder="{{'enterColumnTitle' | translate }}"
+        autofocus
+      />
+      <div class="column__control">
+        <button
+          type="button"
+          class="column__btn-add"
+          mat-raised-button
+          (click)="onCreateColumn(tForm.value)"
+          [disabled]="!tForm.valid"
+          [ngClass]="{valid: tForm.valid}"
+        >
+        {{'addColumn' | translate }}
+        </button>
+        <button
+          type="button"
+          class="column__btn-close"
+          (click)="cancelCreateColumn()"
+        >
+          <mat-icon [inline]="true">close</mat-icon>
+        </button>
+      </div>
+    </div>
+  </form>
+</ng-template>

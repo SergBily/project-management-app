@@ -1,0 +1,56 @@
+<div class="task__wrapper" [ngClass]="{ 'task-add': isCreateTask }">
+  <ng-container *ngIf="!isCreateTask; else addtask">
+    <button class="task__btn-create" (click)="isCreateTask = true">
+      <mat-icon>add</mat-icon>
+      <span class="task__btn-text">
+        {{'addTask' | translate }}
+      </span>
+    </button>
+    <button class="task__btn-conf">
+      <mat-icon [inline]="true" (click)="openDialog()"
+        >add_circle_outline</mat-icon
+      >
+    </button>
+  </ng-container>
+</div>
+<ng-template #addtask>
+  <form [formGroup]="taskForm" @openTaskAdd>
+    <div class="task__container">
+      <input
+        formControlName="title"
+        name="title"
+        class="task__input"
+        type="text"
+        autocomplete="off"
+        placeholder="{{'placeholderTitleForTask' | translate }}"
+        autofocus
+      />
+      <textarea
+        class="task__textarea"
+        formControlName="description"
+        cols="33"
+        rows="5"
+        placeholder="{{'placeholderDescriptionForTask' | translate }}"
+      ></textarea>
+      <div class="task__control">
+        <button
+          type="button"
+          class="task__btn-add"
+          mat-raised-button
+          [disabled]="!taskForm.valid"
+          [ngClass]="{ valid: taskForm.valid}"
+          (click)="onCreateTask()"
+        >
+        {{'addTask' | translate }}
+        </button>
+        <button
+          type="button"
+          class="task__btn-close"
+          (click)="isCreateTask = false"
+        >
+          <mat-icon inline="true">close</mat-icon>
+        </button>
+      </div>
+    </div>
+  </form>
+</ng-template>

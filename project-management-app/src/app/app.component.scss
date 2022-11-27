@@ -1,0 +1,55 @@
+@import '../style/default.scss';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+  flex: 1 1 auto;
+}
+
+.header {
+  width: 100%;
+  height: $HeaderHeight;
+  padding-left: 30px;
+  padding-right: 30px;
+  @include flex($justify-content: space-between);
+  background-color: rgb(203, 183, 212);
+}
+
+.btn__signup, .btn__signin {
+  width: 90px;
+  height: 30px;
+  cursor: pointer;
+  border: 0;
+  font-size: 16px;
+}
+
+.btn__cont {
+  width: 400px;
+  @include flex($justify-content: space-between)
+}
+
+.footer {
+  width: 100%;
+  height: 50px;
+  background-color: rgb(203, 183, 212);
+}
+
+.btn__signup, .btn__signin {
+  @include btn();
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+
+.btn__signup:hover,
+.btn__signin:hover {
+  @include btn-hover();
+}

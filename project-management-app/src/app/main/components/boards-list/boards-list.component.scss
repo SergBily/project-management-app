@@ -1,0 +1,32 @@
+:host {
+  padding-bottom: 20px;
+}
+
+.boards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  margin-top: 20px;
+}
+
+@media (max-width: 900px) {
+  .boards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 670px) {
+  .boards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 440px) {
+  .boards {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

@@ -1,0 +1,14 @@
+@import '../../style/default.scss';
+
+.title {
+  @include title();
+  margin-top: 20px;
+  text-align: center;
+}
+
+.boards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+}

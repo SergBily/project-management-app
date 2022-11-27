@@ -1,0 +1,136 @@
+@import '../../../../style/default.scss';
+
+.task__wrapper {
+  @include wh(260px, 40px);
+  display: inline-block;
+  position: relative;
+  padding: 4px;
+  vertical-align: top;
+  border-radius: $columnBorderRad;
+  -webkit-border-radius: $columnBorderRad;
+  -moz-border-radius: $columnBorderRad;
+  -ms-border-radius: $columnBorderRad;
+  -o-border-radius: $columnBorderRad;
+}
+
+.task__btn-create {
+    @include wh(100%, 32px);
+    @include flex();
+  color: #172b4d;
+  border: 0;
+  background-color: transparent;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+
+    .task__btn-text {
+      margin-left: 10px;
+    }
+}
+
+.task__btn-create:hover {
+  background-color: #7a6a8c5d;
+  border-radius: $columnBorderRad;
+  -webkit-border-radius: $columnBorderRad;
+  -moz-border-radius: $columnBorderRad;
+  -ms-border-radius: $columnBorderRad;
+  -o-border-radius: $columnBorderRad;
+}
+
+.task__container {
+  @include wh(100%, 100%);
+  @include flex($justify-content: space-around);
+  flex-direction: column;
+
+    .task__input {
+      @include wh(100%, 32px);
+      padding: 0 5px;
+      font-size: 16px;
+      border: 0;
+      outline: 0;
+      border-radius: $columnBorderRad;
+      -webkit-border-radius: $columnBorderRad;
+      -moz-border-radius: $columnBorderRad;
+      -ms-border-radius: $columnBorderRad;
+      -o-border-radius: $columnBorderRad;
+      box-shadow: $taskShadow;
+    }
+}
+
+.task__control {
+  @include wh(100%, auto);
+  @include flex($justify-content: flex-start);
+  position: relative;
+  gap: 15px;
+
+    .task__btn-add {
+      @include wh(100px, auto);
+      @include flex();
+    }
+
+    .task__btn-close {
+      @include btn-exit();
+      margin-top: 5px;
+    }
+
+    .task__btn-close:hover {
+      @include btn-exit-hover();
+    }
+}
+
+.task-add {
+  height: auto;
+}
+
+.task__textarea {
+  width: 100%;
+  margin: 5px 0;
+  padding: 5px;
+  border-radius: $columnBorderRad;
+  -webkit-border-radius: $columnBorderRad;
+  -moz-border-radius: $columnBorderRad;
+  -ms-border-radius: $columnBorderRad;
+  -o-border-radius: $columnBorderRad;
+  box-shadow: $taskShadow;
+  font-size: 16px;
+  resize: none;
+  outline: none;
+  border: none;
+}
+
+.valid {
+  @include btn($font-size: 14px);
+  cursor: pointer;
+}
+
+.valid:hover {
+  @include btn-hover($box-shadow: #6c5a74 1px 2px 5px,);
+}
+
+.task__btn-conf {
+  height: 24px;
+  position: absolute;
+  visibility: hidden;
+  top: 8px;
+  right: -26px;
+  font-size: 1.5rem;
+  border: 0;
+  background-color: transparent;
+  color: $btnColor;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+}
+
+.task__wrapper:hover .task__btn-conf {
+  right: 10px;
+  visibility: visible;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+}

@@ -1,0 +1,49 @@
+@import '../../../../style/default.scss';
+
+.container {
+  @include wh(400px,auto);
+  @include center-window();
+  padding: 100px 30px 20px 30px;
+  background: url('../../../../assets/images/logo.png') 15% 4% no-repeat;
+  background-size: 120px 70px;
+  box-shadow: $modalWindowShadow;
+  border-radius: $modalWindowBorderRad;
+  -webkit-border-radius: $modalWindowBorderRad;
+  -moz-border-radius: $modalWindowBorderRad;
+  -ms-border-radius: $modalWindowBorderRad;
+  -o-border-radius: $modalWindowBorderRad;
+
+    .btn__form {
+      @include wh(50%, 40px);
+      @include flex();
+      @include btn($background-color: $disableBtn);
+      margin: 0 auto;
+    }
+
+    .sighin__message {
+      @include wh(100%, 20px);
+      margin-top: 15px;
+      font-size: 18px;
+      font-weight: 400;
+      color: $errorMessage;
+      text-align: center;
+    }
+
+    .btn__form-valid {
+      @include btn();
+    }
+
+    .btn__form-valid:hover {
+      @include btn-hover();
+    }
+
+    .success {
+      color: $successMessage;
+    }
+
+    .btn__logout {
+      margin-top: 30px;
+    }
+}
+
+

@@ -1,0 +1,128 @@
+$btnBackColor: #574b75;
+$circleBtnBackColor: #6c5a74;
+$btnBackColorHover: #cbb7d4;
+$btnColor: #ffffff;
+$btnColorHover: #6c5a74;
+$disableBtn: #d9c1cf;
+$successMessage: #008000;
+$HeaderHeight: 70px;
+$FooterHeight: 50px;
+$errorMessage: #ff0000;
+$modalWindowShadow:rgb(203 183 212 / 60%) 0px 10px 30px;
+$modalWindowBorderRad: 10px;
+$columnBorderRad: 5px;
+$columnAddBack: #7a6a8c4d;
+$widthColumn: 270px;
+$columnWrapperMargin: 0 5px;
+$taskShadow: 1px 1px 3px rgb(203 183 212 / 60%);
+$paddingForElemTask: 5px 15px 10px 10px;
+$colorTitltColumn: #172b4d;
+$titleSize: 40px;
+$textSize: 16px;
+$textName: 18px;
+$bigTextSize: 20px;
+$textBurgerMenu: 20px;
+$textColor: #7b1fa2;
+$cardColor: #e8e1e8;
+$burgerMenuColor:  #eae6ff;
+$hoverListBurgerMenu: #e7d9ec;
+
+@mixin wh($width: auto, $height: auto) {
+  width: $width;
+  height: $height;
+}
+
+@mixin flex($display: flex, $justify-content: center, $align-items: center) {
+  display: $display;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
+
+@mixin btn ($background-color: $btnBackColor, $color: $btnColor, $font-size: 16px,
+$letter-spacing: 0.5px, $transition: all 0.4s ease-in-out) {
+  background-color: $background-color;
+  color: $color;
+  font-size: $font-size;
+  letter-spacing: $letter-spacing;
+  transition: $transition;
+  -webkit-transition: $transition;
+  -moz-transition: $transition;
+  -ms-transition: $transition;
+  -o-transition: $transition;
+}
+
+@mixin btn-hover ($background-color: $btnBackColorHover, $color: $btnColorHover, $transition: all 0.4s ease-in-out,
+$box-shadow: #6c5a74 2px 5px 10px, $font-weight: 700) {
+  background-color: $background-color;
+  color: $color;
+  transition: $transition;
+  -webkit-transition: $transition;
+  -moz-transition: $transition;
+  -ms-transition: $transition;
+  -o-transition: $transition;
+  box-shadow: $box-shadow;
+  font-weight: $font-weight;
+}
+
+@mixin center-window ($position: absolute, $top: 50%, $left: 50%, $transform: translate(-50%, -50%)) {
+  position: $position;
+  top: $top;
+  left: $left;
+  transform: $transform;
+  -webkit-transform: $transform;
+  -moz-transform: $transform;
+  -ms-transform: $transform;
+  -o-transform: $transform;
+}
+
+@mixin btn-exit () {
+  @include wh(26px,26px);
+  font-size: 1.6em;
+  background-color: transparent;
+  color: #352c5f;
+  border: 0;
+  text-align: center;
+  cursor: pointer;
+  transition: all, 0.5s ease-in-out;
+  -webkit-transition: all, 0.5s ease-in-out;
+  -moz-transition: all, 0.5s ease-in-out;
+  -ms-transition: all, 0.5s ease-in-out;
+  -o-transition: all, 0.5s ease-in-out;
+}
+
+@mixin btn-exit-hover ($transform: rotate(180deg)) {
+  @include wh(30px,30px);
+  font-size: 2.0em;
+  color: $circleBtnBackColor;
+  transform: $transform;
+  -webkit-transform: $transform;
+  -moz-transform: $transform;
+  -ms-transform: $transform;
+  -o-transform: $transform;
+}
+
+@mixin design {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 4px;
+}
+
+@mixin flexCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin title {
+  font-size: 3rem;
+          margin: 0;
+          color: #342b5e ;
+          text-shadow: 1px 1px 0 #574b75 ,
+                       2px 2px 0 #7a6a8c,
+                       3px 3px 0 #9a87a3,
+                       4px 4px 0 #bba5ba,
+                       5px 5px 0 #d9c1cf
+}

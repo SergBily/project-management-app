@@ -1,0 +1,114 @@
+<div class="wrapper-header">
+  <div class="header-left">
+    <div class="logo">
+      <img
+        src="../../../assets/images/logo.png"
+        alt=""
+        width="110"
+        height="65"
+      />
+    </div>
+  </div>
+
+  <div class="wrapper-button">
+    <div class="btn-en" [ngClass]="{'active': getCurrentLang() === 'en'}" (click)="switchLang('en')">EN</div>
+    <div class="btn-ru" [ngClass]="{'active': getCurrentLang() === 'ru'}" (click)="switchLang('ru')">RU</div>
+  </div>
+
+  <div class="search-wrap hide" *ngIf="authStateService.getStateChanged() | async">
+    <input
+      type="text"
+      placeholder="{{'placeholderSearch' | translate }}"
+      class="search">
+    <div class="cancel" style="cursor: pointer">
+      <mat-icon>cancel</mat-icon>
+    </div>
+  </div>
+
+  <div class="header-right">
+    <div class="registration" *ngIf="authStateService.getStateChanged() | async; else registrationNot">
+      <div class="search-wrap">
+        <input type="text" placeholder="{{'placeholderSearch' | translate }}" class="search" />
+        <div class="cancel" style="cursor: pointer">
+          <mat-icon>cancel</mat-icon>
+        </div>
+      </div>
+      <ng-container *ngIf="url.getCurrentUrl() !== '/main'">
+        <div class="btn-wrap additionally" routerLink="/main">
+          {{'allBoards' | translate }}
+        </div>
+      </ng-container>
+      <div class="btn-wrap additionally" routerLink="/team">
+        {{'team' | translate }}
+        <mat-icon>expand_more</mat-icon>
+      </div>
+      <div class="btn-wrap additionally" (click)="openDialog()">
+        {{'createNewBoard' | translate }}
+      </div>
+      <div class="btn-wrap additionally" routerLink="/auth/profile">
+        {{'editProfile' | translate }}
+      </div>
+      <div class="btn-wrap black additionally" routerLink="/auth/signin">
+        {{'logout' | translate }}
+      </div>
+    </div>
+
+    <ng-template #registrationNot>
+      <div class="registration">
+        <div class="btn-wrap additionally" routerLink="/auth/signin">
+          {{'login' | translate }}
+        </div>
+        <div class="btn-wrap black additionally" routerLink="/auth/signup">
+          {{'singUp' | translate }}
+        </div>
+      </div>
+    </ng-template>
+
+    <div class="btn-wrap burger" (click)="letModal=!letModal">
+      <mat-icon>menu </mat-icon>
+    </div>
+
+    <div class="modal" *ngIf="letModal">
+
+      <div class="modal-menu" *ngIf="authStateService.getStateChanged() | async; else logout ">
+        <ul class="wrapper-list">
+          <li class="list" routerLink="/auth/signup" (click)="letModal = !letModal">
+            {{'editProfile' | translate }}
+          </li>
+          <li class="list" routerLink="./team" (click)="letModal = !letModal">
+            {{'team' | translate }}
+          </li>
+          <li class="list" routerLink="/main" (click)="letModal = !letModal">
+            {{'allBoards' | translate }}
+          </li>
+          <li class="list" (click)="openDialog()" (click)="letModal = !letModal">
+            {{'createNewBoard' | translate }}
+          </li>
+          <li class="list" routerLink="/auth/signin" (click)="letModal = !letModal">
+            {{'logout' | translate }}
+          </li>
+        </ul>
+        <div class="wrapper-btn-modal">
+          <div class="btn-en" [ngClass]="{'active': getCurrentLang() === 'en'}" (click)="switchLang('en')">EN</div>
+          <div class="btn-ru" [ngClass]="{'active': getCurrentLang() === 'ru'}" (click)="switchLang('ru')">RU</div>
+        </div>
+      </div>
+
+      <ng-template #logout>
+        <div class="modal-menu">
+          <ul class="wrapper-list">
+            <li class="list" routerLink="/auth/signin" (click)="letModal = !letModal">Login</li>
+            <li class="list" routerLink="/auth/signup" (click)="letModal = !letModal">Sing-up</li>
+          </ul>
+          <div class="wrapper-btn-modal">
+            <div class="btn-en" [ngClass]="{'active': getCurrentLang() === 'en'}" (click)="switchLang('en')">EN</div>
+            <div class="btn-ru" [ngClass]="{'active': getCurrentLang() === 'ru'}" (click)="switchLang('ru')">RU</div>
+          </div>
+        </div>
+      </ng-template>
+
+      <div class="modal-opacity" (click)="letModal=!letModal"></div>
+    </div>
+
+  </div>
+</div>

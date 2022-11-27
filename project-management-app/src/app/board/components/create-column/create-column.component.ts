@@ -1,0 +1,75 @@
+import {
+  animate, state, style, transition, trigger,
+} from '@angular/animations';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { Store } from '@ngrx/store';
+import { take } from 'rxjs';
+import { BoardActions } from '../../redux/actions/board.actions';
+import { selectGetBoardId } from '../../redux/selectors/board.selectors';
+import { ApiBoardService } from '../../services/api/api.service';
+import { CreateColumnDialogComponent } from '../create-column-dialog/create-column-dialog.component';
+
+@Component({
+  selector: 'app-create-column',
+  templateUrl: './create-column.component.html',
+  styleUrls: ['./create-column.component.scss'],
+  animations: [
+    trigger('openColumnAdd', [
+      state('void', style({ opacity: 0 })),
+      transition(':enter, :leave', [
+        animate('0.1s'),
+      ]),
+    ]),
+  ],
+})
+export class CreateColumnComponent implements OnInit {
+  isCreateColumn = false;
+
+  idBoard!: string;
+
+  tForm!: FormControl;
+
+  hasErrors!: boolean;
+
+  constructor(
+    private api: ApiBoardService,
+    private store: Store,
+    public dialog: MatDialog,
+  ) { }
+
+  ngOnInit(): void {
+    this.tForm = new FormControl(
+      '',
+      [Validators.required, Validators.minLength(3), Validators.maxLength(45)],
+    );
+
+    this.store.select(selectGetBoardId).pipe(take(1)).subscribe((id) => { this.idBoard = id; });
+  }
+
+  onCreateColumn(title: string): void {
+    this.api.createColumn({ id: this.idBoard, title }).pipe(take(1)).subscribe(
+      () => { this.store.dispatch(BoardActions.getColumns()); },
+    );
+    this.tForm.reset();
+    this.isCreateColumn = false;
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(CreateColumnDialogComponent, {
+      width: '300px',
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.onCreateColumn(result);
+      }
+    });
+  }
+
+  cancelCreateColumn(): void {
+    this.isCreateColumn = false;
+    this.tForm.reset();
+  }
+}
