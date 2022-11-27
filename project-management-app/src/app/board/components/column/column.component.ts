@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { Observable, take } from 'rxjs';
 import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
+import { TranslateService } from '@ngx-translate/core';
 import {
   DataBoardAndColumn, ParamApiColumn, ParamApiTask, TaskUpdate,
 } from '../../model/board.model';
@@ -35,11 +36,16 @@ export class ColumnComponent implements OnInit {
 
   stateColumnsOpenBoard$!: Observable<Column[]>;
 
+  titleDeleteDialog: string;
+
+  messageDeleteDialog: string;
+
   constructor(
     private store: Store,
     public dialog: MatDialog,
     private boardsApi: ApiBoardService,
     private customValidator: ValidatorColumnTitleService,
+    public translate: TranslateService,
   ) { }
 
   ngOnInit(): void {
@@ -156,12 +162,17 @@ export class ColumnComponent implements OnInit {
 
   deleteBoard(event: Event): void {
     event.stopPropagation();
-
+    this.translate.get('areYouSure').subscribe((res: string) => {
+      this.titleDeleteDialog = res;
+    });
+    this.translate.get('deleteColumnMessage').subscribe((res: string) => {
+      this.messageDeleteDialog = res;
+    });
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       maxWidth: '500px',
       data: {
-        title: 'Are you sure?',
-        message: `You are about to delete column ${this.dataForApi.column.title}`,
+        title: this.titleDeleteDialog,
+        message: `${this.messageDeleteDialog} ${this.dataForApi.column.title}`,
       },
     });
 

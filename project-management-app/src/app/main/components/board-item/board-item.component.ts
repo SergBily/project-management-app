@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BoardTitleService } from 'src/app/board/services/board-title/board-title.service';
 import { AddDialogComponent } from 'src/app/shared/components/add-dialog/add-dialog.component';
+import { TranslateService } from '@ngx-translate/core';
 import { Board, ParamApiBoard, PostBoardRequest } from '../../models/board';
 import { BoardsApiService } from '../../services/boards/boards.service';
 import { deleteMainBoard, updateMainBoard } from '../../store/actions/main-boards.actions';
@@ -23,18 +24,33 @@ export class BoardItemComponent implements OnInit {
     private store: Store,
     private snackBar: MatSnackBar,
     private boardTitle: BoardTitleService,
+    public translate: TranslateService,
   ) { }
+
+  titleUpdateDialog: string;
+
+  buttonUpdateName: string;
+
+  titleDeleteDialog: string;
+
+  messageDeleteDialog: string;
 
   ngOnInit(): void {
   }
 
   deleteBoard(event: Event) {
     event.stopPropagation();
+    this.translate.get('areYouSure').subscribe((res: string) => {
+      this.titleDeleteDialog = res;
+    });
+    this.translate.get('deleteMessage').subscribe((res: string) => {
+      this.messageDeleteDialog = res;
+    });
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       maxWidth: '500px',
       data: {
-        title: 'Are you sure?',
-        message: `You are about to delete board ${this.board.title}`,
+        title: this.titleDeleteDialog,
+        message: `${this.messageDeleteDialog} ${this.board.title}`,
       },
     });
 
@@ -53,13 +69,19 @@ export class BoardItemComponent implements OnInit {
 
   updateBoard(event: Event) {
     event.stopPropagation();
+    this.translate.get('updateBoard').subscribe((res: string) => {
+      this.titleUpdateDialog = res;
+    });
+    this.translate.get('update').subscribe((res: string) => {
+      this.buttonUpdateName = res;
+    });
     const dialogRef = this.dialog.open(AddDialogComponent, {
       width: '450px',
       data: {
-        titleDialog: 'Update board',
+        titleDialog: this.titleUpdateDialog,
         title: this.board.title,
         description: this.board.description,
-        button: 'Update',
+        button: this.buttonUpdateName,
       },
     });
 

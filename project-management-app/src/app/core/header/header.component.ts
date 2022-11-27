@@ -31,6 +31,10 @@ export class HeaderComponent implements OnInit {
     private langLS: LangLocalStorageService,
   ) {}
 
+  titleDialog: string;
+
+  buttonName: string;
+
   ngOnInit(): void {
     this.translate.use(this.getCurrentLang());
   }
@@ -38,11 +42,17 @@ export class HeaderComponent implements OnInit {
   letModal = false;
 
   openDialog() {
+    this.translate.get('createNewBoard').subscribe((res: string) => {
+      this.titleDialog = res;
+    });
+    this.translate.get('add').subscribe((res: string) => {
+      this.buttonName = res;
+    });
     const dialogRef = this.dialog.open(AddDialogComponent, {
       width: '450px',
       data: {
-        titleDialog: 'Create new board',
-        button: 'Add',
+        titleDialog: this.titleDialog,
+        button: this.buttonName,
       },
     });
 

@@ -28,5 +28,19 @@
   "welcomeTo": "Welcome to application",
   "projectName": "Ultra Management",
   "projectDescr": "Bring your teammates to optimize the work process, improve efficiency and bring your results to the new level!",
-  "myBoards": "My boards"
+  "myBoards": "My boards",
+  "title": "Title",
+  "placeholderTitle": "Enter a title for this task...",
+  "description": "Description",
+  "placeholderDescription": "Enter a description for this task...",
+  "validationDescr": "current/min/max characters",
+  "updateBoard": "Update board",
+  "update": "Update",
+  "areYouSure": "Are you sure?",
+  "deleteMessage": "You are about to delete board",
+  "deleteColumnMessage": "You are about to delete column",
+  "deleteTaskMessage": "You are about to delete task",
+  "no": "No",
+  "yes": "Yes"
+
 }
