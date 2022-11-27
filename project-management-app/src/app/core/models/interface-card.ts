@@ -3,5 +3,5 @@ export interface ICard {
   name: string,
   gitHub: string,
   appointment: string,
-  description: string
+  description: string[]
 }

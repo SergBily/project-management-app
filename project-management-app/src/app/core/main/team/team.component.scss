@@ -1,10 +1,15 @@
 @import '../../../../style/default.scss';
 
+:host {
+  margin-bottom: 30px;
+}
+
 .wrapper-team{
     margin-top: 50px;
     @include flexCenter;
     flex-direction: column;
     color: $textColor;
+    padding-bottom: 50px;
 }
 
 .title{
@@ -18,4 +23,6 @@
     justify-content: center;
     max-width: 1200px;
     flex-wrap: wrap;
+    height: auto;
+    gap: 2rem;
 }

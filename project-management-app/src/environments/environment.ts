@@ -9,26 +9,37 @@ export const environment = {
     {
       name: 'Sergey Belyavsky',
       appointment: 'team lead',
-      photo: '',
+      photo: 'https://avatars.githubusercontent.com/u/89011743?v=4',
       gitHub: 'https://github.com/SergBily',
-      description: `I started to dive into Front-end half a year ago and thanks to RSSchool.
-       I understood that it really interests me. I am aimed at keep on learning.`,
+      description: [
+        'Backend setup',
+        'User authorization and login / sign up',
+        'Board page (route)',
+        'Deployment',
+      ],
     },
     {
       name: 'Evgeny Parkhomenko',
       appointment: 'frontend',
-      photo: '',
+      photo: 'https://avatars.githubusercontent.com/u/77242330?v=4',
       gitHub: 'https://github.com/Parxommm',
-      description: `I've been learning Front-end for a year.
-      Before that I was far from coding, but I am aimed at switching my career. I am sure that I will manage.`,
+      description: [
+        'Main page (route)',
+        'Drag-n-drop',
+        'Modals',
+        'Localization (ru/en)',
+      ],
     },
     {
       name: 'Siarhei Ashmiana',
       appointment: 'frontend',
-      photo: '',
+      photo: 'https://avatars.githubusercontent.com/u/95861915?v=4',
       gitHub: 'https://github.com/Sergei5431',
-      description: `Front-end interests me because of its diversity,
-      opportunity to see the result immediately and huge community of like-minded people.`,
+      description: [
+        'Welcome page(route)',
+        'Header',
+        'Footer',
+      ],
     },
   ],
 };
