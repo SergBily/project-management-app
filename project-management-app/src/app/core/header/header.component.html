@@ -89,8 +89,8 @@
           </li>
         </ul>
         <div class="wrapper-btn-modal">
-          <div class="btn-en">EN</div>
-          <div class="btn-ru">RU</div>
+          <div class="btn-en" [ngClass]="{'active': getCurrentLang() === 'en'}" (click)="switchLang('en')">EN</div>
+          <div class="btn-ru" [ngClass]="{'active': getCurrentLang() === 'ru'}" (click)="switchLang('ru')">RU</div>
         </div>
       </div>
 
@@ -101,8 +101,8 @@
             <li class="list" routerLink="/auth/signup" (click)="letModal = !letModal">Sing-up</li>
           </ul>
           <div class="wrapper-btn-modal">
-            <div class="btn-en" (click)="switchLang('en')">EN</div>
-            <div class="btn-ru" (click)="switchLang('ru')">RU</div>
+            <div class="btn-en" [ngClass]="{'active': getCurrentLang() === 'en'}" (click)="switchLang('en')">EN</div>
+            <div class="btn-ru" [ngClass]="{'active': getCurrentLang() === 'ru'}" (click)="switchLang('ru')">RU</div>
           </div>
         </div>
       </ng-template>
