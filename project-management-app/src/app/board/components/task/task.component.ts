@@ -1,8 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
+import { DateUserService } from 'src/app/auth/services/date-user/date-user';
+import { AddDialogComponent } from 'src/app/shared/components/add-dialog/add-dialog.component';
 import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
-import { ParamApiTask } from '../../model/board.model';
+import { DataOfConfirm, ParamApiTask } from '../../model/board.model';
 import { BoardActions } from '../../redux/actions/board.actions';
 import { StateTask } from '../../redux/state.model';
 import { ApiBoardService } from '../../services/api/api.service';
@@ -15,12 +17,13 @@ import { ApiBoardService } from '../../services/api/api.service';
 export class TaskComponent implements OnInit {
   @Input() task!: StateTask;
 
-  param!:Omit<ParamApiTask, 'data'>;
+  param!: ParamApiTask;
 
   constructor(
     private store: Store,
     public dialog: MatDialog,
     private api: ApiBoardService,
+    private userData: DateUserService,
   ) { }
 
   ngOnInit(): void {
@@ -45,6 +48,37 @@ export class TaskComponent implements OnInit {
     dialogRef.afterClosed().subscribe((dialogResult) => {
       if (dialogResult) {
         this.api.deleteTask(this.param).subscribe(() => {
+          this.store.dispatch(BoardActions.getTasks({
+            boardId: this.task.boardId, columnId: this.task.columnId,
+          }));
+        });
+      }
+    });
+  }
+
+  updateTask() {
+    const dialogRef = this.dialog.open(AddDialogComponent, {
+      width: '450px',
+      data: {
+        titleDialog: 'Update task',
+        title: this.task.title,
+        description: this.task.description,
+        button: 'Update',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((dialogResult: DataOfConfirm) => {
+      if (dialogResult) {
+        this.param.data = {
+          title: dialogResult.title,
+          description: dialogResult.description,
+          order: this.task.order,
+          boardId: this.task.boardId,
+          columnId: this.task.columnId,
+          userId: this.userData.getloginedUserId(),
+        };
+
+        this.api.updateTask(this.param).subscribe(() => {
           this.store.dispatch(BoardActions.getTasks({
             boardId: this.task.boardId, columnId: this.task.columnId,
           }));
