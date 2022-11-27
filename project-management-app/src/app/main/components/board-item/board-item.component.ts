@@ -4,9 +4,10 @@ import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog
 import { Store } from '@ngrx/store';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BoardTitleService } from 'src/app/board/services/board-title/board-title.service';
-import { Board } from '../../models/board';
+import { AddDialogComponent } from 'src/app/shared/components/add-dialog/add-dialog.component';
+import { Board, ParamApiBoard, PostBoardRequest } from '../../models/board';
 import { BoardsApiService } from '../../services/boards/boards.service';
-import { deleteMainBoard } from '../../store/actions/main-boards.actions';
+import { deleteMainBoard, updateMainBoard } from '../../store/actions/main-boards.actions';
 
 @Component({
   selector: 'app-board-item',
@@ -45,6 +46,36 @@ export class BoardItemComponent implements OnInit {
             this.snackBar.open('Board deleted', 'OK', {
               duration: 2000,
             });
+          });
+      }
+    });
+  }
+
+  updateBoard(event: Event) {
+    event.stopPropagation();
+    const dialogRef = this.dialog.open(AddDialogComponent, {
+      width: '450px',
+      data: {
+        titleDialog: 'Update board',
+        title: this.board.title,
+        description: this.board.description,
+        button: 'Update',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((dialogResult: PostBoardRequest) => {
+      if (dialogResult) {
+        const param: ParamApiBoard = {
+          boardId: this.board.id,
+          data: {
+            title: dialogResult.title,
+            description: dialogResult.description,
+          },
+        };
+
+        this.boardsApi.updateBoard(param)
+          .subscribe(() => {
+            this.store.dispatch(updateMainBoard());
           });
       }
     });

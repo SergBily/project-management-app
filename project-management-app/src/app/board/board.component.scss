@@ -20,12 +20,16 @@
         .board__animate {
           @include wh (100%, auto);
           @include flex($justify-content: flex-start);
-          gap: 2rem;
           padding: 10px;
         }
 
+        .board__title-container {
+          flex-grow: 1;
+          @include flex();
+        }
+
         .board__title {
-          margin: 0;
+          @include title();
         }
 
         .board__btn-back {
@@ -63,13 +67,11 @@
         overflow-x: auto;
         overflow-y: hidden;
         padding: 0 10px 10px 10px;
-        margin-top: 5px;
         user-select: none;
         white-space: nowrap;
       }
   }
 }
-
 
 
 

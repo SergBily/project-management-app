@@ -11,7 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { take } from 'rxjs';
 import { DateUserService } from 'src/app/auth/services/date-user/date-user';
-import { AddDialogComponent } from 'src/app/shared/components/add-board-dialog/add-dialog.component';
+import { AddDialogComponent } from 'src/app/shared/components/add-dialog/add-dialog.component';
 import { DataOfConfirm } from '../../model/board.model';
 import { BoardActions } from '../../redux/actions/board.actions';
 import { selectGetBoardId } from '../../redux/selectors/board.selectors';
@@ -86,11 +86,10 @@ export class CreateTaskComponent implements OnInit {
 
   openDialog() {
     const dialogRef = this.dialog.open(AddDialogComponent, {
-      maxWidth: '500px',
+      width: '450px',
       data: {
-        title: 'Create new task:',
-        maxLengthDescription: 150,
-        maxLengthTitle: 45,
+        titleDialog: 'Create new task',
+        button: 'Create',
       },
     });
 

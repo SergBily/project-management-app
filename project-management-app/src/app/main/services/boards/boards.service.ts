@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import {
   catchError, EMPTY, Observable, retry, take,
 } from 'rxjs';
-import { PostBoardRequest, Board } from '../../models/board';
+import { PostBoardRequest, Board, ParamApiBoard } from '../../models/board';
 
 @Injectable({
   providedIn: 'root',
@@ -55,5 +55,14 @@ export class BoardsApiService {
       take(1),
       catchError(() => EMPTY),
     );
+  }
+
+  public updateBoard(param: ParamApiBoard): Observable<Board> {
+    return this.http.put<Board>(`/boards/${param.boardId}`, param.data)
+      .pipe(
+        retry(2),
+        take(1),
+        catchError(() => EMPTY),
+      );
   }
 }

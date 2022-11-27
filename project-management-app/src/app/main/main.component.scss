@@ -1,4 +1,7 @@
+@import '../../style/default.scss';
+
 .title {
+  @include title();
   margin-top: 20px;
 }
 
@@ -6,4 +9,5 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 15px;
 }

@@ -10,6 +10,13 @@
   <mat-card-actions align="end">
     <button
       mat-icon-button
+      aria-label="update board"
+      (click)="updateBoard($event)"
+    >
+      <mat-icon class="material-symbols-outlined">edit</mat-icon>
+    </button>
+    <button
+      mat-icon-button
       color="warn"
       aria-label="remove board"
       (click)="deleteBoard($event)"
