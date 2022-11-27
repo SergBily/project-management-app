@@ -15,7 +15,7 @@
   "signIn": "Sign In",
   "submit": "Submit",
   "cancel": "Cancel",
-  "addColumn": "addColumn",
+  "addColumn": "Add Column",
   "addAnotherColumn": "Add another column",
   "createColumn": "Create column",
   "enterColumnTitle": "Enter column title..",
@@ -41,6 +41,8 @@
   "deleteColumnMessage": "You are about to delete column",
   "deleteTaskMessage": "You are about to delete task",
   "no": "No",
-  "yes": "Yes"
+  "yes": "Yes",
+  "createNewTask": "Create new task",
+  "create": "Create"
 
 }
