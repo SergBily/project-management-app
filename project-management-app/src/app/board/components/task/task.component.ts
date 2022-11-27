@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
+import { TranslateService } from '@ngx-translate/core';
 import { DateUserService } from 'src/app/auth/services/date-user/date-user';
 import { AddDialogComponent } from 'src/app/shared/components/add-dialog/add-dialog.component';
 import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
@@ -19,11 +20,16 @@ export class TaskComponent implements OnInit {
 
   param!: ParamApiTask;
 
+  titleDeleteDialog: string;
+
+  messageDeleteDialog: string;
+
   constructor(
     private store: Store,
     public dialog: MatDialog,
     private api: ApiBoardService,
     private userData: DateUserService,
+    public translate: TranslateService,
   ) { }
 
   ngOnInit(): void {
@@ -36,12 +42,17 @@ export class TaskComponent implements OnInit {
 
   deleteTask(event: Event) {
     event.stopPropagation();
-
+    this.translate.get('areYouSure').subscribe((res: string) => {
+      this.titleDeleteDialog = res;
+    });
+    this.translate.get('deleteTaskMessage').subscribe((res: string) => {
+      this.messageDeleteDialog = res;
+    });
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       maxWidth: '500px',
       data: {
-        title: 'Are you sure?',
-        message: `You are about to delete task ${this.task.title}`,
+        title: this.titleDeleteDialog,
+        message: `${this.messageDeleteDialog} ${this.task.title}`,
       },
     });
 

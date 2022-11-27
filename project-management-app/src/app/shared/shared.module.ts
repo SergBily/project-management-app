@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { PortalModule } from '@angular/cdk/portal';
+import { TranslateModule } from '@ngx-translate/core';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { AddDialogComponent } from './components/add-dialog/add-dialog.component';
 
@@ -31,6 +32,7 @@ const MATERIAL = [
     ReactiveFormsModule,
     PortalModule,
     MATERIAL,
+    TranslateModule,
   ],
 })
 export class SharedModule { }
