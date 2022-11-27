@@ -21,7 +21,7 @@
     </mat-form-field>
   </div>
   <div mat-dialog-actions class="dialog__buttons">
-    <button mat-button class="btn__cancel" (click)="onCancel()">Cancel</button>
+    <button mat-button class="btn__cancel" (click)="onCancel()">{{'cancel' | translate }}</button>
     <button
       mat-button
       [disabled]="!formColumn.valid"

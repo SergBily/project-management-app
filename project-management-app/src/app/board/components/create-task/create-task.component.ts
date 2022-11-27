@@ -9,6 +9,7 @@ import {
 } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
+import { TranslateService } from '@ngx-translate/core';
 import { take } from 'rxjs';
 import { DateUserService } from 'src/app/auth/services/date-user/date-user';
 import { AddDialogComponent } from 'src/app/shared/components/add-dialog/add-dialog.component';
@@ -39,12 +40,17 @@ export class CreateTaskComponent implements OnInit {
 
   taskForm!: FormGroup;
 
+  titleTaskDialog: string;
+
+  buttonTaskDialog: string;
+
   constructor(
     private api: ApiBoardService,
     private store: Store,
     private fb: FormBuilder,
     private user: DateUserService,
     public dialog: MatDialog,
+    public translate: TranslateService,
   ) { }
 
   ngOnInit(): void {
@@ -85,11 +91,17 @@ export class CreateTaskComponent implements OnInit {
   }
 
   openDialog() {
+    this.translate.get('createNewTask').subscribe((res: string) => {
+      this.titleTaskDialog = res;
+    });
+    this.translate.get('create').subscribe((res: string) => {
+      this.buttonTaskDialog = res;
+    });
     const dialogRef = this.dialog.open(AddDialogComponent, {
       width: '450px',
       data: {
-        titleDialog: 'Create new task',
-        button: 'Create',
+        titleDialog: this.titleTaskDialog,
+        button: this.buttonTaskDialog,
       },
     });
 
