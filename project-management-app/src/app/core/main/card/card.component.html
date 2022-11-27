@@ -1,7 +1,9 @@
 <div class="wrapper-card">
     <div class="photo">
-        <img src="../../../../assets/images/avatar1.png" alt="avatar">
+        <img class="photo-img" src="{{card.photo}}" alt="avatar">
     </div>
     <p class="name">{{card.name}} - {{card.appointment}}</p>
-    <p class="description">{{card.description}}</p>
+    <ul class="description">
+      <li *ngFor="let item of card.description">{{item}}</li>
+    </ul>
 </div>
