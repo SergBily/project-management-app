@@ -2,7 +2,9 @@
   <ng-container *ngIf="!isCreateColumn; else addColumn">
     <button class="column__btn-create" (click)="isCreateColumn = true">
       <mat-icon>add</mat-icon>
-      <span class="column__btn-text"> Add another column</span>
+      <span class="column__btn-text">
+        {{'addAnotherColumn' | translate }}
+      </span>
     </button>
     <button class="column__btn-conf">
       <mat-icon [inline]="true" (click)="openDialog()"
@@ -19,7 +21,7 @@
         class="column__input"
         type="text"
         autocomplete="off"
-        placeholder="Enter column title..."
+        placeholder="{{'enterColumnTitle' | translate }}"
         autofocus
       />
       <div class="column__control">
@@ -31,7 +33,7 @@
           [disabled]="!tForm.valid"
           [ngClass]="{valid: tForm.valid}"
         >
-          Add column
+        {{'addColumn' | translate }}
         </button>
         <button
           type="button"

@@ -2,7 +2,9 @@
   <ng-container *ngIf="!isCreateTask; else addtask">
     <button class="task__btn-create" (click)="isCreateTask = true">
       <mat-icon>add</mat-icon>
-      <span class="task__btn-text">Add task</span>
+      <span class="task__btn-text">
+        {{'addTask' | translate }}
+      </span>
     </button>
     <button class="task__btn-conf">
       <mat-icon [inline]="true" (click)="openDialog()"
@@ -20,7 +22,7 @@
         class="task__input"
         type="text"
         autocomplete="off"
-        placeholder="Enter a title for this task..."
+        placeholder="{{'placeholderTitleForTask' | translate }}"
         autofocus
       />
       <textarea
@@ -28,7 +30,7 @@
         formControlName="description"
         cols="33"
         rows="5"
-        placeholder="Enter a description for this task..."
+        placeholder="{{'placeholderDescriptionForTask' | translate }}"
       ></textarea>
       <div class="task__control">
         <button
@@ -39,7 +41,7 @@
           [ngClass]="{ valid: taskForm.valid}"
           (click)="onCreateTask()"
         >
-          Add task
+        {{'addTask' | translate }}
         </button>
         <button
           type="button"

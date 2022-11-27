@@ -4,7 +4,9 @@
       <div class="board__animate" @animateTitleBoard>
         <button mat-raised-button class="board__btn-back" routerLink="/main">
           <mat-icon inline="true">home</mat-icon>
-          <span class="board__btn-text">Back to your boards</span>
+          <span class="board__btn-text">
+            {{'backToYourBoards' | translate }}
+          </span>
         </button>
         <div class="board__title-container">
           <h1 class="board__title">{{ boardTitle.getTitleBoard() }}</h1>

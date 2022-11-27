@@ -1,5 +1,7 @@
 <div class="wrapper-team">
-  <p class="title">About our team</p>
+  <p class="title">
+    {{'aboutOurTeam' | translate }}
+  </p>
   <div class="wrapper-cards">
     <ng-container *ngFor="let member of team">
       <app-card [card]="member"></app-card>

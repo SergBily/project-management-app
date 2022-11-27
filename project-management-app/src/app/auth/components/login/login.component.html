@@ -10,7 +10,7 @@
         [ngClass]="{ 'btn__form-valid': isValidForm }"
         (click)="onSubmit()"
       >
-        Sign In
+      {{'signIn' | translate }}
       </button>
     </form>
 
@@ -29,6 +29,6 @@
     (click)="onLogout()"
     routerLink="/"
   >
-    Log Out
+  {{'logout' | translate }}
   </button>
 </ng-template>

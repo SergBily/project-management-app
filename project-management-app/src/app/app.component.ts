@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 import { ApiAuthService } from './auth/services/api/api.service';
 import { AuthStateService } from './auth/services/auth-state/auth-state.service';
 import { UrlService } from './auth/services/url/url.service';
@@ -20,17 +21,21 @@ export class AppComponent implements OnInit {
     private router: Router,
     private url: UrlService,
     private userStatus: AuthStateService,
-  ) { }
+    public translate: TranslateService,
+  ) {
+    translate.addLangs(['en', 'ru']);
+    translate.setDefaultLang('en');
+  }
 
   ngOnInit(): void {
-    // this.api.getUsers().subscribe({
-    //   error: () => {
-    //     this.router.navigate(['/']);
-    //     localStorage.removeItem('token');
-    //     this.userStatus.setAuthState(false);
-    //   },
-    //   complete: () => this.router.navigate(['/main']),
-    // });
+    this.api.getUsers().subscribe({
+      error: () => {
+        this.router.navigate(['/']);
+        localStorage.removeItem('token');
+        this.userStatus.setAuthState(false);
+      },
+      complete: () => this.router.navigate(['/main']),
+    });
 
     this.router.events.pipe(
       filter((event): event is NavigationEnd => event instanceof NavigationEnd),

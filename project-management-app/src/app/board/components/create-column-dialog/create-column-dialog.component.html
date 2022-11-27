@@ -1,12 +1,14 @@
 <form>
-  <h1 mat-dialog-title>Create column</h1>
+  <h1 mat-dialog-title>
+    {{'addColumn' | translate }}
+  </h1>
   <div mat-dialog-content>
     <mat-form-field
       appearance="fill"
       class="dialog__field"
       hintLabel="current/min/max characters"
     >
-      <mat-label>Enter column title...</mat-label>
+      <mat-label>{{'enterColumnTitle' | translate }}</mat-label>
       <input
         #title
         class="input"
@@ -26,7 +28,7 @@
       [class]="{ active: formColumn.valid }"
       [mat-dialog-close]="formColumn.getRawValue()"
     >
-      Add
+    {{'add' | translate }}
     </button>
   </div>
 </form>

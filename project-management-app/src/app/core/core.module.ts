@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import { TranslateModule } from '@ngx-translate/core';
 import { CoreRoutingModule } from './core-routing.module';
 import { CoreComponent } from './core.component';
 import { HeaderComponent } from './header/header.component';
@@ -22,6 +23,7 @@ import { TeamComponent } from './main/team/team.component';
     CommonModule,
     CoreRoutingModule,
     MatIconModule,
+    TranslateModule,
   ],
   providers: [],
   exports: [

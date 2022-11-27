@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { TranslateModule } from '@ngx-translate/core';
 import { MainRoutingModule } from './main-routing.module';
 import { MainComponent } from './main.component';
 import { BoardsListComponent } from './components/boards-list/boards-list.component';
@@ -28,6 +29,7 @@ const MATERIAL = [MatCardModule, MatButtonModule, MatIconModule];
     MATERIAL,
     StoreModule.forFeature('mainBoards', reducer),
     EffectsModule.forFeature([EffectsService]),
+    TranslateModule,
   ],
 })
 export class MainModule { }
