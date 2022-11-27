@@ -77,8 +77,12 @@
 
 .task__title {
   margin: 0;
-  word-break: break-all;
   margin-right: 15px;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
+  -webkit-hyphens: auto;
 }
 
 .task__description-container {
@@ -89,8 +93,12 @@
 }
 
 .task__description {
-  word-break: break-all;
   margin: 0;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
+  -webkit-hyphens: auto;
 }
 
 .task__btn-delete {

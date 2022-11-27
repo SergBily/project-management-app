@@ -30,10 +30,10 @@ export interface TaskFile {
 }
 
 export interface ParamApiTask {
-  data: DataTask | TaskUpdate;
   boardId: string;
   columnId: string;
   taskId: string
+  data?: DataTask | TaskUpdate;
 }
 
 export interface ParamApiColumn {

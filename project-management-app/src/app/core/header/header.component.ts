@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthStateService } from 'src/app/auth/services/auth-state/auth-state.service';
 import { BoardsApiService } from 'src/app/main/services/boards/boards.service';
 import { MatDialog } from '@angular/material/dialog';
-import { AddDialogComponent } from 'src/app/shared/components/add-board-dialog/add-dialog.component';
+import { AddDialogComponent } from 'src/app/shared/components/add-dialog/add-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Board } from 'src/app/main/models/board';
 import { addMainBoard } from 'src/app/main/store/actions/main-boards.actions';
@@ -34,11 +34,10 @@ export class HeaderComponent implements OnInit {
 
   openDialog() {
     const dialogRef = this.dialog.open(AddDialogComponent, {
-      maxWidth: '500px',
+      width: '450px',
       data: {
-        title: 'Create new board:',
-        maxLengthDescription: 250,
-        maxLengthTitle: 20,
+        titleDialog: 'Create new board',
+        button: 'Add',
       },
     });
 
