@@ -1,4 +1,7 @@
+@import '../../style/default.scss';
+
 .title {
+  @include title();
   margin-top: 20px;
 }
 

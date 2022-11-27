@@ -29,14 +29,7 @@
         }
 
         .board__title {
-          font-size: 3rem;
-          margin: 0;
-          color: #342b5e ;
-          text-shadow: 1px 1px 0 #574b75 ,
-                       2px 2px 0 #7a6a8c,
-                       3px 3px 0 #9a87a3,
-                       4px 4px 0 #bba5ba,
-                       5px 5px 0 #d9c1cf
+          @include title();
         }
 
         .board__btn-back {
