@@ -40,11 +40,17 @@
   height: 40px;
   @include btn;
   border-radius: 5px;
+  cursor: pointer;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
   &:hover {
+    @include btn-hover();
+  }
+
+  &.active {
+    cursor: default;
     @include btn-hover();
   }
 }

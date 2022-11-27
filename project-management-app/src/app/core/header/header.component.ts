@@ -10,6 +10,7 @@ import { Store } from '@ngrx/store';
 import { UrlService } from 'src/app/auth/services/url/url.service';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { LangLocalStorageService } from '../services/lang-local-storage/lang-local-storage.service';
 
 @Component({
   selector: 'app-header',
@@ -27,9 +28,11 @@ export class HeaderComponent implements OnInit {
     public url: UrlService,
     private router: Router,
     public translate: TranslateService,
+    private langLS: LangLocalStorageService,
   ) {}
 
   ngOnInit(): void {
+    this.translate.use(this.getCurrentLang());
   }
 
   letModal = false;
@@ -59,5 +62,13 @@ export class HeaderComponent implements OnInit {
 
   switchLang(lang: string) {
     this.translate.use(lang);
+    this.langLS.setLang(lang);
+  }
+
+  getCurrentLang(): string {
+    if (this.langLS.getLang() === null) {
+      return this.translate.defaultLang;
+    }
+    return this.langLS.getLang() as string;
   }
 }

@@ -11,8 +11,8 @@
   </div>
 
   <div class="wrapper-button">
-    <div class="btn-en" [ngClass]="{'active': translate.currentLang === 'en'}" (click)="switchLang('en')">EN</div>
-    <div class="btn-ru" [ngClass]="{'active': translate.currentLang === 'ru'}" (click)="switchLang('ru')">RU</div>
+    <div class="btn-en" [ngClass]="{'active': getCurrentLang() === 'en'}" (click)="switchLang('en')">EN</div>
+    <div class="btn-ru" [ngClass]="{'active': getCurrentLang() === 'ru'}" (click)="switchLang('ru')">RU</div>
   </div>
 
   <div class="search-wrap hide" *ngIf="authStateService.getStateChanged() | async">
