@@ -15,3 +15,5 @@ export const deleteMainBoard = createAction(
   '[MainBoards] Delete Main Board',
   props<{ id: string }>(),
 );
+
+export const updateMainBoard = createAction('[MainBoards] Update Main Board');

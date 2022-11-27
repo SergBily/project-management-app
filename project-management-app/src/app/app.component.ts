@@ -23,14 +23,14 @@ export class AppComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.api.getUsers().subscribe({
-      error: () => {
-        this.router.navigate(['/']);
-        localStorage.removeItem('token');
-        this.userStatus.setAuthState(false);
-      },
-      complete: () => this.router.navigate(['/main']),
-    });
+    // this.api.getUsers().subscribe({
+    //   error: () => {
+    //     this.router.navigate(['/']);
+    //     localStorage.removeItem('token');
+    //     this.userStatus.setAuthState(false);
+    //   },
+    //   complete: () => this.router.navigate(['/main']),
+    // });
 
     this.router.events.pipe(
       filter((event): event is NavigationEnd => event instanceof NavigationEnd),
